@@ -1,0 +1,10 @@
+Alavés', 'Albacete', 'Albacete Balompié', 'Athletic Bilbao', 
+'Atlético Madrid', 'Atlético de Madrid', 'Barcelona', 'Barcelona B', 'Benfica', 
+'CA Osasuna', 'CD Leganés', 'CD Logroñés', 'CD Numancia', 'CD Tenerife', 'CP Mérida', 
+'Celta de Vigo', 'Cádiz CF', 'Córdoba CF', 'Dep. La Coruña', 'Deportivo Alavés', 
+'Deportivo de La Coruña', 'Elche CF', 'Espanyol', 'FC Barcelona', 'Getafe', 'Getafe CF', 
+'Gimnàstic', 'Granada CF', 'Hércules CF', 'Levante', 'Levante UD', 'Málaga CF', 'RCD Espanyol Barcelona', 
+'RCD Mallorca', 'Racing', 'Racing Santander', 'Rayo Vallecano', 'Real Betis', 'Real Betis Balompié', 'Real Madrid', 
+'Real Murcia', 'Real Oviedo', 'Real Sociedad', 'Real Valladolid CF', 'Real Zaragoza', 'Recreativo Huelva', 
+'SD Eibar', 'SD Huesca', 'Sevilla FC', 'Sporting Gijón', 'UD Almería', 'UD Las Palmas', 'UD Salamanca', 'Valencia', 
+'Valencia CF', 'Villarreal CF', 'Without Club', 'Xerez CD'
