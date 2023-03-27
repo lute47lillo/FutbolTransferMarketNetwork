@@ -23,9 +23,13 @@ champ_league_winners = ['Olympique Marseille','Marseille', 'AC Milan', 'Ajax', '
                         'FC Porto', 'Liverpool FC', 'FC Barcelona', 'AC Milan', 'Man Utd', 'Barcelona',
                         'Inter', 'Barcelona', 'Chelsea', 'Bayern Munich', 'Real Madrid','Barcelona',
                         'Real Madrid', 'Real Madrid', 'Real Madrid', 'Liverpool', 'Bayern Munich',
-                        'Chelsea FC', 'Real Madrid', 'Borussia Dortmund']
+                        'Chelsea FC', 'Real Madrid', 'Borussia Dortmund', 'Inter Milan']
 
-europa_league_winners = []
+europa_league_winners = ['Juventus', 'Inter Milan', 'Inter', 'Parma', 'Bayern Munich', 'Parma FC', 'Schalke 04',
+                         'FC Schalke 04', 'Galatasaray', 'Liverpool FC', 'Liverpool', 'Feyenoord', 'FC Porto', 
+                         'Valencia', 'Valencia CF', 'CSKA Moscow', 'Sevilla FC', 'Zenit S-Pb', 'Shakhtar D.', 
+                         'Atlético Madrid', 'Atlético de Madrid', 'Chelsea', 'Chelsea FC', 'Manchester United',
+                         'Man Utd', 'Villarreal', 'Villarreal CF', 'E. Frankfurt', 'Eintracht Frankfurt']
 
 def data_community(ordered):
     print(len(ordered))
@@ -42,8 +46,6 @@ def main():
     soccer = prep.create_dict(0)
     # print(soccer)
     
-    
-    
     # Execute functions
     # Communities
     comm = Community()
@@ -58,12 +60,11 @@ def main():
     soccer_champ = prep.create_dict(5)
     
     # Returns winners dict (seller, buyer) : (fee, player)
-    winners = win.champ_league(soccer_champ, champ_league_winners)
+    ch_winners = win.champ_league(soccer_champ, champ_league_winners)
+    eur_winners = win.europa_league(soccer_champ, europa_league_winners)
 
 
 main()
-
-#fee_edge_labels = nx.get_edge_attributes(trim_graph, 'fee')
 
 """
     TODO:

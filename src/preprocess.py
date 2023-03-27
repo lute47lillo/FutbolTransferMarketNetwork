@@ -11,10 +11,9 @@ class Preprocessing:
         
         return leagues[arg_n]
         
-    def create_dict(self, league_n, champs):
+    def create_dict(self, league_n):
         
         league = self.select_league(league_n)
-        print(league)
         df = pd.read_csv(league)
         G = nx.from_pandas_edgelist(df, source='club_name', target='club_involved_name',
                                     edge_attr=['fee', 'year', 'player_name', 'transfer_movement', 'fee_cleaned'],
@@ -47,11 +46,7 @@ class Preprocessing:
             # Remove double edges (Ex: 2 Transactions happen, in and out. Keep only out transactions)
             if not ((seller, buyer), (player, fee_cleaned, year)) in soccer_dict.items():
                 soccer_dict.update({(seller, buyer):(player, fee_cleaned, year)})
-                
-            if not ((seller, buyer), (player, fee_cleaned, year)) in winners.items():
-                if seller in champs and buyer in champs:
-                    winners.update({(seller, buyer):(player, fee_cleaned)})
         
-        return soccer_dict, winners
+        return soccer_dict
                 
 
