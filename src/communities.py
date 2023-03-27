@@ -68,13 +68,22 @@ class Community:
         
     def process_community_graph(self, soccer_dict, is_plotting, title_text):
         
-        trim_graph = nx.Graph()
+        trim_graph = nx.MultiGraph()
         trim_graph.add_nodes_from(soccer_dict.keys())
 
         # Trimmed graph with only fee_cleaned weight
         for ((seller, buyer), (player, fee_cleaned, year)) in soccer_dict.items():
             trim_graph.add_weighted_edges_from(ebunch_to_add=[(seller, buyer, fee_cleaned)], weight="fee")
             
+        fee_trim_graph = trim_graph
+        
+        # buyer, seller is oppositte as how it should be, but result is correct
+        low_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in trim_graph.edges(data=True) if attrs["fee"] < 8]
+        high_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in trim_graph.edges(data=True) if attrs["fee"] > 8]
+    
+        fee_trim_graph.remove_edges_from(high_fee_edges)
+        
+        
         # REMOVE innecesary and noise nodes form the graph
         low_degree = [n for n, d in trim_graph.degree() if d < 20]
         trim_graph.remove_nodes_from(low_degree) 
@@ -98,4 +107,4 @@ class Community:
         if is_plotting:
             self.plot_community(trim_graph, community_index, centrality, title_text)
             
-        return order_comm
+        return order_comm, trim_graph
