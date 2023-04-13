@@ -34,13 +34,33 @@ class ChampionsDataProcess:
     def plotting_categorical(self, data):
         names = list(data.keys())
         values = list(data.values())
-
+        trophies = [6, 1, 3, 6, 5, 1, 2, 2, 3, 7, 14, 4, 2]
+        
         fig, axs = plt.subplots(figsize=(18, 6), sharey=True)
-        plt.bar(names, values, color ='maroon',
+        
+        plt.bar(names, values, color ='green',
         width = 0.4)
         
+        title = "Champions League Winner's - Transactions"
+        axs.set_ylabel('Money Spent')
+        axs.set_title(title)
+        
         fig.autofmt_xdate()  # make space for and rotate the x-axis tick labels
-
-        fig.suptitle('Categorical Plotting')
+        plt.savefig("../plots/CLW_Transactions.png", format="PNG")
         plt.show()
+        
+        
+        fig2, axs2 = plt.subplots(figsize=(18, 6), sharey=True)
+        axs2.set_ylabel('Trophies won')
+        plt.bar(names, trophies, color='blue', width=0.4)
+        fig2.autofmt_xdate()
+        
+        title = "Champions League Winner's - Trophies"
+        axs2.set_ylabel('Trophies Won')
+        axs2.set_title(title)
+        
+        plt.savefig("../plots/CLW_Trophies.png", format="PNG")
+        plt.show()
+        
+        
             

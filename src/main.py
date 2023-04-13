@@ -28,6 +28,7 @@ champ_league_winners = ['Olympique Marseille','Marseille', 'AC Milan', 'Ajax', '
                         'Real Madrid', 'Real Madrid', 'Real Madrid', 'Liverpool', 'Bayern Munich',
                         'Chelsea FC', 'Real Madrid', 'Borussia Dortmund', 'Inter Milan']
 
+
 europa_league_winners = ['Juventus', 'Inter Milan', 'Inter', 'Parma', 'Bayern Munich', 'Parma FC', 'Schalke 04',
                          'FC Schalke 04', 'Galatasaray', 'Liverpool FC', 'Liverpool', 'Feyenoord', 'FC Porto', 
                          'Valencia', 'Valencia CF', 'CSKA Moscow', 'Sevilla FC', 'Zenit S-Pb', 'Shakhtar D.', 
