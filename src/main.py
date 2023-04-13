@@ -50,10 +50,10 @@ def main():
     soccer = prep.create_dict(0)
     # print(soccer)
     
-    # Execute functions
+    
     # Communities
     comm = Community()
-    order_comm, trimmed_graph = comm.process_community_graph(soccer, False, 0)
+    #order_comm, trimmed_graph = comm.process_community_graph(soccer, False, 0)
     #print("The ordered communities: ", ordered)
     #data_community(ordered)
     
@@ -63,14 +63,22 @@ def main():
     win = Winners()
     soccer_champ = prep.create_dict(5)
     
-    # Returns winners dict (seller, buyer) : (fee, player)
-    ch_winners = win.champ_league(soccer_champ, champ_league_winners)
     
     ch_process = ChampionsDataProcess()
-    ch_process.process_data(ch_winners)
-    #print(ch_winners)
+    
+    
+    # TODO: 
+    #   1. Order the teams based on money spent, so we see at least on of the bars 
+    #   moving with a descending trend
+    #   2. Create a correlation coefficient to understand ratio money spent / trophies won
+    #   between that network.
+    
+    # Returns winners dict (seller, buyer) : (fee, player)
+    ch_winners = win.champ_league(soccer_champ, champ_league_winners)
+    ch_process.process_data(ch_winners, 0)
+  
     eur_winners = win.europa_league(soccer_champ, europa_league_winners)
-
+    ch_process.process_data(eur_winners, 1)
 
 main()
 

@@ -3,9 +3,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+
+titles = ["Champions League Winner's - Trophies - Transactions", "Europa League Winner's - Trophies - Transactions"]
+
+fig_names = ["../plots/CLW_Trophies.png", "../plots/EURW_Trophies.png"]
+
+
 class ChampionsDataProcess:
     
-    def process_data(self, winners):
+    def process_data(self, winners, n):
         
         teams = []
         money = []
@@ -29,37 +35,45 @@ class ChampionsDataProcess:
                 money[index] = new_total
 
         data = dict(zip(teams, money))
-        self.plotting_categorical(data)
+        self.plotting_categorical(data, n)
 
-    def plotting_categorical(self, data):
+    def plotting_categorical(self, data, n):
         names = list(data.keys())
         values = list(data.values())
-        trophies = [6, 1, 3, 6, 5, 1, 2, 2, 3, 7, 14, 4, 2]
         
-        fig, axs = plt.subplots(figsize=(18, 6), sharey=True)
+        if n == 0:
+            trophies = [6, 1, 3, 6, 5, 1, 2, 2, 3, 7, 14, 4, 2]
+            
+        else:
+            trophies = [1,1,2,6,1,2,3,3,1,3,3,1,2,1,2,1,1,2,1]
         
-        plt.bar(names, values, color ='green',
-        width = 0.4)
         
-        title = "Champions League Winner's - Transactions"
+        df = pd.DataFrame(list(zip(values, trophies)),
+               columns =['Money', 'Trophies'])
+        
+        df = df.set_axis(names)
+
+        # print(df) # Print list of the names
+        fig = plt.figure() # Create matplotlib figure
+        axs = fig.add_subplot(111) # Create matplotlib axes
+        ax2 = axs.twinx() # Create another axes that shares the same x-axis as ax.
+
+        width = 0.4
+
+        df.Money.plot(kind='bar', color='green', ax=axs, width=width, position=1)
+        df.Trophies.plot(kind='bar', color='blue', ax=ax2, width=width, position=0)
+
+        axs.set_xlabel('Team')
         axs.set_ylabel('Money Spent')
+        ax2.set_ylabel('Trophies Won')
+        
+        fig.autofmt_xdate()
+        
+        title = titles[n]
         axs.set_title(title)
         
-        fig.autofmt_xdate()  # make space for and rotate the x-axis tick labels
-        plt.savefig("../plots/CLW_Transactions.png", format="PNG")
-        plt.show()
-        
-        
-        fig2, axs2 = plt.subplots(figsize=(18, 6), sharey=True)
-        axs2.set_ylabel('Trophies won')
-        plt.bar(names, trophies, color='blue', width=0.4)
-        fig2.autofmt_xdate()
-        
-        title = "Champions League Winner's - Trophies"
-        axs2.set_ylabel('Trophies Won')
-        axs2.set_title(title)
-        
-        plt.savefig("../plots/CLW_Trophies.png", format="PNG")
+        fig_name = fig_names[n]
+        plt.savefig(fig_name, format="PNG")
         plt.show()
         
         
