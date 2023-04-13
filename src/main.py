@@ -72,13 +72,15 @@ def main():
     #   moving with a descending trend
     #   2. Create a correlation coefficient to understand ratio money spent / trophies won
     #   between that network.
+    #   3. We have based on money spent, what about meny received (?)
     
     # Returns winners dict (seller, buyer) : (fee, player)
+    # TODO: Fix team ordering for MONEY RECEIVED the trophies list is out of place
     ch_winners = win.champ_league(soccer_champ, champ_league_winners)
-    ch_process.process_data(ch_winners, 0)
+    #ch_process.process_data(ch_winners, 0, False)
   
     eur_winners = win.europa_league(soccer_champ, europa_league_winners)
-    ch_process.process_data(eur_winners, 1)
+    ch_process.process_data(eur_winners, 1, True)
 
 main()
 

@@ -4,50 +4,80 @@ import numpy as np
 import pandas as pd
 
 
-titles = ["Champions League Winner's - Trophies - Transactions", "Europa League Winner's - Trophies - Transactions"]
+titles = ["Champions League Winner's - Trophies - Transactions", "Europa League Winner's - Trophies - Transactions",
+          "Champions League Winner's - Trophies - Money Received", "Europa League Winner's - Trophies - Money Received"]
 
-fig_names = ["../plots/CLW_Trophies.png", "../plots/EURW_Trophies.png"]
+fig_names = ["../plots/CLW_Trophies.png", "../plots/EURW_Trophies.png",
+             "../plots/CLW_Received.png", "../plots/EURW_Received.png"]
 
 
 class ChampionsDataProcess:
     
-    def process_data(self, winners, n):
+    def process_data(self, winners, n, dinero):
         
         teams = []
         money = []
-        for ((seller, buyer), (fee_cleaned, player)) in winners.items():
         
-            if buyer not in teams:
-                teams.append(buyer)
-                if isinstance(fee_cleaned, float):
-                    money.append(0.0)
+        if dinero:
+            for ((seller, buyer), (fee_cleaned, player)) in winners.items():
+            
+                if buyer not in teams:
+                    teams.append(buyer)
+                    if isinstance(fee_cleaned, float):
+                        money.append(0.0)
+                    else:
+                        money.append(float(fee_cleaned))
                 else:
-                    money.append(float(fee_cleaned))
-            else:
-                index = teams.index(buyer)
-                current_spent = money[index]
-                
-                if isinstance(fee_cleaned, float):
-                    new_total = current_spent
-                else:
-                    new_total = float(fee_cleaned) + current_spent
+                    index = teams.index(buyer)
+                    current_spent = money[index]
                     
-                money[index] = new_total
+                    if isinstance(fee_cleaned, float):
+                        new_total = current_spent
+                    else:
+                        new_total = float(fee_cleaned) + current_spent
+                        
+                    money[index] = new_total
+        else:     
+            for ((seller, buyer), (fee_cleaned, player)) in winners.items():
+            
+                if seller not in teams:
+                    teams.append(seller)
+                    if isinstance(fee_cleaned, float):
+                        money.append(0.0)
+                    else:
+                        money.append(float(fee_cleaned))
+                else:
+                    index = teams.index(seller)
+                    current_spent = money[index]
+                    
+                    if isinstance(fee_cleaned, float):
+                        new_total = current_spent
+                    else:
+                        new_total = float(fee_cleaned) + current_spent
+                        
+                    money[index] = new_total
 
+        print(teams)
         data = dict(zip(teams, money))
-        self.plotting_categorical(data, n)
+        #self.plotting_categorical(data, n, dinero)
 
-    def plotting_categorical(self, data, n):
+    def plotting_categorical(self, data, n, dinero):
         names = list(data.keys())
         values = list(data.values())
         
         if n == 0:
             trophies = [6, 1, 3, 6, 5, 1, 2, 2, 3, 7, 14, 4, 2]
+            if not dinero:
+                n = 2
             
         else:
             trophies = [1,1,2,6,1,2,3,3,1,3,3,1,2,1,2,1,1,2,1]
+            if not dinero:
+                n = 3
         
-        
+    
+            
+            
         df = pd.DataFrame(list(zip(values, trophies)),
                columns =['Money', 'Trophies'])
         
@@ -64,7 +94,7 @@ class ChampionsDataProcess:
         df.Trophies.plot(kind='bar', color='blue', ax=ax2, width=width, position=0)
 
         axs.set_xlabel('Team')
-        axs.set_ylabel('Money Spent')
+        axs.set_ylabel('Money Received')
         ax2.set_ylabel('Trophies Won')
         
         fig.autofmt_xdate()
