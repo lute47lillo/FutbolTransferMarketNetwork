@@ -54,6 +54,18 @@ class Winners:
         mapping = {'Barcelona': 'FC Barcelona', 'Bor. Dortmund': 'Borussia Dortmund', 'Man Utd': 'Manchester United',
                    'Chelsea' : 'Chelsea FC', 'Liverpool' : 'Liverpool FC', 'Marseille' : 'Olympique Marseille',
                    'Inter': 'Inter Milan'}
+        
+        # Fix dictionary naming (Could it be more efficient (?))
+        winners_f = {}
+        for ((seller, buyer), (fee_cleaned, player)) in winners.items():
+            if seller in mapping: # it is a key
+                seller = mapping.get(seller)
+                
+            if buyer in mapping:
+                buyer = mapping.get(buyer)
+
+            winners_f.update({(seller, buyer):(fee_cleaned, player)})
+        
         winners_graph = nx.relabel_nodes(winners_graph, mapping)
 
         # Induced subgraph of larger connected components
@@ -66,7 +78,7 @@ class Winners:
 
         self.plot_winners(winners_graph, centrality, 0)
         
-        return winners
+        return winners_f
     
     def europa_league(self, soccer, champs):
         winners_graph = nx.Graph()
