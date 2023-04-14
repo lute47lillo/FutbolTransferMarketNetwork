@@ -80,7 +80,7 @@ def main():
     #ch_process.process_data(ch_winners, 0, False)
   
     eur_winners = win.europa_league(soccer_champ, europa_league_winners)
-    ch_process.process_data(eur_winners, 1, True)
+    #ch_process.process_data(eur_winners, 1, False)
 
 main()
 

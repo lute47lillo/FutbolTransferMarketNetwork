@@ -57,9 +57,8 @@ class ChampionsDataProcess:
                         
                     money[index] = new_total
 
-        print(teams)
         data = dict(zip(teams, money))
-        #self.plotting_categorical(data, n, dinero)
+        #self.plotting_categorical(data, n, dinero) # All plots are correct and saved
 
     def plotting_categorical(self, data, n, dinero):
         names = list(data.keys())
@@ -67,17 +66,17 @@ class ChampionsDataProcess:
         
         if n == 0:
             trophies = [6, 1, 3, 6, 5, 1, 2, 2, 3, 7, 14, 4, 2]
-            if not dinero:
+            if not dinero: # Money Received
                 n = 2
+                trophies = [1, 6, 3, 6, 5, 1, 2, 7, 14, 4, 3, 2, 2]
             
         else:
-            trophies = [1,1,2,6,1,2,3,3,1,3,3,1,2,1,2,1,1,2,1]
+            trophies = [1,1,2, 6,1,2,3,3,1,3,3,1,2,1,2,1,1,2,1]
             if not dinero:
                 n = 3
+                trophies = [1,1,2, 2,6, 2, 3, 3,3 ,3,1 ,1 ,1 ,2,1 ,1,1,2,1]
         
     
-            
-            
         df = pd.DataFrame(list(zip(values, trophies)),
                columns =['Money', 'Trophies'])
         
@@ -105,6 +104,3 @@ class ChampionsDataProcess:
         fig_name = fig_names[n]
         plt.savefig(fig_name, format="PNG")
         plt.show()
-        
-        
-            
