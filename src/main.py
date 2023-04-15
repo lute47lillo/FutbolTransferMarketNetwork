@@ -35,11 +35,14 @@ europa_league_winners = ['Juventus', 'Inter Milan', 'Inter', 'Parma', 'Bayern Mu
                          'Atlético Madrid', 'Atlético de Madrid', 'Chelsea', 'Chelsea FC', 'Manchester United',
                          'Man Utd', 'Villarreal', 'Villarreal CF', 'E. Frankfurt', 'Eintracht Frankfurt']
 
+''' Helper function that returns a dictionary with the ordered communities'''
 def data_community(ordered):
+    ord = {}
     print(len(ordered))
     for i in range(len(ordered)):
-        print(ordered[i]) # Prints lists of communities
-    
+        # print(ordered[i]) # Prints lists of communities
+        ord.update({i+1:ordered[i]})
+    return ord
 
 def main():
     
@@ -50,15 +53,26 @@ def main():
         Given Index 0-5
         Returns dictionary of type -> (seller, buyer) : (player, fee, year) 
     """
-    #soccer = prep.create_dict(0)
+    soccer = prep.create_dict(5)
 
     
     
-    # Communities
+    """ Communities
+    
+        Given a dictionary:
+            - Plot if TRUE
+    
+        Returns and ordered dictionary of communities based on the greedy_modularity_communities algorithm
+        and the trimmed graph
+    
+    """
     comm = Community()
-    #order_comm, trimmed_graph = comm.process_community_graph(soccer, False, 0)
-    #print("The ordered communities: ", ordered)
-    #data_community(ordered)
+    mapping = prep.get_universal_mapping()
+    soccer = prep.dictionary_name_mapping(soccer, mapping)
+    order_comm, trimmed_graph = comm.process_community_graph(soccer, True, 5)
+    
+    ordered = data_community(order_comm)
+    print("The ordered community: ", ordered)
     
     
     # Process International Champions DATA

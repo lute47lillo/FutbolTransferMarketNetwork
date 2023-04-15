@@ -7,11 +7,11 @@ import itertools
 
 titles = ["LaLiga association network for TransferMarket", "Bundesliga association network for TransferMarket",
           "Serie A association network for TransferMarket", "PremierLeague association network for TransferMarket",
-          "Ligue 1 association network for TransferMarket"]
+          "Ligue 1 association network for TransferMarket", "TOP5_Leagues association network for TransferMarket"]
 
 fig_names = ["../plots/LaLigaSGraph.png", "../plots/BundesligaSGraph.png",
           "../plots/Serie_ASGraph.png", "../plots/PremierLeagueSGraph.png",
-          "../plots/Ligue_1SGraph.png"]
+          "../plots/Ligue_1SGraph.png", "../plots/All_SGraph.png"]
 
 class Community:
     
@@ -78,10 +78,10 @@ class Community:
         fee_trim_graph = trim_graph
         
         # buyer, seller is oppositte as how it should be, but result is correct
-        low_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in trim_graph.edges(data=True) if attrs["fee"] < 8]
-        high_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in trim_graph.edges(data=True) if attrs["fee"] > 8]
+        # low_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in trim_graph.edges(data=True) if attrs["fee"] < 8]
+        # high_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in trim_graph.edges(data=True) if attrs["fee"] > 8]
     
-        fee_trim_graph.remove_edges_from(high_fee_edges)
+        # fee_trim_graph.remove_edges_from(high_fee_edges)
         
         
         # REMOVE innecesary and noise nodes form the graph
@@ -93,7 +93,7 @@ class Community:
         trim_graph = trim_graph.subgraph(largest_component)
 
         # Compute centrality
-        centrality = nx.betweenness_centrality(trim_graph, k=50, normalized=True, endpoints=True)
+        centrality = nx.betweenness_centrality(trim_graph, k=70, normalized=True, endpoints=True)
 
         # Run algorithm
         comm = nx.community.greedy_modularity_communities(trim_graph, best_n=10)
