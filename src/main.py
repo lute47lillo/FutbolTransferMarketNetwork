@@ -45,10 +45,13 @@ def main():
     
     # Preprocess the data 
     prep = Preprocessing()
-    
-    # Returns dictionary (seller, buyer) : (player, fee, year) for index (0 - 4) indicated
-    soccer = prep.create_dict(0)
-    # print(soccer)
+    """
+        'create_dict' function from Preprocessing
+        Given Index 0-5
+        Returns dictionary of type -> (seller, buyer) : (player, fee, year) 
+    """
+    #soccer = prep.create_dict(0)
+
     
     
     # Communities
@@ -58,29 +61,36 @@ def main():
     #data_community(ordered)
     
     
-    # Winners correlation
-    # index 5 uses all leagues mixed dataset
-    win = Winners()
-    soccer_champ = prep.create_dict(5)
+    # Process International Champions DATA
+    ch_process = ChampionsDataProcess()
     
-    # soccer_champ -> Dictionary ((seller, buyer), (player, fee_cleaned, year))
-    # CHAMPIONS LEAGUE
-    #champs_money_spent = prep.sub_champions_spent_community(soccer_champ, champ_league_winners, 0)
-    #champs_money_received = prep.sub_champions_received_community(soccer_champ, champ_league_winners, 0)
+    """
+        Given a dictionary of all teams of all datasets
+        Create small subcommunity of International Champions
+        To calculate Pearson Correlation Coefficients
+        Based on:
+        Trophies won - Money Spent 
+                    &
+        Trophies won - Money Spent 
+    """
+    #soccer_champ = prep.create_dict(5)
+    '''# CHAMPIONS LEAGUE
+    champs_money_spent = prep.sub_champions_spent_community(soccer_champ, champ_league_winners, 0)
+    champs_money_received = prep.sub_champions_received_community(soccer_champ, champ_league_winners, 0)
     
     # EUROPA LEAGUE
     champs_money_spent_eur = prep.sub_champions_spent_community(soccer_champ, europa_league_winners, 1)
-    champs_money_received_eur = prep.sub_champions_received_community(soccer_champ, europa_league_winners, 1)
+    champs_money_received_eur = prep.sub_champions_received_community(soccer_champ, europa_league_winners, 1)'''
     
-    # ONLY CHAMPIONS COMMUNITIES
-    ch_process = ChampionsDataProcess()
     
     """ Calculates the Pearson Correlation Coefficient """
-    #ch_process.calculating_pearson_corr(champs_money_spent, 0, True)
-    #ch_process.calculating_pearson_corr(champs_money_received, 0, False)
+    '''ch_process.calculating_pearson_corr(champs_money_spent, 0, True)
+    ch_process.calculating_pearson_corr(champs_money_received, 0, False)
     
     ch_process.calculating_pearson_corr(champs_money_spent_eur, 1, True)
-    ch_process.calculating_pearson_corr(champs_money_received_eur, 1, False)
+    ch_process.calculating_pearson_corr(champs_money_received_eur, 1, False)'''
+    
+    
     
     """     Given arguments for 'process_data' function:
                 #   0 -> Champions League
@@ -88,12 +98,15 @@ def main():
                 #   True -> Money Spent
                 #   False -> Money Received
         'champ_league' function: Returns winners dict (seller, buyer) : (fee, player)
+        Also returns graph of sub-community of champions if plot function uncommented
     """
-    ch_winners = win.champ_league(soccer_champ, champ_league_winners)
-    #ch_process.process_data(ch_winners, 0, True)
+    # ONLY CHAMPIONS COMMUNITIES
+    win = Winners()
+    '''ch_winners = win.champ_league(soccer_champ, champ_league_winners)
+    ch_process.process_data(ch_winners, 0, True)
   
     eur_winners = win.europa_league(soccer_champ, europa_league_winners)
-    #ch_process.process_data(eur_winners, 1, False)
+    ch_process.process_data(eur_winners, 1, False)'''
 
 main()
 
