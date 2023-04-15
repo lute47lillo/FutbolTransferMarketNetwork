@@ -48,5 +48,63 @@ class Preprocessing:
                 soccer_dict.update({(seller, buyer):(player, fee_cleaned, year)})
         
         return soccer_dict
+    
+    """ Helper Function that maps International Champions names on dictionary with different names """
+    def dictionary_name_mapping(self, old):
+        # Fix naming of clubs 
+        mapping = {'Barcelona': 'FC Barcelona', 'Bor. Dortmund': 'Borussia Dortmund', 'Man Utd': 'Manchester United',
+                   'Chelsea' : 'Chelsea FC', 'Liverpool' : 'Liverpool FC', 'Marseille' : 'Olympique Marseille',
+                   'Inter': 'Inter Milan'}
+        
+        # Fix dictionary naming 
+        soccer = {}
+        for ((seller, buyer), (fee_cleaned, player, year)) in old.items():
+            if seller in mapping: # it is a key
+                seller = mapping.get(seller)
+                
+            if buyer in mapping:
+                buyer = mapping.get(buyer)
+
+            soccer.update({(seller, buyer):(fee_cleaned, player, year)})
+        return soccer
+            
+    """ Helper function that sorts dictionary by key alphabetically"""
+    def sort_dictionary(self, unsorted):
+ 
+        myKeys = list(unsorted.keys())
+        myKeys.sort()
+        sorted_dict = {i: unsorted[i] for i in myKeys}
+        
+        return sorted_dict
+    
+    """ Creates a sub-community of international champions teams - money spent"""
+    def sub_champions_spent_community(self, soccer, champs):
+        soccer = self.dictionary_name_mapping(soccer)
+        
+        spent = {}
+        for ((seller, buyer), (player, fee_cleaned, year)) in soccer.items():
+            if buyer in champs:
+                
+                # Set fee_cleaned to float type value
+                if isinstance(fee_cleaned, float):
+                        fee = 0.0
+                else:
+                        fee = float(fee_cleaned)
+                        
+                # Update spent dictionary
+                if buyer not in spent:
+                    spent.update({ buyer : fee })
+                else:
+                    current_spent = spent.get(buyer)
+                    spent.update({ buyer : (fee + current_spent) })
+                    
+        #print(spent)
+        for k, v in spent.items():
+            print(k, " spent ", v)
+        
+        spent = self.sort_dictionary(spent)
+        return spent
+            
+    """ Creates a sub-community of international champions teams - money received"""        
                 
 

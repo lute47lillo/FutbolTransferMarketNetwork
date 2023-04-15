@@ -40,7 +40,16 @@ def data_community(ordered):
     for i in range(len(ordered)):
         print(ordered[i]) # Prints lists of communities
         
+def create_lists_from_dict(soccer):
+    T = []
+    M = []
     
+    for teams, money in soccer.items():
+        T.append(teams)
+        M.append(money)
+    
+    return T, M
+
 def main():
     
     # Preprocess the data 
@@ -63,21 +72,26 @@ def main():
     win = Winners()
     soccer_champ = prep.create_dict(5)
     
+    # soccer_champ -> Dictionary ((seller, buyer), (player, fee_cleaned, year))
+    champs_money_spent = prep.sub_champions_spent_community(soccer_champ, champ_league_winners)
+    teams, money = create_lists_from_dict(champs_money_spent)
     
+    # ONLY CHAMPIONS COMMUNITIES
     ch_process = ChampionsDataProcess()
     
+    """ Calculates the Pearson Correlation Coefficient """
+    ch_process.calculating_pearson_corr(teams, money, 0, True)
     
-    # TODO: 
-    #   1. Order the teams based on money spent, so we see at least on of the bars 
-    #   moving with a descending trend
-    #   2. Create a correlation coefficient to understand ratio money spent / trophies won
-    #   between that network.
-    #   3. We have based on money spent, what about meny received (?)
     
-    # Returns winners dict (seller, buyer) : (fee, player)
-    # TODO: Fix team ordering for MONEY RECEIVED the trophies list is out of place
+    """     Given arguments for 'process_data' function:
+                #   0 -> Champions League
+                #   1 -> Europa League
+                #   True -> Money Spent
+                #   False -> Money Received
+        'champ_league' function: Returns winners dict (seller, buyer) : (fee, player)
+    """
     ch_winners = win.champ_league(soccer_champ, champ_league_winners)
-    #ch_process.process_data(ch_winners, 0, False)
+    #ch_process.process_data(ch_winners, 0, True)
   
     eur_winners = win.europa_league(soccer_champ, europa_league_winners)
     #ch_process.process_data(eur_winners, 1, False)

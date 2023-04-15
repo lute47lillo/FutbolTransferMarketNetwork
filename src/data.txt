@@ -1,0 +1,16 @@
+
+1. If teams were divided as sub-communities of teams that have won International Trophies
+# Champions league teams community
+
+Champions league corr coeff for trophies - money spent: PearsonRResult(statistic=0.03398761547900719, pvalue=0.91222962015109)
+Champions league corr coeff for trophies - money received: PearsonRResult(statistic=0.4110751163370809, pvalue=0.16288754563391938)
+
+
+# Europa League teams commnunity
+Europa league corr coeff for trophies - money spent: PearsonRResult(statistic=-0.01516501605417929, pvalue=0.9508668366652264)
+Europa league corr coeff for trophies - money received: PearsonRResult(statistic=0.11630738895552792, pvalue=0.6353793101619044)
+
+None of these are statistically significant.
+
+2. If teams that have won International trophies, but all the money is accounted for.
+

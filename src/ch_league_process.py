@@ -2,6 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import scipy as sp
 
 
 titles = ["Champions League Winner's - Trophies - Transactions", "Europa League Winner's - Trophies - Transactions",
@@ -58,8 +59,26 @@ class ChampionsDataProcess:
                     money[index] = new_total
 
         data = dict(zip(teams, money))
+        self.calculating_pearson_corr(teams, money, n, dinero)
         #self.plotting_categorical(data, n, dinero) # All plots are correct and saved
 
+    def calculating_pearson_corr(self, teams, money, n, dinero):
+        
+        if n == 0:
+            trophies = [6, 1, 3, 6, 5, 1, 2, 2, 3, 7, 14, 4, 2] #CH_spent
+            if not dinero:
+                trophies = [1, 6, 3, 6, 5, 1, 2, 7, 14, 4, 3, 2, 2] #CH_received
+        else:
+            trophies = [1,1,2, 6,1,2,3,3,1,3,3,1,2,1,2,1,1,2,1] #eur_spent
+            if not dinero:
+                trophies = [1,1,2, 2,6, 2, 3, 3,3 ,3,1 ,1 ,1 ,2,1 ,1,1,2,1] #eur_received
+        
+        y = np.array(trophies)
+        x = np.array(money)
+        corr_coeff = sp.stats.pearsonr(y, x)
+        
+        print("For ", teams, " and based on money spent, the Pearsons correlation coefficient is: ", corr_coeff)
+        
     def plotting_categorical(self, data, n, dinero):
         names = list(data.keys())
         values = list(data.values())
