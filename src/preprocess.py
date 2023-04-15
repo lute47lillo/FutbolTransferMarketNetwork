@@ -1,6 +1,15 @@
 import networkx as nx
 import pandas as pd
 
+CH_mapping = {'Barcelona': 'FC Barcelona', 'Bor. Dortmund': 'Borussia Dortmund', 'Man Utd': 'Manchester United',
+                   'Chelsea' : 'Chelsea FC', 'Liverpool' : 'Liverpool FC', 'Marseille' : 'Olympique Marseille',
+                   'Inter': 'Inter Milan'}
+
+EUR_mapping = {'Bor. Dortmund': 'Borussia Dortmund', 'Man Utd': 'Manchester United',
+                   'Chelsea' : 'Chelsea FC', 'Liverpool' : 'Liverpool FC', 'Villarreal' : 'Villarreal CF',
+                   'Inter': 'Inter Milan', 'Schalke 04' : 'FC Schalke 04', 'Parma' : 'Parma FC',
+                   'E. Frankfurt' : 'Eintracht Frankfurt', 'Atlético Madrid' : 'Atlético de Madrid',
+                   'Valencia' : 'Valencia CF'}
 
 class Preprocessing:
     
@@ -49,12 +58,19 @@ class Preprocessing:
         
         return soccer_dict
     
+    """ Helper function that creates 2 lists from a (K,V) pair of a dictionary """
+    def create_lists_from_dict(self, soccer):
+        T = []
+        M = []
+        
+        for teams, money in soccer.items():
+            T.append(teams)
+            M.append(money)
+        
+        return T, M
+
     """ Helper Function that maps International Champions names on dictionary with different names """
-    def dictionary_name_mapping(self, old):
-        # Fix naming of clubs 
-        mapping = {'Barcelona': 'FC Barcelona', 'Bor. Dortmund': 'Borussia Dortmund', 'Man Utd': 'Manchester United',
-                   'Chelsea' : 'Chelsea FC', 'Liverpool' : 'Liverpool FC', 'Marseille' : 'Olympique Marseille',
-                   'Inter': 'Inter Milan'}
+    def dictionary_name_mapping(self, old, mapping):
         
         # Fix dictionary naming 
         soccer = {}
@@ -78,8 +94,11 @@ class Preprocessing:
         return sorted_dict
     
     """ Creates a sub-community of international champions teams - money spent"""
-    def sub_champions_spent_community(self, soccer, champs):
-        soccer = self.dictionary_name_mapping(soccer)
+    def sub_champions_spent_community(self, soccer, champs, mapp):
+        if mapp == 0:
+            soccer = self.dictionary_name_mapping(soccer, CH_mapping)
+        else:
+            soccer = self.dictionary_name_mapping(soccer, EUR_mapping)
         
         spent = {}
         for ((seller, buyer), (player, fee_cleaned, year)) in soccer.items():
@@ -106,5 +125,33 @@ class Preprocessing:
         return spent
             
     """ Creates a sub-community of international champions teams - money received"""        
+    def sub_champions_received_community(self, soccer, champs, mapp):
+        if mapp == 0:
+            soccer = self.dictionary_name_mapping(soccer, CH_mapping)
+        else:
+            soccer = self.dictionary_name_mapping(soccer, EUR_mapping)
+        
+        spent = {}
+        for ((seller, buyer), (player, fee_cleaned, year)) in soccer.items():
+            if seller in champs:
                 
+                # Set fee_cleaned to float type value
+                if isinstance(fee_cleaned, float):
+                        fee = 0.0
+                else:
+                        fee = float(fee_cleaned)
+                        
+                # Update spent dictionary
+                if seller not in spent:
+                    spent.update({ seller : fee })
+                else:
+                    current_spent = spent.get(seller)
+                    spent.update({ seller : (fee + current_spent) })
+                    
+        #print(spent)
+        for k, v in spent.items():
+            print(k, " spent ", v)
+        
+        spent = self.sort_dictionary(spent)
+        return spent    
 

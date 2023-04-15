@@ -14,3 +14,32 @@ None of these are statistically significant.
 
 2. If teams that have won International trophies, but all the money is accounted for.
 
+"""
+        Bayern Munich  spent  989.92
+        Olympique Marseille  spent  464.035
+        Borussia Dortmund  spent  839.25
+        Ajax  spent  140.736
+        Chelsea FC  spent  1550.015
+        Real Madrid  spent  1068.13
+        Juventus  spent  622.6
+        AC Milan  spent  674.45
+        FC Barcelona  spent  1357.848
+        Liverpool FC  spent  1149.365
+        Inter Milan  spent  585.55
+        Manchester United  spent  1519.855
+        FC Porto  spent  101.56
+"""
+
+# Champions League teams commnunity
+Champions league corr coeff for trophies - money spent: PearsonRResult(statistic=0.21748078275074464, pvalue=0.47538661281978073)
+Champions league corr coeff for trophies - money received: PearsonRResult(statistic=0.44614316415894983, pvalue=0.1264841093322834)
+
+# Europa League teams commnunity
+Europa league corr coeff for trophies - money spent:  PearsonRResult(statistic=0.2299994417571039, pvalue=0.3435029221240558)
+Europa league corr coeff for trophies - money received: PearsonRResult(statistic=0.4459524399313345, pvalue=0.05565435283259332)
+
+
+SOME EARLY CONCLUSIONS: HIGH p-values indicate that your evidence is NOT STRONG ENOUGH to suggest an effect exists in the population.
+
+However, there is a strong correlation that might show that teams that receive more money, tend to usually win more,
+rather than logical idea given by 'spending more means winning more'

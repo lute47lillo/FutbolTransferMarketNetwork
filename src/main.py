@@ -39,16 +39,7 @@ def data_community(ordered):
     print(len(ordered))
     for i in range(len(ordered)):
         print(ordered[i]) # Prints lists of communities
-        
-def create_lists_from_dict(soccer):
-    T = []
-    M = []
     
-    for teams, money in soccer.items():
-        T.append(teams)
-        M.append(money)
-    
-    return T, M
 
 def main():
     
@@ -73,15 +64,23 @@ def main():
     soccer_champ = prep.create_dict(5)
     
     # soccer_champ -> Dictionary ((seller, buyer), (player, fee_cleaned, year))
-    champs_money_spent = prep.sub_champions_spent_community(soccer_champ, champ_league_winners)
-    teams, money = create_lists_from_dict(champs_money_spent)
+    # CHAMPIONS LEAGUE
+    #champs_money_spent = prep.sub_champions_spent_community(soccer_champ, champ_league_winners, 0)
+    #champs_money_received = prep.sub_champions_received_community(soccer_champ, champ_league_winners, 0)
+    
+    # EUROPA LEAGUE
+    champs_money_spent_eur = prep.sub_champions_spent_community(soccer_champ, europa_league_winners, 1)
+    champs_money_received_eur = prep.sub_champions_received_community(soccer_champ, europa_league_winners, 1)
     
     # ONLY CHAMPIONS COMMUNITIES
     ch_process = ChampionsDataProcess()
     
     """ Calculates the Pearson Correlation Coefficient """
-    ch_process.calculating_pearson_corr(teams, money, 0, True)
+    #ch_process.calculating_pearson_corr(champs_money_spent, 0, True)
+    #ch_process.calculating_pearson_corr(champs_money_received, 0, False)
     
+    ch_process.calculating_pearson_corr(champs_money_spent_eur, 1, True)
+    ch_process.calculating_pearson_corr(champs_money_received_eur, 1, False)
     
     """     Given arguments for 'process_data' function:
                 #   0 -> Champions League

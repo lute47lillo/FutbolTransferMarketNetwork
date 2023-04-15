@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import scipy as sp
 
+from preprocess import Preprocessing
 
 titles = ["Champions League Winner's - Trophies - Transactions", "Europa League Winner's - Trophies - Transactions",
           "Champions League Winner's - Trophies - Money Received", "Europa League Winner's - Trophies - Money Received"]
@@ -16,6 +17,7 @@ class ChampionsDataProcess:
     
     def process_data(self, winners, n, dinero):
         
+        prep =  Preprocessing()
         teams = []
         money = []
         
@@ -59,19 +61,19 @@ class ChampionsDataProcess:
                     money[index] = new_total
 
         data = dict(zip(teams, money))
-        self.calculating_pearson_corr(teams, money, n, dinero)
+        data = prep.sort_dictionary(data)
+        # self.calculating_pearson_corr(data, n, dinero)
         #self.plotting_categorical(data, n, dinero) # All plots are correct and saved
 
-    def calculating_pearson_corr(self, teams, money, n, dinero):
+    def calculating_pearson_corr(self, data, n, dinero):
+        teams = list(data.keys())
+        money = list(data.values())
         
         if n == 0:
-            trophies = [6, 1, 3, 6, 5, 1, 2, 2, 3, 7, 14, 4, 2] #CH_spent
-            if not dinero:
-                trophies = [1, 6, 3, 6, 5, 1, 2, 7, 14, 4, 3, 2, 2] #CH_received
+            trophies = [7, 4, 6, 1, 2, 5, 2, 3, 2, 6, 3, 1, 14] 
+
         else:
-            trophies = [1,1,2, 6,1,2,3,3,1,3,3,1,2,1,2,1,1,2,1] #eur_spent
-            if not dinero:
-                trophies = [1,1,2, 2,6, 2, 3, 3,3 ,3,1 ,1 ,1 ,2,1 ,1,1,2,1] #eur_received
+            trophies = [3,1,1,2,2,2,1,2,1,3,3,3,1,2,6,1,1,1,1]
         
         y = np.array(trophies)
         x = np.array(money)
@@ -84,17 +86,14 @@ class ChampionsDataProcess:
         values = list(data.values())
         
         if n == 0:
-            trophies = [6, 1, 3, 6, 5, 1, 2, 2, 3, 7, 14, 4, 2]
+            trophies = [7, 4, 6, 1, 2, 5, 2, 3, 2, 6, 3, 1, 14] 
             if not dinero: # Money Received
                 n = 2
-                trophies = [1, 6, 3, 6, 5, 1, 2, 7, 14, 4, 3, 2, 2]
             
         else:
-            trophies = [1,1,2, 6,1,2,3,3,1,3,3,1,2,1,2,1,1,2,1]
+            trophies = [3,1,1,2,2,2,1,2,1,3,3,3,1,2,6,1,1,1,1]
             if not dinero:
                 n = 3
-                trophies = [1,1,2, 2,6, 2, 3, 3,3 ,3,1 ,1 ,1 ,2,1 ,1,1,2,1]
-        
     
         df = pd.DataFrame(list(zip(values, trophies)),
                columns =['Money', 'Trophies'])
