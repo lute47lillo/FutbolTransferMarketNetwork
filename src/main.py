@@ -57,6 +57,21 @@ def main():
 
     
     
+    """
+        Given a historical classification dataset
+        Return a stats dictionary {team : average position, total points}
+        
+        & 
+        
+        Given an ordered community from ONLY Premier league and ALL leagues
+        Map Relationship to results
+    
+    """
+    stats = prep.average_stats()
+    
+    soccer = prep.dictionary_name_mapping(soccer, mapping)
+    order_comm, trimmed_graph = comm.process_community_graph(soccer, True, 3)
+    
     """ Communities
     
         Given a dictionary:
@@ -69,10 +84,10 @@ def main():
     comm = Community()
     mapping = prep.get_universal_mapping()
     soccer = prep.dictionary_name_mapping(soccer, mapping)
-    order_comm, trimmed_graph = comm.process_community_graph(soccer, True, 5)
+    #order_comm, trimmed_graph = comm.process_community_graph(soccer, True, 5)
     
-    ordered = data_community(order_comm)
-    print("The ordered community: ", ordered)
+    #ordered = data_community(order_comm)
+    #print("The ordered community: ", ordered)
     
     
     # Process International Champions DATA

@@ -1,5 +1,6 @@
 import networkx as nx
 import pandas as pd
+import math
 
 CH_mapping = {'Barcelona': 'FC Barcelona', 'Bor. Dortmund': 'Borussia Dortmund', 'Man Utd': 'Manchester United',
                    'Chelsea' : 'Chelsea FC', 'Liverpool' : 'Liverpool FC', 'Marseille' : 'Olympique Marseille',
@@ -53,7 +54,6 @@ class Preprocessing:
         
         # Clean-up data
         soccer_dict = {}
-        winners = {}
         for (teams, move), (_,player), (_,year), (_, fee), (_, fee_cleaned) in zip(move_edge_labels.items(),
                                                                                 player_edge_labels.items(),
                                                                                 year_edge_labels.items(),
@@ -172,4 +172,56 @@ class Preprocessing:
         
         spent = self.sort_dictionary(spent)
         return spent    
+    
+    
+    def average_stats(self):
 
+        league = '../dataset/EPL Standings 2000-2022.csv'
+        df = pd.read_csv(league)
+        
+        
+        names = []
+        for name in df['Team']:
+            names.append(name)
+            
+        points = []
+        for pts in df['Pts']:
+            points.append(pts)
+                
+        positions = []
+        for pos in df['Pos']:
+            positions.append(pos)
+            
+        
+        soccer = {}
+    
+
+        for idx in range(len(names)):
+            
+            team = names[idx]
+            new_points = points[idx]
+            new_position = positions[idx]
+    
+            seasons_played = 1
+            
+            if team not in soccer.keys():
+                soccer.update({ team : (new_position, new_points, seasons_played) })
+    
+            else:
+                current_pos, current_points, curr_seasons  = soccer.get(team)
+                    
+                seasons_played = seasons_played + curr_seasons
+                avg_position = new_position + current_pos
+                
+                total_points = new_points + current_points
+                
+                soccer.update({ team : (avg_position, total_points, seasons_played ) })
+ 
+        
+        for (team , (avg_position, total_points, seasons_played)) in soccer.items():
+            avg_position = avg_position / seasons_played
+            soccer.update({ team : (math.ceil(avg_position), total_points) })
+        
+        soccer = self.sort_dictionary(soccer)
+            
+        return soccer
