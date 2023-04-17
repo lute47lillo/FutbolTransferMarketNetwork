@@ -15,7 +15,7 @@ EUR_mapping = {'Bor. Dortmund': 'Borussia Dortmund', 'Man Utd': 'Manchester Unit
 universal_mapping = {'Barcelona': 'FC Barcelona', 'Bor. Dortmund': 'Borussia Dortmund', 'Man Utd': 'Manchester United',
                    'Chelsea' : 'Chelsea FC', 'Liverpool' : 'Liverpool FC', 'Marseille' : 'Olympique Marseille',
                    'Inter': 'Inter Milan', 'Man Utd': 'Manchester United',
-                   'Chelsea' : 'Chelsea FC', 'Liverpool' : 'Liverpool FC', 'Villarreal' : 'Villarreal CF',
+                   'Liverpool' : 'Liverpool FC', 'Villarreal' : 'Villarreal CF',
                    'Inter': 'Inter Milan', 'Schalke 04' : 'FC Schalke 04', 'Parma' : 'Parma FC',
                    'E. Frankfurt' : 'Eintracht Frankfurt', 'Atlético Madrid' : 'Atlético de Madrid',
                    'Valencia' : 'Valencia CF', 'Real Betis' : 'Real Betis Balompié', 'RCD Mallorca B':'RCD Mallorca',
@@ -113,20 +113,20 @@ class Preprocessing:
     
     """ Creates a sub-community of international champions teams - money spent"""
     def sub_champions_spent_community(self, soccer, champs, mapp):
-        if mapp == 0:
-            soccer = self.dictionary_name_mapping(soccer, CH_mapping)
-        else:
-            soccer = self.dictionary_name_mapping(soccer, EUR_mapping)
+        # if mapp == 0:
+        #     soccer = self.dictionary_name_mapping(soccer, CH_mapping)
+        # else:
+        #     soccer = self.dictionary_name_mapping(soccer, EUR_mapping)
         
         spent = {}
         for ((seller, buyer), (player, fee_cleaned, year)) in soccer.items():
             if buyer in champs:
                 
                 # Set fee_cleaned to float type value
-                if isinstance(fee_cleaned, float):
-                        fee = 0.0
+                if math.isnan(fee_cleaned):
+                    fee = 0.0
                 else:
-                        fee = float(fee_cleaned)
+                    fee = float(fee_cleaned)
                         
                 # Update spent dictionary
                 if buyer not in spent:
@@ -136,8 +136,8 @@ class Preprocessing:
                     spent.update({ buyer : (fee + current_spent) })
                     
         #print(spent)
-        for k, v in spent.items():
-            print(k, " spent ", v)
+        # for k, v in spent.items():
+        #     print(k, " spent ", v)
         
         spent = self.sort_dictionary(spent)
         return spent
@@ -167,8 +167,8 @@ class Preprocessing:
                     spent.update({ seller : (fee + current_spent) })
                     
         #print(spent)
-        for k, v in spent.items():
-            print(k, " spent ", v)
+        # for k, v in spent.items():
+        #     print(k, " spent ", v)
         
         spent = self.sort_dictionary(spent)
         return spent    
@@ -223,5 +223,5 @@ class Preprocessing:
             soccer.update({ team : (math.ceil(avg_position), total_points) })
         
         soccer = self.sort_dictionary(soccer)
-            
+        print(soccer)
         return soccer

@@ -85,7 +85,7 @@ class Community:
         
         
         # REMOVE innecesary and noise nodes form the graph
-        low_degree = [n for n, d in trim_graph.degree() if d < 20]
+        low_degree = [n for n, d in trim_graph.degree() if d < 30]
         trim_graph.remove_nodes_from(low_degree) 
 
         components = nx.connected_components(trim_graph)

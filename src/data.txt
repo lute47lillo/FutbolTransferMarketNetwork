@@ -43,3 +43,18 @@ SOME EARLY CONCLUSIONS: HIGH p-values indicate that your evidence is NOT STRONG 
 
 However, there is a strong correlation that might show that teams that receive more money, tend to usually win more,
 rather than logical idea given by 'spending more means winning more'
+
+
+3. Premier League performance
+        The position - money corr. coeff. for teams
+                ['Aston Villa', 'Bournemouth', 'Brentford', 'Cardiff City', 'Charlton Athletic',
+                'Coventry City', 'Crystal Palace', 'Ipswich Town', 'Leeds United',
+                'Leicester City', 'Norwich City', 'Queens Park Rangers', 'Reading',
+                'Tottenham Hotspur', 'Watford']
+
+        is  PearsonRResult(
+                statistic=-0.6625047339415308,
+                pvalue=0.007117635427102362
+        ) 
+
+        That means that Position decreases while Money spent increases.

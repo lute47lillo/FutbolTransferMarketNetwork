@@ -8,6 +8,7 @@ from preprocess import Preprocessing
 from communities import Community
 from winners import Winners
 from ch_league_process import ChampionsDataProcess
+from stats_comm import StatsAndCommunities
     
     
 
@@ -53,9 +54,9 @@ def main():
         Given Index 0-5
         Returns dictionary of type -> (seller, buyer) : (player, fee, year) 
     """
-    soccer = prep.create_dict(5)
+    soccer = prep.create_dict(3)
+    mapping = prep.get_universal_mapping()
 
-    
     
     """
         Given a historical classification dataset
@@ -67,10 +68,24 @@ def main():
         Map Relationship to results
     
     """
+    comm = Community()
     stats = prep.average_stats()
     
     soccer = prep.dictionary_name_mapping(soccer, mapping)
-    order_comm, trimmed_graph = comm.process_community_graph(soccer, True, 3)
+    order_comm, trimmed_graph = comm.process_community_graph(soccer, False, 3)
+    
+    
+    # Print ordered communites
+    ordered = data_community(order_comm)
+   
+    
+    sc = StatsAndCommunities()
+    
+    #sc.study(ordered, stats, soccer)
+    sc.whole_league_community(stats, soccer)
+    #print("Premier League ordered communites :",  ordered)
+    
+    
     
     """ Communities
     
@@ -81,8 +96,7 @@ def main():
         and the trimmed graph
     
     """
-    comm = Community()
-    mapping = prep.get_universal_mapping()
+    
     soccer = prep.dictionary_name_mapping(soccer, mapping)
     #order_comm, trimmed_graph = comm.process_community_graph(soccer, True, 5)
     
