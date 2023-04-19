@@ -4,9 +4,10 @@ import scipy as sp
 import numpy as np
 import math
 import networkx as nx
+import matplotlib.pyplot as plt
+import pandas as pd
 
-# TODO: YOu have studied for small communites based on modularity.
-# MISSING: Study Premier League as a one big community
+
 class StatsAndCommunities:
     
     """
@@ -79,9 +80,15 @@ class StatsAndCommunities:
         
     def calculating_pearson_corr_stats(self, data):
         money = list(data.keys())
-        other_value = list(data.values())
+        #other_value = list(data.values())
         
-        y = np.array(other_value)
+        t_list = []
+        attrs = []
+        for (ts, attr) in data.values():
+            t_list.append(ts)
+            attrs.append(attr)
+        
+        y = np.array(attrs)
         x = np.array(money)
         corr_coeff = sp.stats.spearmanr(y, x)
         
@@ -146,26 +153,32 @@ class StatsAndCommunities:
     def study_betwenneess(self, betw, stats):
         b_points = {}
         b_pos = {}
+        teams = []
         for team, (avg_pos, points) in stats.items():
-            if team in betw:
-                print(f"Betweenness Centrality {team:2} {betw[team]:.3f}")
-                b_points.update({points:betw[team]})
-                b_pos.update({avg_pos:betw[team]})
+            teams.append(team)
+            print(f"Betweenness Centrality {team:2} {betw[team]:.3f}")
+            b_points.update({points:(team, betw[team])})
+            b_pos.update({avg_pos:(team, betw[team])})
                 
-        points_corr = self.calculating_pearson_corr_stats(b_points)
-        print("The points - betwenneess corr. coeff. for teams is ", points_corr, "\n")
+                
+        #points_corr = self.calculating_pearson_corr_stats(b_points)
+       #print("The points - betwenneess corr. coeff. for teams is ", points_corr, "\n")
         
-        position_corr = self.calculating_pearson_corr_stats(b_pos)
-        print("The position - betwenneess corr. coeff. for teams is ", position_corr, "\n")
+        #position_corr = self.calculating_pearson_corr_stats(b_pos)
+        #print("The position - betwenneess corr. coeff. for teams is ", position_corr, "\n")
+        
+        self.plotting_categorical(b_points,  "Points", "Betwenneess")
+        self.plotting_categorical(b_pos,  "Avg. Position", "Betwenneess")
         
     def study_closenes(self, close, stats):
         b_points = {}
         b_pos = {}
+        teams = []
         for team, (avg_pos, points) in stats.items():
-            if team in close:
-                print(f"Closeness Centrality { team:2} {close[team]:.3f}")
-                b_points.update({points:close[team]})
-                b_pos.update({avg_pos:close[team]})
+            teams.append(team)
+            print(f"Closeness Centrality { team:2} {close[team]:.3f}")
+            b_points.update({points:(team, close[team])})
+            b_pos.update({avg_pos:(team, close[team])})
                 
         points_corr = self.calculating_pearson_corr_stats(b_points)
         print("The points - closenes corr. coeff. for teams is ", points_corr, "\n")
@@ -173,20 +186,66 @@ class StatsAndCommunities:
         position_corr = self.calculating_pearson_corr_stats(b_pos)
         print("The position - closenes corr. coeff. for teams is ", position_corr, "\n")
         
+        self.plotting_categorical(b_points,  "Points", "Closeness Centrality")
+        self.plotting_categorical(b_pos,  "Avg. Position", "Closeness Centrality")
+        
     def study_degree(self, deg, stats):
         b_points = {}
         b_pos = {}
+        teams = []
         for team, (avg_pos, points) in stats.items():
-            if team in deg:
-                print(f"Degree Centrality {team:2} {deg[team]:.3f}")
-                b_points.update({points:deg[team]})
-                b_pos.update({avg_pos:deg[team]})
+            teams.append(team)
+            print(f"Degree Centrality {team:2} {deg[team]:.3f}")
+            b_points.update({points:(team, deg[team])})
+            b_pos.update({avg_pos:(team, deg[team])})
                 
         points_corr = self.calculating_pearson_corr_stats(b_points)
         print("The points - degree centrality corr. coeff. for teams is ", points_corr, "\n")
         
         position_corr = self.calculating_pearson_corr_stats(b_pos)
         print("The position - degree centrality corr. coeff. for teams is ", position_corr, "\n")
+        
+        self.plotting_categorical(b_points,  "Points", "Degree Centrality ")
+        self.plotting_categorical(b_pos, "Avg. Position", "Degree Centrality ")
+        
+        
+    def plotting_categorical(self, data, attribute, val_name):
+        values = list(data.keys()) # Points / Avg. position
+        
+        t_list = []
+        attrs = []
+        for (ts, attr) in data.values():
+            t_list.append(ts)
+            attrs.append(attr)
+        
+        df = pd.DataFrame(list(zip(values, attrs)),
+               columns =['Value', 'Attribute'])
+        
+        df = df.set_axis(t_list)
+
+        # print(df) # Print list of the names
+        fig = plt.figure(figsize=(36,11)) # Create matplotlib figure
+        axs = fig.add_subplot(111) # Create matplotlib axes
+        ax2 = axs.twinx() # Create another axes that shares the same x-axis as ax.
+
+        width = 0.2
+
+        df.Value.plot(kind='bar', color='green', ax=axs, width=width, position=1)
+        df.Attribute.plot(kind='bar', color='blue', ax=ax2, width=width, position=0)
+
+        axs.set_xlabel('Team')
+        ax2.set_ylabel(val_name)
+        axs.set_ylabel(attribute)
+        
+        title = attribute + " - " + val_name
+        fig_name = "../plots/"+attribute+"_"+val_name+".png"
+        fig.autofmt_xdate()
+        
+        plt.title(title)
+        plt.savefig(fig_name, format="PNG")
+        plt.show()
+        
+
                 
             
             
