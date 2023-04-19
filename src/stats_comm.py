@@ -78,7 +78,6 @@ class StatsAndCommunities:
         
     def calculating_pearson_corr_stats(self, data):
         money = list(data.keys())
-        print(money)
         other_value = list(data.values())
         
         y = np.array(other_value)
@@ -118,9 +117,15 @@ class StatsAndCommunities:
             print("\nCommunity nº: ", i+1)
             for team, (avg_pos, points) in stats.items():
                 if team in graph.nodes() and team in teams:
-                    print(f"Betweenness {team:2} {betw[team]:.3f}")
-                    print(f"Closeness Centrality { team:2} {close[team]:.3f}")
-                    print(f"Degree Centrality {team:2} {deg_centrality[team]:.3f}\n")
+                    pass
+                    #print(f"Betweenness Centrality {team:2} {betw[team]:.3f}")
+                    #print(f"Closeness Centrality { team:2} {close[team]:.3f}")
+                    #print(f"Degree Centrality {team:2} {deg_centrality[team]:.3f}\n")
+        
+        self.study_betwenneess(betw, stats)
+        self.study_closenes(close, stats)
+        self.study_degree(deg_centrality, stats)
+            
                   
     """ Helper function to narrow the graph by deleting nodes not in the target community """  
     def narrow_graph(self, graph, stats):
@@ -131,7 +136,57 @@ class StatsAndCommunities:
         graph.remove_nodes_from(non_community_nodes) 
             
         return graph
-                    
+    
+    """
+        A node with higher betweenness centrality would have more control over the network,
+        because more information will pass through that node.
+        Therefore, order by betw centrality. Are higher nodes (more transfers through). better off?
+    """    
+    def study_betwenneess(self, betw, stats):
+        b_points = {}
+        b_pos = {}
+        for team, (avg_pos, points) in stats.items():
+            if team in betw:
+                print(f"Betweenness Centrality {team:2} {betw[team]:.3f}")
+                b_points.update({points:betw[team]})
+                b_pos.update({avg_pos:betw[team]})
+                
+        points_corr = self.calculating_pearson_corr_stats(b_points)
+        print("The points - betwenneess corr. coeff. for teams is ", points_corr, "\n")
+        
+        position_corr = self.calculating_pearson_corr_stats(b_pos)
+        print("The position - betwenneess corr. coeff. for teams is ", position_corr, "\n")
+        
+    def study_closenes(self, close, stats):
+        b_points = {}
+        b_pos = {}
+        for team, (avg_pos, points) in stats.items():
+            if team in close:
+                print(f"Closeness Centrality { team:2} {close[team]:.3f}")
+                b_points.update({points:close[team]})
+                b_pos.update({avg_pos:close[team]})
+                
+        points_corr = self.calculating_pearson_corr_stats(b_points)
+        print("The points - closenes corr. coeff. for teams is ", points_corr, "\n")
+        
+        position_corr = self.calculating_pearson_corr_stats(b_pos)
+        print("The position - closenes corr. coeff. for teams is ", position_corr, "\n")
+        
+    def study_degree(self, deg, stats):
+        b_points = {}
+        b_pos = {}
+        for team, (avg_pos, points) in stats.items():
+            if team in deg:
+                print(f"Degree Centrality {team:2} {deg[team]:.3f}")
+                b_points.update({points:deg[team]})
+                b_pos.update({avg_pos:deg[team]})
+                
+        points_corr = self.calculating_pearson_corr_stats(b_points)
+        print("The points - degree centrality corr. coeff. for teams is ", points_corr, "\n")
+        
+        position_corr = self.calculating_pearson_corr_stats(b_pos)
+        print("The position - degree centrality corr. coeff. for teams is ", position_corr, "\n")
+                
             
             
             
