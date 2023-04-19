@@ -173,7 +173,7 @@ class Preprocessing:
         spent = self.sort_dictionary(spent)
         return spent    
     
-    
+    ''' Helper function to obtain the average position and points obtained by teams of a particular league '''
     def average_stats(self):
 
         league = '../dataset/EPL Standings 2000-2022.csv'
@@ -225,3 +225,18 @@ class Preprocessing:
         soccer = self.sort_dictionary(soccer)
         print(soccer)
         return soccer
+    
+    def get_betweenness(self, graph):
+        print("Betweenness")
+        b = nx.betweenness_centrality(graph)
+        return b
+        
+    def get_closeness(self, graph):
+        print("Closeness centrality")
+        c = nx.closeness_centrality(graph)
+        return c
+    
+    def get_deg_centrality(self, graph):
+        print("Degree centrality")
+        d = nx.degree_centrality(graph)
+        return d

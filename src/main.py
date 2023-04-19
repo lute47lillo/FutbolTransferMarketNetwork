@@ -74,18 +74,28 @@ def main():
     soccer = prep.dictionary_name_mapping(soccer, mapping)
     order_comm, trimmed_graph = comm.process_community_graph(soccer, False, 3)
     
-    
     # Print ordered communites
     ordered = data_community(order_comm)
    
-    
+    """
+        Given the statistics and the soccer prepped dictionary, and the ordered communities based on modularity.
+        
+        Return
+            sc.study -> Correlation between performance and sub-communites
+    """
     sc = StatsAndCommunities()
     
     #sc.study(ordered, stats, soccer)
-    sc.whole_league_community(stats, soccer)
+    #sc.whole_league_community(stats, soccer)
     #print("Premier League ordered communites :",  ordered)
     
     
+    """
+        Study the Betweenness, closeness centrality and degree centrality of a particular community.
+        Compare it to their overall performance (stats)
+    
+    """
+    sc.community_attributes(stats, ordered, trimmed_graph)
     
     """ Communities
     
@@ -97,7 +107,7 @@ def main():
     
     """
     
-    soccer = prep.dictionary_name_mapping(soccer, mapping)
+    #soccer = prep.dictionary_name_mapping(soccer, mapping)
     #order_comm, trimmed_graph = comm.process_community_graph(soccer, True, 5)
     
     #ordered = data_community(order_comm)
@@ -105,7 +115,7 @@ def main():
     
     
     # Process International Champions DATA
-    ch_process = ChampionsDataProcess()
+    #ch_process = ChampionsDataProcess()
     
     """
         Given a dictionary of all teams of all datasets
@@ -144,7 +154,7 @@ def main():
         Also returns graph of sub-community of champions if plot function uncommented
     """
     # ONLY CHAMPIONS COMMUNITIES
-    win = Winners()
+    #win = Winners()
     '''ch_winners = win.champ_league(soccer_champ, champ_league_winners)
     ch_process.process_data(ch_winners, 0, True)
   
