@@ -66,6 +66,7 @@ class StatsAndCommunities:
             sub_comm_pos.update({ money : avg_pos})
             sub_comm_points.update({money:  points})
             
+            
             #print(team, "spends ", money, " million euros to achieve ", avg_pos, " average position")
             #print(team, "spends ", money, " million euros to achieve ", points, " points")
         

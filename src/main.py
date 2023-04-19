@@ -86,7 +86,7 @@ def main():
     sc = StatsAndCommunities()
     
     #sc.study(ordered, stats, soccer)
-    #sc.whole_league_community(stats, soccer)
+    sc.whole_league_community(stats, soccer)
     #print("Premier League ordered communites :",  ordered)
     
     
@@ -95,7 +95,7 @@ def main():
         Compare it to their overall performance (stats)
     
     """
-    sc.community_attributes(stats, ordered, trimmed_graph)
+    #sc.community_attributes(stats, ordered, trimmed_graph)
     
     """ Communities
     
