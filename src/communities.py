@@ -99,7 +99,7 @@ class Community:
         # Run algorithm
         comm = nx.community.greedy_modularity_communities(trim_graph, best_n=10)
         community_index = {n: i for i, com in enumerate(comm) for n in com}
-
+        print(community_index)
         order_comm = {}
         for team, community in community_index.items():
             if not (community, team) in order_comm.items():

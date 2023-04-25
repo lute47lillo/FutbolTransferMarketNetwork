@@ -69,7 +69,7 @@ class Preprocessing:
                 
             # Remove double edges (Ex: 2 Transactions happen, in and out. Keep only out transactions)
             if not ((seller, buyer), (player, fee_cleaned, year)) in soccer_dict.items():
-                if int(year) >= 2000:
+                if int(year) >= 2000: # Premier League Data
                     soccer_dict.update({(seller, buyer):(player, fee_cleaned, year)})
         
         return soccer_dict
@@ -226,12 +226,12 @@ class Preprocessing:
             soccer.update({ team : (math.ceil(avg_position), total_points) })
         
         soccer = self.sort_dictionary(soccer)
-        print(soccer)
+        #print(soccer)
         return soccer
     
     def get_betweenness(self, graph):
         print("Betweenness")
-        b = nx.betweenness_centrality(graph)
+        b = nx.betweenness_centrality(graph, k=30, normalized=True, endpoints=True)
         return b
         
     def get_closeness(self, graph):
@@ -243,3 +243,11 @@ class Preprocessing:
         print("Degree centrality")
         d = nx.degree_centrality(graph)
         return d
+    
+    def create_com_index(self, ord):
+        n_ord = {}
+        for k, v in ord.items():
+            n = len(v)
+            for i in range(n):
+                n_ord.update({v[i]: k-1})
+        return n_ord

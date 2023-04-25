@@ -80,16 +80,16 @@ class StatsAndCommunities:
         
     def calculating_pearson_corr_stats(self, data):
         # For sub-communities
-        # money = list(data.keys())
-        # values = list(data.values())
+        attrs = list(data.keys())
+        values = list(data.values())
         
         # For attributes study
-        values = []
-        attrs = []
+        # values = []
+        # attrs = []
 
-        for (ts, attr) in data.values():
-            values.append(ts)
-            attrs.append(attr)
+        # for (ts, attr) in data.values():
+        #     values.append(ts)
+        #     attrs.append(attr)
         
         y = np.array(attrs)
         x = np.array(values)
@@ -133,10 +133,23 @@ class StatsAndCommunities:
                     #print(f"Closeness Centrality { team:2} {close[team]:.3f}")
                     #print(f"Degree Centrality {team:2} {deg_centrality[team]:.3f}\n")
         
-        self.study_betwenneess(betw, stats)
+        #self.study_betwenneess(betw, stats)
         #self.study_closenes(close, stats)
         #self.study_degree(deg_centrality, stats)
+        return betw, graph
+        
+    def trim_communities(self, ord, stats):
+        teams = list(ord.values())
+        i = 1
+        for values in ord.values():
+            n = len(values)
+            for t in range(n):
+                if values[t] not in stats:
+                    values.remove(values[t])
             
+            ord.update({i:values})
+            i+=1
+        print(ord)
                   
     """ Helper function to narrow the graph by deleting nodes not in the target community """  
     def narrow_graph(self, graph, stats):

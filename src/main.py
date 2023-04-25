@@ -37,12 +37,23 @@ europa_league_winners = ['Juventus FC', 'Inter Milan', 'Inter', 'Parma', 'Bayern
                          'Man Utd', 'Villarreal', 'Villarreal CF', 'E. Frankfurt', 'Eintracht Frankfurt']
 
 ''' Helper function that returns a dictionary with the ordered communities'''
-def data_community(ordered):
+def data_community(ordered, stats, do):
     ord = {}
-    print(len(ordered))
-    for i in range(len(ordered)):
-        # print(ordered[i]) # Prints lists of communities
-        ord.update({i+1:ordered[i]})
+    if do: # Trim the community
+        for idx, teams in ordered.items():
+            trim_teams = []
+            n = len(teams)
+            for t in range(n):
+                if teams[t] in stats:
+                    trim_teams.append(teams[t])
+                    ord.update({idx+1:trim_teams})
+        #print(ord)
+        
+    else:
+        print(len(ordered))
+        for i in range(len(ordered)):
+            # print(ordered[i]) # Prints lists of communities
+            ord.update({i+1:ordered[i]})
     return ord
 
 def main():
@@ -74,8 +85,9 @@ def main():
     soccer = prep.dictionary_name_mapping(soccer, mapping)
     order_comm, trimmed_graph = comm.process_community_graph(soccer, False, 3)
     
-    # Print ordered communites
-    ordered = data_community(order_comm)
+    # Print ordered communites (True -> Trim community given stats dicitonary)
+    ordered = data_community(order_comm, stats, True)
+    
    
     """
         Given the statistics and the soccer prepped dictionary, and the ordered communities based on modularity.
@@ -84,18 +96,22 @@ def main():
             sc.study -> Correlation between performance and sub-communites
     """
     sc = StatsAndCommunities()
-    
     #sc.study(ordered, stats, soccer)
     #sc.whole_league_community(stats, soccer)
     #print("Premier League ordered communites :",  ordered)
-    
     
     """
         Study the Betweenness, closeness centrality and degree centrality of a particular community.
         Compare it to their overall performance (stats)
     
     """
-    sc.community_attributes(stats, ordered, trimmed_graph)
+    btw_centr, graph = sc.community_attributes(stats, ordered, trimmed_graph)
+    
+    """ Helper function to create a community index {team : comm_idx} based on a given community (ordered)"""
+    community_index = prep.create_com_index(ordered)
+    
+    """ Plot communities """
+    comm.plot_community(graph, community_index, btw_centr, 3)
     
     """ Communities
     
@@ -178,5 +194,7 @@ main()
         Do the same for teams on 7th - 17th position. How have they spent that money, have they spent more after getting relegated?
         
     3. Obtain LaLiga dataset as the one of Premier LEague.
+    
+    4. Get The league, obtain nodes with highest attributes, map to the results
 """
 
