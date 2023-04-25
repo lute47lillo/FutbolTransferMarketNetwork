@@ -218,7 +218,7 @@ class Preprocessing:
                 
                 total_points = new_points + current_points
                 
-                soccer.update({ team : (avg_position, total_points, seasons_played ) })
+                soccer.update({ team : (avg_position, total_points, seasons_played)})
  
         
         for (team , (avg_position, total_points, seasons_played)) in soccer.items():
@@ -230,17 +230,17 @@ class Preprocessing:
         return soccer
     
     def get_betweenness(self, graph):
-        print("Betweenness")
+        #print("Betweenness")
         b = nx.betweenness_centrality(graph, k=30, normalized=True, endpoints=True)
         return b
         
     def get_closeness(self, graph):
-        print("Closeness centrality")
+        #print("Closeness centrality")
         c = nx.closeness_centrality(graph)
         return c
     
     def get_deg_centrality(self, graph):
-        print("Degree centrality")
+        #print("Degree centrality")
         d = nx.degree_centrality(graph)
         return d
     
@@ -251,3 +251,55 @@ class Preprocessing:
             for i in range(n):
                 n_ord.update({v[i]: k-1})
         return n_ord
+    
+    """ 
+        Helper function. 
+        Given a dictionary {team: avg position, total points} 
+        Return performance communities
+    """
+    def organize_teams(self, stats):
+        int_n = 6
+        mid_n = 17
+        
+        pos = {}
+        mon = {}
+        for t, (avg_pos, points) in stats.items():
+            
+            # Create a pos_dict_community index based on performance positions
+            if avg_pos <= int_n:
+                pos.update({t:1})
+            elif avg_pos > int_n and avg_pos <= mid_n:
+                pos.update({t:2})
+            else:
+                pos.update({t:3})
+                
+            # Create a comm_index based on points spent
+            if points <= 350:
+                mon.update({t:4})
+            elif points > 350 and points <= 700:
+                mon.update({t:3})
+            elif points > 700 and points <= 1000:
+                mon.update({t:2})
+            else:
+                mon.update({t:1})
+                
+        return pos, mon
+    
+    """ 
+        Helper function.
+        Given a dictionary {team : total spent}
+        Returns a community index
+    """
+    def get_money_community(self, stats):
+        mon = {}
+        for t, m in stats.items():
+            if m <= 200:
+                mon.update({t:4})
+            elif m > 200 and m <= 500:
+                mon.update({t:3})
+            elif m > 500 and m <= 800:
+                mon.update({t:2})
+            else:
+                mon.update({t:1})
+        return mon
+            

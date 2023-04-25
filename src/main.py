@@ -56,6 +56,21 @@ def data_community(ordered, stats, do):
             ord.update({i+1:ordered[i]})
     return ord
 
+''' Helper function that returns a dictionary {idx : list of teams} based on the ordered communities'''
+def deconstruct_com_idx(order):
+    ord = {}
+    for t, idx in order.items():
+        if not idx in ord.keys():
+            l = []
+            l.append(t)
+            ord.update({idx:l})
+        else:
+            curr = ord.get(idx)
+            curr.append(t)
+            ord.update({idx:curr})
+        
+    return ord
+
 def main():
     
     # Preprocess the data 
@@ -85,20 +100,55 @@ def main():
     soccer = prep.dictionary_name_mapping(soccer, mapping)
     order_comm, trimmed_graph = comm.process_community_graph(soccer, False, 3)
     
-    # Print ordered communites (True -> Trim community given stats dicitonary)
+    # # Print ordered communites (True -> Trim community given stats dicitonary)
     ordered = data_community(order_comm, stats, True)
     
-   
+    
+    """
+        Given community index creation of based performance teams:
+        Average position
+        Total Money spent within community
+        Plot them,
+    
+    """
+    sc = StatsAndCommunities()
+    '''pos_com_idx, points_pos_idx = prep.organize_teams(stats)
+    print("The pos_com_idx: ", pos_com_idx)
+    print("\nThe points_com_idx: ", points_pos_idx)
+    
+    # Get ordered communities for both avg_pos, and total points
+    pos_ordered = deconstruct_com_idx(pos_com_idx)
+    points_ordered = deconstruct_com_idx(points_pos_idx)
+    
+    print("\n The position communities are: ", pos_ordered)
+    print("\n The points communities are: ", points_ordered)'''
+    
+    # Plot the communities wrt betw centrality, and their pos, or total points community index
+    # btw_centr, graph = sc.community_attributes(stats, ordered, trimmed_graph)
+    # comm.plot_community(graph, pos_com_idx, btw_centr, 6)
+    
+    """ 
+        Obtain the community total spent of a team within a sub-community
+        Example: Premier league (seasons 2000 - 2022)
+        stats -> Teams : avg_pos, total points
+        soccer -> dict ({(seller, buyer):(fee_cleaned, player, year)})
+    """
+    # champs = list(stats.keys())
+    # spent = prep.sub_champions_spent_community(soccer, champs, 0)
+    # money_comm_idx = prep.get_money_community(spent)
+    # money_comm_idx = deconstruct_com_idx(money_comm_idx)
+    # print(money_comm_idx)
+    
     """
         Given the statistics and the soccer prepped dictionary, and the ordered communities based on modularity.
         
         Return
             sc.study -> Correlation between performance and sub-communites
     """
-    sc = StatsAndCommunities()
+    
     #sc.study(ordered, stats, soccer)
     #sc.whole_league_community(stats, soccer)
-    #print("Premier League ordered communites :",  ordered)
+    print("Premier League ordered communites :",  ordered)
     
     """
         Study the Betweenness, closeness centrality and degree centrality of a particular community.
@@ -107,11 +157,13 @@ def main():
     """
     btw_centr, graph = sc.community_attributes(stats, ordered, trimmed_graph)
     
-    """ Helper function to create a community index {team : comm_idx} based on a given community (ordered)"""
-    community_index = prep.create_com_index(ordered)
+    omega, sigma = sc.obtain_omega_sigma_small_world(graph)
+    print(omega, sigma)
+    # """ Helper function to create a community index {team : comm_idx} based on a given community (ordered)"""
+    # community_index = prep.create_com_index(ordered)
     
-    """ Plot communities """
-    comm.plot_community(graph, community_index, btw_centr, 3)
+    # """ Plot communities """
+    # comm.plot_community(graph, community_index, btw_centr, 3)
     
     """ Communities
     

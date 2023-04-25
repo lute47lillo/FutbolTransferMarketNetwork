@@ -4,15 +4,18 @@ import matplotlib.pyplot as plt
 from networkx.algorithms import approximation as approx
 import itertools
 from stats_comm import StatsAndCommunities
+import math
 
 
 titles = ["LaLiga association network for TransferMarket", "Bundesliga association network for TransferMarket",
           "Serie A association network for TransferMarket", "PremierLeague association network for TransferMarket",
-          "Ligue 1 association network for TransferMarket", "TOP5_Leagues association network for TransferMarket"]
+          "Ligue 1 association network for TransferMarket", "TOP5_Leagues association network for TransferMarket",
+          "PLAIN"]
 
 fig_names = ["../plots/LaLigaSGraph.png", "../plots/BundesligaSGraph.png",
           "../plots/Serie_ASGraph.png", "../plots/PremierLeagueSGraph.png",
-          "../plots/Ligue_1SGraph.png", "../plots/All_SGraph.png"]
+          "../plots/Ligue_1SGraph.png", "../plots/All_SGraph.png",
+          "../plots/plain.png"]
 
 class Community:
     
@@ -74,6 +77,8 @@ class Community:
 
         # Trimmed graph with only fee_cleaned weight
         for ((seller, buyer), (player, fee_cleaned, year)) in soccer_dict.items():
+            if math.isnan(fee_cleaned):
+                    fee_cleaned = 0.0
             trim_graph.add_weighted_edges_from(ebunch_to_add=[(seller, buyer, fee_cleaned)], weight="fee")
             
         fee_trim_graph = trim_graph
@@ -99,7 +104,7 @@ class Community:
         # Run algorithm
         comm = nx.community.greedy_modularity_communities(trim_graph, best_n=10)
         community_index = {n: i for i, com in enumerate(comm) for n in com}
-        print(community_index)
+    
         order_comm = {}
         for team, community in community_index.items():
             if not (community, team) in order_comm.items():

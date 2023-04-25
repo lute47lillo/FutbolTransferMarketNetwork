@@ -144,7 +144,7 @@ rather than logical idea given by 'spending more means winning more'
         That means that Points increases while Money spent increases.
 
 
-        CONCLUSION: FOR 2/3 PREMIER LEAGUE COMMUNITIES WRT THEMSELVES:
+        CONCLUSION: FOR 3/4 PREMIER LEAGUE COMMUNITIES WRT THEMSELVES:
                 That means that Position decreases while Money spent decreases.
                 That means that Points increases while Money spent increases.
 
@@ -166,6 +166,63 @@ rather than logical idea given by 'spending more means winning more'
 
         That means that Points increases while Money spent increases.
         
+
+4. 
+        Based on points, and average position
+        I created 3 communities
+
+        Position Communites
+        1. ['Arsenal FC', 'Chelsea FC', 'Liverpool FC', 'Manchester City', 'Manchester United']
+
+        2. ['Aston Villa', 'Birmingham City', 'Blackburn Rovers', 'Bolton Wanderers', 'Bournemouth',
+        'Brentford FC', 'Brighton & Hove Albion', 'Burnley FC', 'Charlton Athletic', 'Crystal Palace',
+        'Everton FC', 'Fulham FC', 'Ipswich Town', 'Leeds United', 'Leicester City', 'Middlesbrough',
+        'Newcastle United', 'Norwich City', 'Portsmouth FC', 'Reading FC', 'Sheffield United', 'Southampton FC',
+        'Stoke City', 'Sunderland AFC', 'Swansea City', 'Tottenham Hotspur', 'Watford', 'West Bromwich Albion',
+        'West Ham United', 'Wigan Athletic', 'Wolverhampton Wanderers']
+
+        3. ['Blackpool', 'Bradford City', 'Cardiff City', 'Coventry City', 'Derby County',
+        'Huddersfield Town', 'Hull City', 'Queens Park Rangers']
+
+        Points communities
+        1. ['Arsenal FC', 'Chelsea FC', 'Everton FC', 'Liverpool FC', 'Manchester City', 'Manchester United', 'Tottenham Hotspur']
+
+        2. ['Aston Villa', 'Newcastle United', 'Southampton FC', 'West Ham United']
+
+        3. ['Blackburn Rovers', 'Bolton Wanderers', 'Crystal Palace', 'Fulham FC', 'Leicester City',
+        'Middlesbrough', 'Stoke City', 'Sunderland AFC', 'West Bromwich Albion']
+
+        4: ['Birmingham City', 'Blackpool', 'Bournemouth', 'Bradford City', 'Brentford FC',
+        'Brighton & Hove Albion', 'Burnley FC', 'Cardiff City', 'Charlton Athletic', 'Coventry City',
+        'Derby County', 'Huddersfield Town', 'Hull City', 'Ipswich Town', 'Leeds United', 'Norwich City',
+        'Portsmouth FC', 'Queens Park Rangers', 'Reading FC', 'Sheffield United', 'Swansea City',
+        'Watford', 'Wigan Athletic', 'Wolverhampton Wanderers']
+
+        Money communities
+        1. ['Chelsea FC', 'Liverpool FC', 'Manchester City', 'Manchester United']
+
+        2. ['Arsenal FC', 'Aston Villa', 'Everton FC', 'Newcastle United', 'Tottenham Hotspur']
+
+        3. ['Brighton & Hove Albion', 'Crystal Palace', 'Fulham FC', 'Leeds United', 'Leicester City',
+        'Southampton FC', 'Sunderland AFC', 'Swansea City', 'Watford', 'Wolverhampton Wanderers']
+        
+        4. ['Birmingham City', 'Blackburn Rovers', 'Blackpool', 'Bolton Wanderers', 'Bournemouth',
+        'Bradford City', 'Brentford FC', 'Burnley FC', 'Cardiff City', 'Charlton Athletic',
+        'Coventry City', 'Derby County', 'Huddersfield Town', 'Hull City', 'Ipswich Town',
+        'Middlesbrough', 'Norwich City', 'Portsmouth FC', 'Queens Park Rangers', 'Reading FC',
+        'Sheffield United', 'Stoke City', 'West Bromwich Albion', 'West Ham United', 'Wigan Athletic']
+
+
+
+
+
+
+A social network is called a small-world network if, roughly speaking,
+any two of people in the network can reach each other through a short sequence of acquaintances.
+So, if omega values are close to 0, it has small-world properties.
+
+If I get whole premier league community and calculate the omega, does it follow?
+
 
 4. 
         For Premier League teams with betweeneess calculated wrt to their small community:

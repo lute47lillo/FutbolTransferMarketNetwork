@@ -6,6 +6,7 @@ import math
 import networkx as nx
 import matplotlib.pyplot as plt
 import pandas as pd
+from networkx import algorithms
 
 
 class StatsAndCommunities:
@@ -129,7 +130,7 @@ class StatsAndCommunities:
             for team, (avg_pos, points) in stats.items():
                 if team in graph.nodes() and team in teams:
                     pass
-                    #print(f"Betweenness Centrality {team:2} {betw[team]:.3f}")
+                    print(f"Betweenness Centrality {team:2} {betw[team]:.3f}")
                     #print(f"Closeness Centrality { team:2} {close[team]:.3f}")
                     #print(f"Degree Centrality {team:2} {deg_centrality[team]:.3f}\n")
         
@@ -225,6 +226,21 @@ class StatsAndCommunities:
         self.plotting_categorical(b_pos, "Avg. Position", "Degree Centrality ")
         
         
+    def obtain_omega_sigma_small_world(self, graph):
+        print([e for e in graph.edges.data()])
+        # graph = nx.MultiGraph.to_undirected(graph)
+        
+        low_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in graph.edges(data=True) if attrs["fee"] == 0.0]
+        graph.remove_edges_from(low_fee_edges)
+        print(graph)
+        sigma = algorithms.smallworld.sigma(graph, niter=50, nrand=5, seed=4572321)
+        omega = 0
+        #omega = algorithms.smallworld.omega(graph, niter=5, nrand=10, seed=4572321)
+        return omega, sigma
+    
+    # sigma (niter=50, nrand=5) -> 1.0258586515689005
+    # omega (niter=5, nrand=10) -> 0.45827135905581773
+    
     def plotting_categorical(self, data, attribute, val_name):
         teams = list(data.keys()) # Points / Avg. position
         
