@@ -22,7 +22,7 @@ from stats_comm import StatsAndCommunities
     5   ../dataset/all.csv
 """
 
-champ_league_winners = ['Olympique Marseille','Marseille', 'AC Milan', 'Ajax', 'Juventus', 'Bor. Dortmund', 'Real Madrid',
+champ_league_winners = ['Olympique Marseille','Marseille', 'AC Milan', 'Ajax', 'Juventus FC', 'Bor. Dortmund', 'Real Madrid',
                         'Manchester United', 'Real Madrid', 'Bayern Munich', 'Real Madrid', 'AC Milan',
                         'FC Porto', 'Liverpool FC', 'FC Barcelona', 'AC Milan', 'Man Utd', 'Barcelona',
                         'Inter', 'Barcelona', 'Chelsea', 'Bayern Munich', 'Real Madrid','Barcelona',
@@ -30,7 +30,7 @@ champ_league_winners = ['Olympique Marseille','Marseille', 'AC Milan', 'Ajax', '
                         'Chelsea FC', 'Real Madrid', 'Borussia Dortmund', 'Inter Milan']
 
 
-europa_league_winners = ['Juventus', 'Inter Milan', 'Inter', 'Parma', 'Bayern Munich', 'Parma FC', 'Schalke 04',
+europa_league_winners = ['Juventus FC', 'Inter Milan', 'Inter', 'Parma', 'Bayern Munich', 'Parma FC', 'Schalke 04',
                          'FC Schalke 04', 'Galatasaray', 'Liverpool FC', 'Liverpool', 'Feyenoord', 'FC Porto', 
                          'Valencia', 'Valencia CF', 'CSKA Moscow', 'Sevilla FC', 'Zenit S-Pb', 'Shakhtar D.', 
                          'Atlético Madrid', 'Atlético de Madrid', 'Chelsea', 'Chelsea FC', 'Manchester United',
@@ -115,7 +115,7 @@ def main():
     
     
     # Process International Champions DATA
-    #ch_process = ChampionsDataProcess()
+    # ch_process = ChampionsDataProcess()
     
     """
         Given a dictionary of all teams of all datasets
@@ -126,22 +126,23 @@ def main():
                     &
         Trophies won - Money Spent 
     """
-    #soccer_champ = prep.create_dict(5)
-    '''# CHAMPIONS LEAGUE
-    champs_money_spent = prep.sub_champions_spent_community(soccer_champ, champ_league_winners, 0)
-    champs_money_received = prep.sub_champions_received_community(soccer_champ, champ_league_winners, 0)
+    # soccer_champ = prep.create_dict(5)
+    # soccer_champ = prep.dictionary_name_mapping(soccer_champ, mapping)
+    # CHAMPIONS LEAGUE
+    # champs_money_spent = prep.sub_champions_spent_community(soccer_champ, champ_league_winners, 0)
+    # champs_money_received = prep.sub_champions_received_community(soccer_champ, champ_league_winners, 0)
     
-    # EUROPA LEAGUE
-    champs_money_spent_eur = prep.sub_champions_spent_community(soccer_champ, europa_league_winners, 1)
-    champs_money_received_eur = prep.sub_champions_received_community(soccer_champ, europa_league_winners, 1)'''
+    # # EUROPA LEAGUE
+    # champs_money_spent_eur = prep.sub_champions_spent_community(soccer_champ, europa_league_winners, 1)
+    # champs_money_received_eur = prep.sub_champions_received_community(soccer_champ, europa_league_winners, 1)
     
     
-    """ Calculates the Pearson Correlation Coefficient """
-    '''ch_process.calculating_pearson_corr(champs_money_spent, 0, True)
-    ch_process.calculating_pearson_corr(champs_money_received, 0, False)
+    # """ Calculates the Pearson Correlation Coefficient """
+    # ch_process.calculating_pearson_corr(champs_money_spent, 0, True)
+    # ch_process.calculating_pearson_corr(champs_money_received, 0, False)
     
-    ch_process.calculating_pearson_corr(champs_money_spent_eur, 1, True)
-    ch_process.calculating_pearson_corr(champs_money_received_eur, 1, False)'''
+    # ch_process.calculating_pearson_corr(champs_money_spent_eur, 1, True)
+    # ch_process.calculating_pearson_corr(champs_money_received_eur, 1, False)
     
     
     
@@ -154,28 +155,28 @@ def main():
         Also returns graph of sub-community of champions if plot function uncommented
     """
     # ONLY CHAMPIONS COMMUNITIES
-    #win = Winners()
-    '''ch_winners = win.champ_league(soccer_champ, champ_league_winners)
-    ch_process.process_data(ch_winners, 0, True)
+    # win = Winners()
+    # ch_winners = win.champ_league(soccer_champ, champ_league_winners)
+    # ch_process.process_data(ch_winners, 0, False)
   
-    eur_winners = win.europa_league(soccer_champ, europa_league_winners)
-    ch_process.process_data(eur_winners, 1, False)'''
+    # eur_winners = win.europa_league(soccer_champ, europa_league_winners)
+    # ch_process.process_data(eur_winners, 1, False)
 
 main()
 
 """
-    TODO:
-    1. Create a Dictionary {team : (total_fee_spent, total_fee_received)}
-        - Divide teams by clusters with threshold of total fee spent
-        - Now, map them to their major trophy wins (We should see that more money = more trophies)
-        - Number of relegations, which teams are getting relegated more? More or less money spent?
-        
-    2. Create A Dictionary by year {team : {list of position of players transferred into team} }
+    TODO:   
+    1. Create A Dictionary by year {team : {list of position of players transferred into team} }
         - Compare to following season records.
         - Are teams getting more cbs, strikers, gks... doing better or worse?
 
-    3. Create a dataset of teams performance (Avg position in the last decade, and compare it to how they do
-        in the transfer market):
+    2. Relegation Study:
+        From dataset, collect teams in 18,19,20th position -> Relegation.
+        Collect teams in 7th - 17th position -> Nothing obtained.
+        Create a dictionary, of those teams : how many relegations, year of relegation. Now, go to transfer_market dataset (Prem + Championship example).
+        Create a graph where nodes are teams that have been relegated, and study that spending community.
+        Do the same for teams on 7th - 17th position. How have they spent that money, have they spent more after getting relegated?
         
+    3. Obtain LaLiga dataset as the one of Premier LEague.
 """
 

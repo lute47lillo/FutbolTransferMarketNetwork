@@ -79,10 +79,14 @@ class StatsAndCommunities:
         
         
     def calculating_pearson_corr_stats(self, data):
-        names = list(data.keys())
+        # For sub-communities
+        # money = list(data.keys())
+        # values = list(data.values())
         
+        # For attributes study
         values = []
         attrs = []
+
         for (ts, attr) in data.values():
             values.append(ts)
             attrs.append(attr)
@@ -130,8 +134,8 @@ class StatsAndCommunities:
                     #print(f"Degree Centrality {team:2} {deg_centrality[team]:.3f}\n")
         
         self.study_betwenneess(betw, stats)
-        self.study_closenes(close, stats)
-        self.study_degree(deg_centrality, stats)
+        #self.study_closenes(close, stats)
+        #self.study_degree(deg_centrality, stats)
             
                   
     """ Helper function to narrow the graph by deleting nodes not in the target community """  
@@ -160,11 +164,11 @@ class StatsAndCommunities:
             b_pos.update({team:(avg_pos, betw[team])})
                 
                 
-        #points_corr = self.calculating_pearson_corr_stats(b_points)
-        #print("The points - betwenneess corr. coeff. for teams is ", points_corr, "\n")
+        points_corr = self.calculating_pearson_corr_stats(b_points)
+        print("The points - betwenneess corr. coeff. for teams is ", points_corr, "\n")
         
-        #position_corr = self.calculating_pearson_corr_stats(b_pos)
-        #print("The position - betwenneess corr. coeff. for teams is ", position_corr, "\n")
+        position_corr = self.calculating_pearson_corr_stats(b_pos)
+        print("The position - betwenneess corr. coeff. for teams is ", position_corr, "\n")
         
         self.plotting_categorical(b_points,  "Points", "Betwenneess")
         self.plotting_categorical(b_pos,  "Avg. Position", "Betwenneess")

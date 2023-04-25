@@ -69,7 +69,8 @@ class Preprocessing:
                 
             # Remove double edges (Ex: 2 Transactions happen, in and out. Keep only out transactions)
             if not ((seller, buyer), (player, fee_cleaned, year)) in soccer_dict.items():
-                soccer_dict.update({(seller, buyer):(player, fee_cleaned, year)})
+                if int(year) >= 2000:
+                    soccer_dict.update({(seller, buyer):(player, fee_cleaned, year)})
         
         return soccer_dict
     
@@ -123,6 +124,8 @@ class Preprocessing:
             if buyer in champs:
                 
                 # Set fee_cleaned to float type value
+                #isinstance(fee_cleaned, float):
+                #math.isnan(fee_cleaned):
                 if math.isnan(fee_cleaned):
                     fee = 0.0
                 else:

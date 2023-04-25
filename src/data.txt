@@ -49,102 +49,102 @@ rather than logical idea given by 'spending more means winning more'
 
         COMMUNITY 1
         The position - money corr. coeff. for teams
-                ['Arsenal FC', 'Bournemouth', 'Bradford City', 'Burnley FC', 'Cardiff City', 'Coventry City',
-                 'Crystal Palace', 'Derby County', 'Fulham FC', 'Hull City','Manchester United', 'Norwich City',
-                  'Portsmouth FC', 'Swansea City', 'West Bromwich Albion', 'West Ham United']
+                ['Aston Villa', 'Birmingham City', 'Blackburn Rovers', 'Blackpool', 'Bolton Wanderers',
+                'Bradford City', 'Brentford FC', 'Brighton & Hove Albion', 'Burnley FC', 'Chelsea FC',
+                'Huddersfield Town', 'Hull City', 'Leicester City', 'Liverpool FC', 'Middlesbrough', 'Norwich City', 'Sheffield United',
+                'Southampton FC', 'Stoke City', 'Sunderland AFC', 'Swansea City', 'Watford', 'West Ham United', 'Wigan Athletic']
 
         is  SignificanceResult(
-                statistic=-0.6523384078371562,
-                pvalue=0.006165310662101676
+                statistic=-0.5395367477645031,
+                pvalue=0.006508660765162183
         ) 
 
-        That means that Position decreases while Money spent increases.
+        That means that Position decreases while Money spent decreases.
 
 
         The points - money corr. coeff. for teams 
-                ['Arsenal FC', 'Bournemouth', 'Bradford City', 'Burnley FC', 'Cardiff City', 'Coventry City',
-                 'Crystal Palace', 'Derby County', 'Fulham FC', 'Hull City','Manchester United', 'Norwich City',
-                  'Portsmouth FC', 'Swansea City', 'West Bromwich Albion', 'West Ham United']
+                ['Aston Villa', 'Birmingham City', 'Blackburn Rovers', 'Blackpool', 'Bolton Wanderers',
+                'Bradford City', 'Brentford FC', 'Brighton & Hove Albion', 'Burnley FC', 'Chelsea FC',
+                'Huddersfield Town', 'Hull City', 'Leicester City', 'Liverpool FC', 'Middlesbrough', 'Norwich City', 'Sheffield United',
+                'Southampton FC', 'Stoke City', 'Sunderland AFC', 'Swansea City', 'Watford', 'West Ham United', 'Wigan Athletic']
         
         is  SignificanceResult(
-                statistic=0.8176470588235294,
-                pvalue=0.00010936308081986549
+                statistic=0.6208695652173912,
+                pvalue=0.0012059039024496878
         ) 
 
-        That means that Points increases while Money spent decreases.
+        That means that Points increases while Money spent increases.
 
         COMMUNITY 2
         The position - money corr. coeff. for teams
-                ['Aston Villa', 'Blackburn Rovers', 'Blackpool', 'Charlton Athletic', 'Chelsea FC',
-                 'Everton FC', 'Queens Park Rangers', 'Reading FC', 'Southampton FC', 'Tottenham Hotspur',
-                  'Watford', 'Wigan Athletic', 'Wolverhampton Wanderers']
+                ['Arsenal FC', 'Bournemouth', 'Cardiff City', 'Coventry City', 'Derby County',
+                'Everton FC', 'Fulham FC', 'Manchester City', 'Manchester United', 'Newcastle United',
+                'Portsmouth FC', 'Tottenham Hotspur']
         
         is  SignificanceResult(
-                statistic=-0.7590289798987319,
-                pvalue=0.0026230060168894224
+                statistic=-0.8653352828140373,
+                pvalue=0.00027699363255207486
         ) 
 
-        That means that Position decreases while Money spent increases.
+        That means that Position decreases while Money spent decreases.
 
 
         The points - money corr. coeff. for teams
-                ['Aston Villa', 'Blackburn Rovers', 'Blackpool', 'Charlton Athletic', 'Chelsea FC',
-                 'Everton FC', 'Queens Park Rangers', 'Reading FC', 'Southampton FC', 'Tottenham Hotspur',
-                  'Watford', 'Wigan Athletic', 'Wolverhampton Wanderers']
+                ['Arsenal FC', 'Bournemouth', 'Cardiff City', 'Coventry City', 'Derby County',
+                'Everton FC', 'Fulham FC', 'Manchester City', 'Manchester United', 'Newcastle United',
+                'Portsmouth FC', 'Tottenham Hotspur']
         
         is  SignificanceResult(
-                statistic=0.8571428571428571,
-                pvalue=0.0001809340887252406
+                statistic=0.9020979020979022,
+                pvalue=5.9978574465377e-05
         ) 
 
-        That means that Points increases while Money spent decreases.
+        That means that Points increases while Money spent increases.
 
         COMMUNITY 3
 
         The position - money corr. coeff. for teams
-                ['Birmingham City', 'Bolton Wanderers', 'Brighton & Hove Albion', 'Huddersfield Town',
-                'Ipswich Town', 'Leeds United', 'Leicester City', 'Liverpool FC', 'Manchester City',
-                'Middlesbrough', 'Newcastle United', 'Sheffield United', 'Stoke City', 'Sunderland AFC']
+                ['Charlton Athletic', 'Crystal Palace', 'Ipswich Town', 'Leeds United', 'Queens Park Rangers',
+                'Reading FC', 'West Bromwich Albion', 'Wolverhampton Wanderers']
                 
         is  SignificanceResult(
-                statistic=-0.5625861176010527,
-                pvalue=0.03622999434715563
+                statistic=-0.04819626927118799,
+                pvalue=0.909771840305317
         ) 
-        That means that Position decreases while Money spent increases.
+        That means that Position decreases while Money spent decreases.
 
-        The points - money corr. coeff. for teams
-                ['Birmingham City', 'Bolton Wanderers', 'Brighton & Hove Albion', 'Huddersfield Town',
-                'Ipswich Town', 'Leeds United', 'Leicester City', 'Liverpool FC', 'Manchester City',
-                'Middlesbrough', 'Newcastle United', 'Sheffield United', 'Stoke City', 'Sunderland AFC']
+        The points - money corr. coeff. for teams -> Less years in the premier league
+                ['Charlton Athletic', 'Crystal Palace', 'Ipswich Town', 'Leeds United', 'Queens Park Rangers',
+                'Reading FC', 'West Bromwich Albion', 'Wolverhampton Wanderers']
         
         is  SignificanceResult(
-                statistic=0.7186813186813187,
-                pvalue=0.003779579961412288
+                statistic=0.5000000000000001,
+                pvalue=0.20703124999999997
         ) 
-        That means that Points increases while Money spent decreases.
+        That means that Points increases while Money spent increases.
 
 
-        CONCLUSION: FOR ALL PREMIER LEAGUE COMMUNITIES WRT THEMSELVES:
-                That means that Position decreases while Money spent increases.
-                That means that Points increases while Money spent decreases.
+        CONCLUSION: FOR 2/3 PREMIER LEAGUE COMMUNITIES WRT THEMSELVES:
+                That means that Position decreases while Money spent decreases.
+                That means that Points increases while Money spent increases.
 
         COMMUNITY OF ALL PREM LEAGUE TEAMS:
-        The points - money corr. coeff.
+        The Positions - money corr. coeff.
 
         is  SignificanceResult(
-                        statistic=0.7826914272451452,
-                        pvalue=3.4618800711074476e-10
+                        statistic=-0.6308652477033281,
+                        pvalue=4.421687640123573e-06
         ) 
-        That means that Points increases while Money spent decreases.
+        That means that Position decreases while Money spent decreases.
 
-        The position - money corr. coeff.
+        The Points - money corr. coeff.
 
         is  SignificanceResult(
-                statistic=-0.636109465668959,
-                pvalue=3.4763900087918683e-06
+                statistic=0.7800133906671409,
+                pvalue=4.3520386383567495e-10
         ) 
 
-        That means that Position decreases while Money spent increases.
+        That means that Points increases while Money spent increases.
         
 
 4. 
@@ -152,10 +152,10 @@ rather than logical idea given by 'spending more means winning more'
 
                 Betwenneess
                 The points - betwenneess corr. coeff. for teams is
-                        SignificanceResult(statistic=0.2521777887893012, pvalue=0.10714971032004662) 
+                        SignificanceResult(statistic=0.30318193048880016, pvalue=0.04544115979230959) 
 
                 The position - betwenneess corr. coeff. for teams is
-                        SignificanceResult(statistic=-0.2441176470588235, pvalue=0.3622134961419501) 
+                        SignificanceResult(statistic=-0.2797861152474432, pvalue=0.06585780268631787) 
 
 
                 Closeness
@@ -172,3 +172,6 @@ rather than logical idea given by 'spending more means winning more'
 
                 The position - degree centrality corr. coeff. for teams is
                         SignificanceResult(statistic=-0.2781113776445511, pvalue=0.29696479123832054) 
+
+
+Hagberg, A., Swart, P., S Chult, D.: Exploring network structure, dynamics, and function using NetworkX. Technical report, Los Alamos National Lab.(LANL), Los Alamos, NM (United States) (2008)

@@ -62,36 +62,38 @@ class ChampionsDataProcess:
 
         data = dict(zip(teams, money))
         data = prep.sort_dictionary(data)
-        # self.calculating_pearson_corr(data, n, dinero)
+        
+        #self.calculating_pearson_corr(data, n, dinero)
         #self.plotting_categorical(data, n, dinero) # All plots are correct and saved
 
     def calculating_pearson_corr(self, data, n, dinero):
         teams = list(data.keys())
         money = list(data.values())
+    
         
         if n == 0:
-            trophies = [7, 4, 6, 1, 2, 5, 2, 3, 2, 6, 3, 1, 14] 
+            trophies = [3, 1, 3, 1, 2, 4, 1, 1, 1, 2, 2, 1, 8] 
 
         else:
-            trophies = [3,1,1,2,2,2,1,2,1,3,3,3,1,2,6,1,1,1,1]
+            trophies = [3,1,1,2,1,2,1,1,1,2,1,1,1,2,6,1,1,1,1]
         
         y = np.array(trophies)
         x = np.array(money)
-        corr_coeff = sp.stats.pearsonr(y, x)
+        corr_coeff = sp.stats.spearmanr(y, x)
         
-        print("For ", teams, " and based on money spent, the Pearsons correlation coefficient is: ", corr_coeff)
+        print("For ", teams, " and based on money spent/received, the Pearsons correlation coefficient is: ", corr_coeff)
         
     def plotting_categorical(self, data, n, dinero):
         names = list(data.keys())
         values = list(data.values())
         
         if n == 0:
-            trophies = [7, 4, 6, 1, 2, 5, 2, 3, 2, 6, 3, 1, 14] 
+            trophies = [3, 1, 3, 1, 2, 4, 1, 1, 1, 2, 2, 1, 8] 
             if not dinero: # Money Received
                 n = 2
             
         else:
-            trophies = [3,1,1,2,2,2,1,2,1,3,3,3,1,2,6,1,1,1,1]
+            trophies = [3,1,1,2,1,2,1,1,1,2,1,1,1,2,6,1,1,1,1]
             if not dinero:
                 n = 3
     

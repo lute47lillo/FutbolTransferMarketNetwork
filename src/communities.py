@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from networkx.algorithms import approximation as approx
 import itertools
+from stats_comm import StatsAndCommunities
 
 
 titles = ["LaLiga association network for TransferMarket", "Bundesliga association network for TransferMarket",
@@ -93,7 +94,7 @@ class Community:
         trim_graph = trim_graph.subgraph(largest_component)
 
         # Compute centrality
-        centrality = nx.betweenness_centrality(trim_graph, k=70, normalized=True, endpoints=True)
+        centrality = nx.betweenness_centrality(trim_graph, k=30, normalized=True, endpoints=True)
 
         # Run algorithm
         comm = nx.community.greedy_modularity_communities(trim_graph, best_n=10)
