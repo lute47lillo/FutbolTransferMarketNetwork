@@ -79,13 +79,14 @@ class Community:
         for ((seller, buyer), (player, fee_cleaned, year)) in soccer_dict.items():
             trim_graph.add_weighted_edges_from(ebunch_to_add=[(seller, buyer, fee_cleaned)], weight="fee")
             
-        fee_trim_graph = trim_graph
         
         # buyer, seller is oppositte as how it should be, but result is correct
+        # Remove all fees with 0 (either were NAN (free agent), or 0 (free transfers))
         low_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in trim_graph.edges(data=True) if attrs["fee"] == 0.0]
-        # high_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in trim_graph.edges(data=True) if attrs["fee"] > 8]
+        low2_fee_edges = [(seller, buyer) for (seller, buyer, attrs) in trim_graph.edges(data=True) if attrs["fee"] == 0.0]
     
         trim_graph.remove_edges_from(low_fee_edges)
+        trim_graph.remove_edges_from(low2_fee_edges)
         
         # REMOVE innecesary and noise nodes form the graph
         low_degree = [n for n, d in trim_graph.degree() if d < 30]
@@ -96,10 +97,10 @@ class Community:
         trim_graph = trim_graph.subgraph(largest_component)
 
         # Compute centrality
-        centrality = nx.betweenness_centrality(trim_graph, k=180, normalized=True, endpoints=True)
+        centrality = nx.betweenness_centrality(trim_graph, k=115, weight="fee", normalized=True, endpoints=True)
 
         # Run algorithm
-        comm = nx.community.greedy_modularity_communities(trim_graph, best_n=10, resolution=1)
+        comm = nx.community.greedy_modularity_communities(trim_graph, best_n=10)
         community_index = {n: i for i, com in enumerate(comm) for n in com}
     
         order_comm = {}

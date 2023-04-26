@@ -9,6 +9,7 @@ from communities import Community
 from winners import Winners
 from ch_league_process import ChampionsDataProcess
 from stats_comm import StatsAndCommunities
+import math
     
     
 
@@ -37,24 +38,6 @@ europa_league_winners = ['Juventus FC', 'Inter Milan', 'Inter', 'Parma', 'Bayern
                          'Man Utd', 'Villarreal', 'Villarreal CF', 'E. Frankfurt', 'Eintracht Frankfurt']
 
 
-money_com1 = ['Chelsea FC', 'Liverpool FC', 'Manchester City', 'Manchester United']
-
-money_com2 = ['Arsenal FC', 'Aston Villa', 'Everton FC', 'Newcastle United', 'Tottenham Hotspur']
-
-money_com3 = ['Brighton & Hove Albion', 'Crystal Palace', 'Fulham FC', 'Leeds United', 'Leicester City',
-        'Southampton FC', 'Sunderland AFC', 'Swansea City', 'Watford', 'Wolverhampton Wanderers']
-        
-money_com4 = ['Birmingham City', 'Blackburn Rovers', 'Blackpool', 'Bolton Wanderers', 'Bournemouth',
-        'Bradford City', 'Brentford FC', 'Burnley FC', 'Cardiff City', 'Charlton Athletic',
-        'Coventry City', 'Derby County', 'Huddersfield Town', 'Hull City', 'Ipswich Town',
-        'Middlesbrough', 'Norwich City', 'Portsmouth FC', 'Queens Park Rangers', 'Reading FC',
-        'Sheffield United', 'Stoke City', 'West Bromwich Albion', 'West Ham United', 'Wigan Athletic']
-
-prem_com1 = ['Arsenal FC', 'Bournemouth', 'Cardiff City', 'Chelsea FC', 'Coventry City', 'Derby County',
-                'Liverpool FC', 'Manchester City', 'Manchester United', 'Newcastle United', 'Portsmouth FC',
-                'Tottenham Hotspur', 'Wolverhampton Wanderers']
-
-
 ''' Helper function that returns a dictionary with the ordered communities'''
 def data_community(ordered, stats, do):
     ord = {}
@@ -65,6 +48,7 @@ def data_community(ordered, stats, do):
             for t in range(n):
                 if teams[t] in stats:
                     trim_teams.append(teams[t])
+                    trim_teams.sort()
                     ord.update({idx+1:trim_teams})
         #print(ord)
         
@@ -114,6 +98,7 @@ def main():
     
     """
     comm = Community()
+    sc = StatsAndCommunities()
     stats = prep.average_stats()
     
     
@@ -123,10 +108,21 @@ def main():
     # # # Print ordered communites (True -> Trim community given stats dicitonary)
     
     ordered = data_community(order_comm, stats, False)
-    print(ordered)
+    #print(ordered)
     
     #trimmed_graph = prep.trim_graph(trimmed_graph)
     print(trimmed_graph)
+    
+    """
+        Obtain how much money has been spent by community   
+    """
+    # Get the money dict
+    money_dict = prep.get_dict_money_spent(trimmed_graph)
+
+    # Calculate how much each community spends.
+    money_dict = sc.all_community_money(money_dict, ordered)
+    #print(money_dict)
+
     
     """
         Given community index creation of based performance teams:
@@ -135,7 +131,6 @@ def main():
         Plot them,
     
     """
-    sc = StatsAndCommunities()
     '''pos_com_idx, points_pos_idx = prep.organize_teams(stats)
     print("The pos_com_idx: ", pos_com_idx)
     print("\nThe points_com_idx: ", points_pos_idx)
@@ -188,8 +183,10 @@ def main():
     
     #btw_centr = prep.sort_dictionary_by_value(btw_centr)
     #print(btw_centr)
-    #omega, sigma = sc.obtain_omega_sigma_small_world(graph)
-    # print(omega, sigma)
+    
+    """ Obtain omega value to calculate the small-world property of the given graph"""
+    # omega = sc.obtain_omega_small_world(trimmed_graph)
+    # print(omega)
     
     
     """ Communities

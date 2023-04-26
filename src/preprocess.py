@@ -317,3 +317,24 @@ class Preprocessing:
     #     low_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in graph.edges(data=True) if attrs["fee"] == 0.0]
     #     graph.remove_edges_from(low_fee_edges)
     #     return graph
+    
+    """
+        Given a graph
+        Returns total money spent by each buyer.
+    """
+    def get_dict_money_spent(self, graph):
+        edges = [e for e in graph.edges.data()]
+        buys = {}
+
+        n = len(edges)
+        for i in range(n):
+            seller, buyer, fee = edges[i]
+            fee = fee.get('fee')
+            
+            if buyer not in buys:
+                buys.update({buyer:fee})
+            else:
+                curr = buys.get(buyer)
+                buys.update({buyer:fee + curr})
+                
+        return buys

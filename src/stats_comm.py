@@ -226,20 +226,20 @@ class StatsAndCommunities:
         self.plotting_categorical(b_pos, "Avg. Position", "Degree Centrality ")
         
         
-    def obtain_omega_sigma_small_world(self, graph):
-        print([e for e in graph.edges.data()])
-        # graph = nx.MultiGraph.to_undirected(graph)
-        
-        #low_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in graph.edges(data=True) if attrs["fee"] == 0.0]
-        #graph.remove_edges_from(low_fee_edges)
+    def obtain_omega_small_world(self, graph):
+        graph = nx.Graph(graph)
+
+        #print([e for e in graph.edges.data()])
         print(graph)
-        #sigma = algorithms.smallworld.sigma(graph, niter=50, nrand=5, seed=4572321)
-        sigma = 0
-        omega = algorithms.smallworld.omega(graph, niter=5, nrand=10, seed=4572321)
-        return omega, sigma
+        
+        omega = algorithms.smallworld.omega(graph, niter=5, nrand=8, seed=4572321)
+        return omega
     
     # sigma (niter=50, nrand=5) -> 1.0258586515689005
     # omega (niter=5, nrand=10) -> 0.018400902591983903 For all graph
+    
+    # For ALL dataset (1246 edges of 129 nodes)
+    # omega (niter=2, nrand=5, seed=4572321 ) 0.29451829051817535
     
     def plotting_categorical(self, data, attribute, val_name):
         teams = list(data.keys()) # Points / Avg. position
@@ -280,11 +280,41 @@ class StatsAndCommunities:
         plt.show()
 
 
-                
-            
-            
-            
-            
-      
-            
+    """
+        Given a dictionary of transfers -> soccer
+        and a community system of those clubs -> community
+        
+        Return how much money has been spent on each community
+    """
+    def all_community_money(self, soccer, community):
+        prep = Preprocessing()
+        spent = {}
+        n = len(community)
+        
+        coms = []
+        for i in range(n):
+            com = community.get(i+1)
+            com_len = len(com)
+            coms.append(com_len)
+            #print(com)
+            for t in com:
+                if t in soccer:
+                    money = soccer.get(t)
+
+                    if i+1 not in spent:
+                        spent.update({i+1:money})
+                    else:
+                        curr = spent.get(i+1)
+                        spent.update({i+1:money+curr})
+               
+        spent = prep.sort_dictionary(spent)
+             
+        # for k,v in spent.items():
+        #     avg = v/coms[k-1]
+        #     v = str(round(v, 3))
+        
+        #     print("Community " + str(k) + " spent " + v + " millions of Euros between "+ str(coms[k-1]) +" teams.\n"
+        #         +"Being an average of " + str(round(avg, 3)) + " per team.\n")
+        
+        return spent 
     
