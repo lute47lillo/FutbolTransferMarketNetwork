@@ -36,6 +36,25 @@ europa_league_winners = ['Juventus FC', 'Inter Milan', 'Inter', 'Parma', 'Bayern
                          'Atlético Madrid', 'Atlético de Madrid', 'Chelsea', 'Chelsea FC', 'Manchester United',
                          'Man Utd', 'Villarreal', 'Villarreal CF', 'E. Frankfurt', 'Eintracht Frankfurt']
 
+
+money_com1 = ['Chelsea FC', 'Liverpool FC', 'Manchester City', 'Manchester United']
+
+money_com2 = ['Arsenal FC', 'Aston Villa', 'Everton FC', 'Newcastle United', 'Tottenham Hotspur']
+
+money_com3 = ['Brighton & Hove Albion', 'Crystal Palace', 'Fulham FC', 'Leeds United', 'Leicester City',
+        'Southampton FC', 'Sunderland AFC', 'Swansea City', 'Watford', 'Wolverhampton Wanderers']
+        
+money_com4 = ['Birmingham City', 'Blackburn Rovers', 'Blackpool', 'Bolton Wanderers', 'Bournemouth',
+        'Bradford City', 'Brentford FC', 'Burnley FC', 'Cardiff City', 'Charlton Athletic',
+        'Coventry City', 'Derby County', 'Huddersfield Town', 'Hull City', 'Ipswich Town',
+        'Middlesbrough', 'Norwich City', 'Portsmouth FC', 'Queens Park Rangers', 'Reading FC',
+        'Sheffield United', 'Stoke City', 'West Bromwich Albion', 'West Ham United', 'Wigan Athletic']
+
+prem_com1 = ['Arsenal FC', 'Bournemouth', 'Cardiff City', 'Chelsea FC', 'Coventry City', 'Derby County',
+                'Liverpool FC', 'Manchester City', 'Manchester United', 'Newcastle United', 'Portsmouth FC',
+                'Tottenham Hotspur', 'Wolverhampton Wanderers']
+
+
 ''' Helper function that returns a dictionary with the ordered communities'''
 def data_community(ordered, stats, do):
     ord = {}
@@ -80,7 +99,7 @@ def main():
         Given Index 0-5
         Returns dictionary of type -> (seller, buyer) : (player, fee, year) 
     """
-    soccer = prep.create_dict(3)
+    soccer = prep.create_dict(5)
     mapping = prep.get_universal_mapping()
 
     
@@ -97,12 +116,17 @@ def main():
     comm = Community()
     stats = prep.average_stats()
     
+    
     soccer = prep.dictionary_name_mapping(soccer, mapping)
-    order_comm, trimmed_graph = comm.process_community_graph(soccer, False, 3)
+    order_comm, trimmed_graph = comm.process_community_graph(soccer, False, 5)
     
-    # # Print ordered communites (True -> Trim community given stats dicitonary)
-    ordered = data_community(order_comm, stats, True)
+    # # # Print ordered communites (True -> Trim community given stats dicitonary)
     
+    ordered = data_community(order_comm, stats, False)
+    print(ordered)
+    
+    #trimmed_graph = prep.trim_graph(trimmed_graph)
+    print(trimmed_graph)
     
     """
         Given community index creation of based performance teams:
@@ -148,22 +172,25 @@ def main():
     
     #sc.study(ordered, stats, soccer)
     #sc.whole_league_community(stats, soccer)
-    print("Premier League ordered communites :",  ordered)
+    #print("Premier League ordered communites :",  ordered)
     
     """
         Study the Betweenness, closeness centrality and degree centrality of a particular community.
         Compare it to their overall performance (stats)
     
     """
-    btw_centr, graph = sc.community_attributes(stats, ordered, trimmed_graph)
-    
-    omega, sigma = sc.obtain_omega_sigma_small_world(graph)
-    print(omega, sigma)
+    #btw_centr, graph = sc.community_attributes(stats, ordered, trimmed_graph)
     # """ Helper function to create a community index {team : comm_idx} based on a given community (ordered)"""
-    # community_index = prep.create_com_index(ordered)
+    #community_index = prep.create_com_index(ordered)
     
     # """ Plot communities """
-    # comm.plot_community(graph, community_index, btw_centr, 3)
+    #comm.plot_community(graph, community_index, btw_centr, 3)
+    
+    #btw_centr = prep.sort_dictionary_by_value(btw_centr)
+    #print(btw_centr)
+    #omega, sigma = sc.obtain_omega_sigma_small_world(graph)
+    # print(omega, sigma)
+    
     
     """ Communities
     

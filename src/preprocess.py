@@ -69,8 +69,12 @@ class Preprocessing:
                 
             # Remove double edges (Ex: 2 Transactions happen, in and out. Keep only out transactions)
             if not ((seller, buyer), (player, fee_cleaned, year)) in soccer_dict.items():
-                if int(year) >= 2000: # Premier League Data
-                    soccer_dict.update({(seller, buyer):(player, fee_cleaned, year)})
+                #if int(year) >= 2000: # Premier League Data
+                if isinstance(fee_cleaned, str):
+                    fee_cleaned = float(fee_cleaned)
+                if math.isnan(fee_cleaned):
+                    fee_cleaned = 0.0
+                soccer_dict.update({(seller, buyer):(player, fee_cleaned, year)})
         
         return soccer_dict
     
@@ -111,6 +115,11 @@ class Preprocessing:
         sorted_dict = {i: unsorted[i] for i in myKeys}
         
         return sorted_dict
+    
+    def sort_dictionary_by_value(self, unsorted):
+ 
+        sort = sorted(unsorted.items(), key=lambda x:x[1])
+        return sort
     
     """ Creates a sub-community of international champions teams - money spent"""
     def sub_champions_spent_community(self, soccer, champs, mapp):
@@ -231,7 +240,7 @@ class Preprocessing:
     
     def get_betweenness(self, graph):
         #print("Betweenness")
-        b = nx.betweenness_centrality(graph, k=30, normalized=True, endpoints=True)
+        b = nx.betweenness_centrality(graph, k=43, normalized=True, endpoints=True)
         return b
         
     def get_closeness(self, graph):
@@ -302,4 +311,9 @@ class Preprocessing:
             else:
                 mon.update({t:1})
         return mon
-            
+        
+    # def trim_graph(self, graph):
+    #     graph = nx.MultiGraph(graph)
+    #     low_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in graph.edges(data=True) if attrs["fee"] == 0.0]
+    #     graph.remove_edges_from(low_fee_edges)
+    #     return graph

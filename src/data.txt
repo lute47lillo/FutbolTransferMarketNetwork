@@ -152,16 +152,16 @@ rather than logical idea given by 'spending more means winning more'
         The Positions - money corr. coeff.
 
         is  SignificanceResult(
-                        statistic=-0.6308652477033281,
-                        pvalue=4.421687640123573e-06
+                        statistic=-0.6491491427726899,
+                        pvalue=1.8739136229310119e-06
         ) 
         That means that Position decreases while Money spent decreases.
 
         The Points - money corr. coeff.
 
         is  SignificanceResult(
-                statistic=0.7800133906671409,
-                pvalue=4.3520386383567495e-10
+                statistic=0.7893865186901559,
+                pvalue=1.9259791471024608e-10
         ) 
 
         That means that Points increases while Money spent increases.

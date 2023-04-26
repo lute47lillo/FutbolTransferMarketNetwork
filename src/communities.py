@@ -72,23 +72,20 @@ class Community:
         
     def process_community_graph(self, soccer_dict, is_plotting, title_text):
         
-        trim_graph = nx.MultiGraph()
+        trim_graph = nx.MultiGraph() # MultiGraph will hold parallel edges, but for the study we've done so far, that's not relevant.
         trim_graph.add_nodes_from(soccer_dict.keys())
 
         # Trimmed graph with only fee_cleaned weight
         for ((seller, buyer), (player, fee_cleaned, year)) in soccer_dict.items():
-            if math.isnan(fee_cleaned):
-                    fee_cleaned = 0.0
             trim_graph.add_weighted_edges_from(ebunch_to_add=[(seller, buyer, fee_cleaned)], weight="fee")
             
         fee_trim_graph = trim_graph
         
         # buyer, seller is oppositte as how it should be, but result is correct
-        # low_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in trim_graph.edges(data=True) if attrs["fee"] < 8]
+        low_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in trim_graph.edges(data=True) if attrs["fee"] == 0.0]
         # high_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in trim_graph.edges(data=True) if attrs["fee"] > 8]
     
-        # fee_trim_graph.remove_edges_from(high_fee_edges)
-        
+        trim_graph.remove_edges_from(low_fee_edges)
         
         # REMOVE innecesary and noise nodes form the graph
         low_degree = [n for n, d in trim_graph.degree() if d < 30]
@@ -99,10 +96,10 @@ class Community:
         trim_graph = trim_graph.subgraph(largest_component)
 
         # Compute centrality
-        centrality = nx.betweenness_centrality(trim_graph, k=30, normalized=True, endpoints=True)
+        centrality = nx.betweenness_centrality(trim_graph, k=180, normalized=True, endpoints=True)
 
         # Run algorithm
-        comm = nx.community.greedy_modularity_communities(trim_graph, best_n=10)
+        comm = nx.community.greedy_modularity_communities(trim_graph, best_n=10, resolution=1)
         community_index = {n: i for i, com in enumerate(comm) for n in com}
     
         order_comm = {}

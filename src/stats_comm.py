@@ -84,7 +84,7 @@ class StatsAndCommunities:
         attrs = list(data.keys())
         values = list(data.values())
         
-        # For attributes study
+       # For attributes study
         # values = []
         # attrs = []
 
@@ -130,7 +130,7 @@ class StatsAndCommunities:
             for team, (avg_pos, points) in stats.items():
                 if team in graph.nodes() and team in teams:
                     pass
-                    print(f"Betweenness Centrality {team:2} {betw[team]:.3f}")
+                    #print(f"Betweenness Centrality {team:2} {betw[team]:.3f}")
                     #print(f"Closeness Centrality { team:2} {close[team]:.3f}")
                     #print(f"Degree Centrality {team:2} {deg_centrality[team]:.3f}\n")
         
@@ -184,8 +184,8 @@ class StatsAndCommunities:
         position_corr = self.calculating_pearson_corr_stats(b_pos)
         print("The position - betwenneess corr. coeff. for teams is ", position_corr, "\n")
         
-        self.plotting_categorical(b_points,  "Points", "Betwenneess")
-        self.plotting_categorical(b_pos,  "Avg. Position", "Betwenneess")
+        # self.plotting_categorical(b_points,  "Points", "Betwenneess")
+        # self.plotting_categorical(b_pos,  "Avg. Position", "Betwenneess")
         
     def study_closenes(self, close, stats):
         b_points = {}
@@ -230,16 +230,16 @@ class StatsAndCommunities:
         print([e for e in graph.edges.data()])
         # graph = nx.MultiGraph.to_undirected(graph)
         
-        low_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in graph.edges(data=True) if attrs["fee"] == 0.0]
-        graph.remove_edges_from(low_fee_edges)
+        #low_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in graph.edges(data=True) if attrs["fee"] == 0.0]
+        #graph.remove_edges_from(low_fee_edges)
         print(graph)
-        sigma = algorithms.smallworld.sigma(graph, niter=50, nrand=5, seed=4572321)
-        omega = 0
-        #omega = algorithms.smallworld.omega(graph, niter=5, nrand=10, seed=4572321)
+        #sigma = algorithms.smallworld.sigma(graph, niter=50, nrand=5, seed=4572321)
+        sigma = 0
+        omega = algorithms.smallworld.omega(graph, niter=5, nrand=10, seed=4572321)
         return omega, sigma
     
     # sigma (niter=50, nrand=5) -> 1.0258586515689005
-    # omega (niter=5, nrand=10) -> 0.45827135905581773
+    # omega (niter=5, nrand=10) -> 0.018400902591983903 For all graph
     
     def plotting_categorical(self, data, attribute, val_name):
         teams = list(data.keys()) # Points / Avg. position
@@ -278,7 +278,7 @@ class StatsAndCommunities:
         plt.title(title)
         plt.savefig(fig_name, format="PNG")
         plt.show()
-        
+
 
                 
             
