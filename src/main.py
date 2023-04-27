@@ -81,11 +81,12 @@ def main():
     """
         'create_dict' function from Preprocessing
         Given Index 0-5
-        Returns dictionary of type -> (seller, buyer) : (player, fee, year) 
+        Returns dictionary of type -> (seller, buyer) : (player, fee, year), *Optional, also returns list of teams of domestic league
     """
-    soccer = prep.create_dict(5)
+    soccer, teams = prep.create_dict(4)
+    teams = sorted(teams)
     mapping = prep.get_universal_mapping()
-
+    
     
     """
         Given a historical classification dataset
@@ -103,12 +104,12 @@ def main():
     
     
     soccer = prep.dictionary_name_mapping(soccer, mapping)
-    order_comm, trimmed_graph = comm.process_community_graph(soccer, False, 5)
+    order_comm, trimmed_graph = comm.process_community_graph(soccer, True, 4, teams)
     
     # # # Print ordered communites (True -> Trim community given stats dicitonary)
     
     ordered = data_community(order_comm, stats, False)
-    #print(ordered)
+    print(ordered)
     
     #trimmed_graph = prep.trim_graph(trimmed_graph)
     print(trimmed_graph)
@@ -117,10 +118,10 @@ def main():
         Obtain how much money has been spent by community   
     """
     # Get the money dict
-    money_dict = prep.get_dict_money_spent(trimmed_graph)
+    #money_dict = prep.get_dict_money_spent(trimmed_graph)
 
     # Calculate how much each community spends.
-    money_dict = sc.all_community_money(money_dict, ordered)
+    #money_dict = sc.all_community_money(money_dict, ordered)
     #print(money_dict)
 
     
@@ -185,8 +186,8 @@ def main():
     #print(btw_centr)
     
     """ Obtain omega value to calculate the small-world property of the given graph"""
-    # omega = sc.obtain_omega_small_world(trimmed_graph)
-    # print(omega)
+    omega = sc.obtain_omega_small_world(trimmed_graph)
+    print(omega)
     
     
     """ Communities

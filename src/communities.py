@@ -25,7 +25,7 @@ class Community:
         fig, ax = plt.subplots(figsize=(20, 15))
         pos = nx.spring_layout(graph, k=0.15, seed=4572321)
         node_color = [com_index[n] for n in graph]
-        node_size = [v * 20000 for v in centrality.values()]
+        node_size = [v * 2000 for v in centrality.values()]
         nx.draw_networkx(
             graph,
             pos=pos,
@@ -70,37 +70,39 @@ class Community:
         plt.show()
         
         
-    def process_community_graph(self, soccer_dict, is_plotting, title_text):
+    def process_community_graph(self, soccer_dict, is_plotting, title_text, teams):
         
         trim_graph = nx.MultiGraph() # MultiGraph will hold parallel edges, but for the study we've done so far, that's not relevant.
         trim_graph.add_nodes_from(soccer_dict.keys())
 
         # Trimmed graph with only fee_cleaned weight
         for ((seller, buyer), (player, fee_cleaned, year)) in soccer_dict.items():
-            trim_graph.add_weighted_edges_from(ebunch_to_add=[(seller, buyer, fee_cleaned)], weight="fee")
+            if seller in teams and buyer in teams:
+                trim_graph.add_weighted_edges_from(ebunch_to_add=[(seller, buyer, fee_cleaned)], weight="fee")
             
         
         # buyer, seller is oppositte as how it should be, but result is correct
         # Remove all fees with 0 (either were NAN (free agent), or 0 (free transfers))
         low_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in trim_graph.edges(data=True) if attrs["fee"] == 0.0]
-        low2_fee_edges = [(seller, buyer) for (seller, buyer, attrs) in trim_graph.edges(data=True) if attrs["fee"] == 0.0]
+        #low2_fee_edges = [(seller, buyer) for (seller, buyer, attrs) in trim_graph.edges(data=True) if attrs["fee"] == 0.0]
     
         trim_graph.remove_edges_from(low_fee_edges)
-        trim_graph.remove_edges_from(low2_fee_edges)
+        #trim_graph.remove_edges_from(low2_fee_edges)
         
         # REMOVE innecesary and noise nodes form the graph
-        low_degree = [n for n, d in trim_graph.degree() if d < 30]
-        trim_graph.remove_nodes_from(low_degree) 
+        #low_degree = [n for n, d in trim_graph.degree() if d < 30] # ALL dataset
+        #low_degree = [n for n, d in trim_graph.degree() if d < 3] # LaLiga Dataset
+       #trim_graph.remove_nodes_from(low_degree) 
 
         components = nx.connected_components(trim_graph)
         largest_component = max(components, key=len)
         trim_graph = trim_graph.subgraph(largest_component)
 
         # Compute centrality
-        centrality = nx.betweenness_centrality(trim_graph, k=115, weight="fee", normalized=True, endpoints=True)
+        centrality = nx.betweenness_centrality(trim_graph, k=35, weight="fee", normalized=True, endpoints=True)
 
         # Run algorithm
-        comm = nx.community.greedy_modularity_communities(trim_graph, best_n=10)
+        comm = nx.community.greedy_modularity_communities(trim_graph, best_n=4, resolution=1)
         community_index = {n: i for i, com in enumerate(comm) for n in com}
     
         order_comm = {}
