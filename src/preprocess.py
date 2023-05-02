@@ -355,8 +355,12 @@ class Preprocessing:
                 
         return league
     
+    """
+        Given a graph. Convert it to normal graph.
+        Returns clustering coefficient for all nodes in the graph.
+    """
     def get_graph_clustering_ceff(self, graph):
         graph = nx.Graph(graph)
-        coeff = nx.average_clustering(graph) 
+        coeff = nx.clustering(graph) 
         return coeff
     

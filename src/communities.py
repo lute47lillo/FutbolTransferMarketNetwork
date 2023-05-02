@@ -116,6 +116,9 @@ class Community:
         return order_comm, trim_graph
     
     
+    """ 
+        Refined MultiGraph dictionary. UTILS()
+    """
     def process_community_graph_update(self, soccer_dict, is_plotting, title_text, teams):
         
         trim_graph = nx.MultiGraph() # MultiGraph will hold parallel edges, but for the study we've done so far, that's not relevant.

@@ -86,9 +86,11 @@ def new_execution():
     
     
     #print([e for e in graph.edges.data()])
+    coeff = prep.get_graph_clustering_ceff(graph)
+    print(prep.sort_dictionary_by_value(coeff))
     
     ordered = data_community(order_comm, stats, False)
-    print(ordered)
+    #print(ordered)
     print(graph)
     exit()
     
