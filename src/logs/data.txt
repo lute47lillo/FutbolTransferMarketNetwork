@@ -1,0 +1,248 @@
+
+1. If teams were divided as sub-communities of teams that have won International Trophies
+        # Champions league teams community
+
+        Champions league corr coeff for trophies - money spent: PearsonRResult(statistic=0.03398761547900719, pvalue=0.91222962015109)
+        Champions league corr coeff for trophies - money received: PearsonRResult(statistic=0.4110751163370809, pvalue=0.16288754563391938)
+
+
+        # Europa League teams commnunity
+        Europa league corr coeff for trophies - money spent: PearsonRResult(statistic=-0.01516501605417929, pvalue=0.9508668366652264)
+        Europa league corr coeff for trophies - money received: PearsonRResult(statistic=0.11630738895552792, pvalue=0.6353793101619044)
+
+        None of these are statistically significant.
+
+2. If teams that have won International trophies, but all the money is accounted for.
+
+"""
+        Bayern Munich  spent  989.92
+        Olympique Marseille  spent  464.035
+        Borussia Dortmund  spent  839.25
+        Ajax  spent  140.736
+        Chelsea FC  spent  1550.015
+        Real Madrid  spent  1068.13
+        Juventus  spent  622.6
+        AC Milan  spent  674.45
+        FC Barcelona  spent  1357.848
+        Liverpool FC  spent  1149.365
+        Inter Milan  spent  585.55
+        Manchester United  spent  1519.855
+        FC Porto  spent  101.56
+"""
+
+        # Champions League teams commnunity
+        Champions league corr coeff for trophies - money spent: PearsonRResult(statistic=0.21748078275074464, pvalue=0.47538661281978073)
+        Champions league corr coeff for trophies - money received: PearsonRResult(statistic=0.44614316415894983, pvalue=0.1264841093322834)
+
+        # Europa League teams commnunity
+        Europa league corr coeff for trophies - money spent:  PearsonRResult(statistic=0.2299994417571039, pvalue=0.3435029221240558)
+        Europa league corr coeff for trophies - money received: PearsonRResult(statistic=0.4459524399313345, pvalue=0.05565435283259332)
+
+
+        SOME EARLY CONCLUSIONS: HIGH p-values indicate that your evidence is NOT STRONG ENOUGH to suggest an effect exists in the population.
+
+        However, there is a strong correlation that might show that teams that receive more money, tend to usually win more,
+        rather than logical idea given by 'spending more means winning more'
+
+
+3. Premier League performance
+
+        COMMUNITY 1
+        The position - money corr. coeff. for teams
+                ['Arsenal FC', 'Bournemouth', 'Cardiff City', 'Chelsea FC', 'Coventry City', 'Derby County',
+                'Liverpool FC', 'Manchester City', 'Manchester United', 'Newcastle United', 'Portsmouth FC',
+                'Tottenham Hotspur', 'Wolverhampton Wanderers']
+
+        is  SignificanceResult(
+                statistic=-0.8846311984212656,
+                pvalue=5.901480815635342e-05
+        ) 
+
+        That means that Position decreases while Money spent decreases.
+
+
+        The points - money corr. coeff. for teams 
+                ['Arsenal FC', 'Bournemouth', 'Cardiff City', 'Chelsea FC', 'Coventry City', 'Derby County',
+                'Liverpool FC', 'Manchester City', 'Manchester United', 'Newcastle United', 'Portsmouth FC',
+                'Tottenham Hotspur', 'Wolverhampton Wanderers']
+        
+        is  SignificanceResult(
+                statistic=0.9175824175824175,
+                pvalue=9.906225317564678e-06
+        ) 
+
+        That means that Points increases while Money spent increases.
+
+        COMMUNITY 2
+        The position - money corr. coeff. for teams
+                ['Birmingham City', 'Blackpool', 'Bradford City', 'Brighton & Hove Albion', 'Crystal Palace',
+                'Everton FC', 'Ipswich Town', 'Leeds United', 'Leicester City', 'Middlesbrough', 'Norwich City',
+                'Sheffield United', 'Southampton FC', 'Sunderland AFC', 'Watford']
+        
+        is  SignificanceResult(
+                statistic=-0.6762764941060211,
+                pvalue=0.005637535550483043
+        ) 
+
+        That means that Position decreases while Money spent decreases.
+
+
+        The points - money corr. coeff. for teams
+                ['Birmingham City', 'Blackpool', 'Bradford City', 'Brighton & Hove Albion', 'Crystal Palace',
+                'Everton FC', 'Ipswich Town', 'Leeds United', 'Leicester City', 'Middlesbrough', 'Norwich City',
+                'Sheffield United', 'Southampton FC', 'Sunderland AFC', 'Watford']
+        
+        is  SignificanceResult(
+                statistic=0.7892857142857141,
+                pvalue=0.0004673267561781759
+        ) 
+
+        That means that Points increases while Money spent increases.
+
+        COMMUNITY 3
+
+        The position - money corr. coeff. for teams
+                ['Aston Villa', 'Blackburn Rovers', 'Bolton Wanderers', 'Brentford FC',
+                'Burnley FC', 'Hull City', 'Reading FC', 'Stoke City', 'Wigan Athletic'] 
+                
+        is  SignificanceResult(
+                statistic=-0.2945959721156873,
+                pvalue=0.44158052931355807
+        ) 
+        That means that Position decreases while Money spent decreases.
+
+        The points - money corr. coeff. for teams -> Less years in the premier league
+                ['Aston Villa', 'Blackburn Rovers', 'Bolton Wanderers', 'Brentford FC',
+                'Burnley FC', 'Hull City', 'Reading FC', 'Stoke City', 'Wigan Athletic'] 
+        
+        is  SignificanceResult(
+                statistic=0.6166666666666666,
+                pvalue=0.07692880993776309
+        ) 
+        That means that Points increases while Money spent increases.
+
+        COMMUNITY 4
+
+        The position - money corr. coeff. for teams
+                ['Charlton Athletic', 'Fulham FC', 'Huddersfield Town', 'Queens Park Rangers', 'Swansea City',
+                'West Bromwich Albion', 'West Ham United']
+                
+        is  SignificanceResult(
+                statistic=-0.16216874328520064,
+                pvalue=0.7282995630820223
+        ) 
+        That means that Position decreases while Money spent decreases.
+
+        The points - money corr. coeff. for teams -> Less years in the premier league
+                ['Charlton Athletic', 'Fulham FC', 'Huddersfield Town', 'Queens Park Rangers', 'Swansea City',
+                'West Bromwich Albion', 'West Ham United']
+        
+        is  SignificanceResult(
+                statistic=0.4642857142857144,
+                pvalue=0.2939341076002517
+        ) 
+        That means that Points increases while Money spent increases.
+
+
+        CONCLUSION: FOR 3/4 PREMIER LEAGUE COMMUNITIES WRT THEMSELVES:
+                That means that Position decreases while Money spent decreases.
+                That means that Points increases while Money spent increases.
+
+        COMMUNITY OF ALL PREM LEAGUE TEAMS:
+        The Positions - money corr. coeff.
+
+        is  SignificanceResult(
+                        statistic=-0.6491491427726899,
+                        pvalue=1.8739136229310119e-06
+        ) 
+        That means that Position decreases while Money spent decreases.
+
+        The Points - money corr. coeff.
+
+        is  SignificanceResult(
+                statistic=0.7893865186901559,
+                pvalue=1.9259791471024608e-10
+        ) 
+
+        That means that Points increases while Money spent increases.
+        
+
+4. 
+        Based on points, and average position
+        I created 3 communities
+
+        Position Communites
+        1. ['Arsenal FC', 'Chelsea FC', 'Liverpool FC', 'Manchester City', 'Manchester United']
+
+        2. ['Aston Villa', 'Birmingham City', 'Blackburn Rovers', 'Bolton Wanderers', 'Bournemouth',
+        'Brentford FC', 'Brighton & Hove Albion', 'Burnley FC', 'Charlton Athletic', 'Crystal Palace',
+        'Everton FC', 'Fulham FC', 'Ipswich Town', 'Leeds United', 'Leicester City', 'Middlesbrough',
+        'Newcastle United', 'Norwich City', 'Portsmouth FC', 'Reading FC', 'Sheffield United', 'Southampton FC',
+        'Stoke City', 'Sunderland AFC', 'Swansea City', 'Tottenham Hotspur', 'Watford', 'West Bromwich Albion',
+        'West Ham United', 'Wigan Athletic', 'Wolverhampton Wanderers']
+
+        3. ['Blackpool', 'Bradford City', 'Cardiff City', 'Coventry City', 'Derby County',
+        'Huddersfield Town', 'Hull City', 'Queens Park Rangers']
+
+        Points communities
+        1. ['Arsenal FC', 'Chelsea FC', 'Everton FC', 'Liverpool FC', 'Manchester City', 'Manchester United', 'Tottenham Hotspur']
+
+        2. ['Aston Villa', 'Newcastle United', 'Southampton FC', 'West Ham United']
+
+        3. ['Blackburn Rovers', 'Bolton Wanderers', 'Crystal Palace', 'Fulham FC', 'Leicester City',
+        'Middlesbrough', 'Stoke City', 'Sunderland AFC', 'West Bromwich Albion']
+
+        4: ['Birmingham City', 'Blackpool', 'Bournemouth', 'Bradford City', 'Brentford FC',
+        'Brighton & Hove Albion', 'Burnley FC', 'Cardiff City', 'Charlton Athletic', 'Coventry City',
+        'Derby County', 'Huddersfield Town', 'Hull City', 'Ipswich Town', 'Leeds United', 'Norwich City',
+        'Portsmouth FC', 'Queens Park Rangers', 'Reading FC', 'Sheffield United', 'Swansea City',
+        'Watford', 'Wigan Athletic', 'Wolverhampton Wanderers']
+
+        Money communities
+        1. ['Chelsea FC', 'Liverpool FC', 'Manchester City', 'Manchester United']
+
+        2. ['Arsenal FC', 'Aston Villa', 'Everton FC', 'Newcastle United', 'Tottenham Hotspur']
+
+        3. ['Brighton & Hove Albion', 'Crystal Palace', 'Fulham FC', 'Leeds United', 'Leicester City',
+        'Southampton FC', 'Sunderland AFC', 'Swansea City', 'Watford', 'Wolverhampton Wanderers']
+        
+        4. ['Birmingham City', 'Blackburn Rovers', 'Blackpool', 'Bolton Wanderers', 'Bournemouth',
+        'Bradford City', 'Brentford FC', 'Burnley FC', 'Cardiff City', 'Charlton Athletic',
+        'Coventry City', 'Derby County', 'Huddersfield Town', 'Hull City', 'Ipswich Town',
+        'Middlesbrough', 'Norwich City', 'Portsmouth FC', 'Queens Park Rangers', 'Reading FC',
+        'Sheffield United', 'Stoke City', 'West Bromwich Albion', 'West Ham United', 'Wigan Athletic']
+
+
+A social network is called a small-world network if, roughly speaking,
+any two of people in the network can reach each other through a short sequence of acquaintances.
+So, if omega values are close to 0, it has small-world properties.
+
+If I get whole premier league community and calculate the omega, does it follow?
+It does for some.
+
+
+4. 
+        For Premier League teams with betweeneess calculated wrt to their small community:
+
+                Betwenneess
+                The points - betwenneess corr. coeff. for teams is
+                        SignificanceResult(statistic=0.30318193048880016, pvalue=0.04544115979230959) 
+
+                The position - betwenneess corr. coeff. for teams is
+                        SignificanceResult(statistic=-0.2797861152474432, pvalue=0.06585780268631787) 
+
+
+                Closeness
+                The points - closenes corr. coeff. for teams is
+                        SignificanceResult(statistic=0.356218557931386, pvalue=0.020589914900294295) 
+
+                The position - closenes corr. coeff. for teams is
+                        SignificanceResult(statistic=-0.2781113776445511, pvalue=0.29696479123832054) 
+
+
+                Degree centrality 
+                The points - degree centrality corr. coeff. for teams is
+                        SignificanceResult(statistic=0.356218557931386, pvalue=0.020589914900294295) 
+
+                The position - degree centrality corr. coeff. for teams is
+                        SignificanceResult(statistic=-0.2781113776445511, pvalue=0.29696479123832054) 

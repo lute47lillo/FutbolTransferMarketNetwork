@@ -72,7 +72,10 @@ class Preprocessing:
                 seller = temp
             
             # Remove double edges (Ex: 2 Transactions happen, in and out. Keep only out transactions)
-            if not ((seller, buyer), (player, fee_cleaned, year)) in soccer_dict.items():
+            if ((seller, buyer), (player, fee_cleaned, year)) not in soccer_dict.items():
+                # if player == 'Cristiano Ronaldo':
+                #     print(seller, buyer, fee_cleaned, year)
+                #     print(type(seller), type(buyer), type(fee_cleaned), type(year))
                 #if int(year) >= 2000: # Premier League Data
                 if isinstance(fee_cleaned, str):
                     fee_cleaned = float(fee_cleaned)
@@ -315,12 +318,6 @@ class Preprocessing:
             else:
                 mon.update({t:1})
         return mon
-        
-    # def trim_graph(self, graph):
-    #     graph = nx.MultiGraph(graph)
-    #     low_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in graph.edges(data=True) if attrs["fee"] == 0.0]
-    #     graph.remove_edges_from(low_fee_edges)
-    #     return graph
     
     """
         Given a graph
@@ -357,3 +354,9 @@ class Preprocessing:
                 league.append(seller)
                 
         return league
+    
+    def get_graph_clustering_ceff(self, graph):
+        graph = nx.Graph(graph)
+        coeff = nx.average_clustering(graph) 
+        return coeff
+    

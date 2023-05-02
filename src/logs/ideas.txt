@@ -1,0 +1,17 @@
+In the year 1998, Watts and Strogatz et al published a
+paper in Nature based on the clustering coefficient
+measure [17]. The cluster is a measure of the likelihood
+that two associates of a node are associating themselves.
+A higher clustering coefficient indicates a greater
+’cliquishness’. In most real-world networks, if node A is
+
+
+connected to node B and node B is connected to node C,
+then node A is also connected to node C as well. In a
+socialnetwork, the friendship between individuals shows
+that there is a higher probability that a friend of your
+friend is also your friend. The clustering coefficient value
+lies in the range 0 ≤ C ≤ 1. 
+
+
+IDEA: Study what is the clustering coeff between big leagues. Like what are the pair association bigger (Serie A- LaLiga for example (?))

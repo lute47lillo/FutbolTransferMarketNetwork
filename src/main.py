@@ -7,6 +7,7 @@ import itertools
 from preprocess import Preprocessing
 from communities import Community
 from winners import Winners
+from utils import Utils
 from ch_league_process import ChampionsDataProcess
 from stats_comm import StatsAndCommunities
 import math
@@ -73,9 +74,30 @@ def deconstruct_com_idx(order):
             ord.update({idx:curr})
         
     return ord
-
-def main():
+def new_execution():
+    # Preprocess the data 
+    util = Utils()
+    prep = Preprocessing()
+    soccer_dict, teams = util.create_dict(5)
+    stats = prep.average_stats()
     
+    comm = Community()
+    order_comm, graph = comm.process_community_graph_update(soccer_dict, False, 5, teams)
+    
+    
+    #print([e for e in graph.edges.data()])
+    
+    ordered = data_community(order_comm, stats, False)
+    print(ordered)
+    print(graph)
+    exit()
+    
+    
+def main(args):
+    
+    if args:
+        new_execution()
+        
     # Preprocess the data 
     prep = Preprocessing()
     """
@@ -83,7 +105,8 @@ def main():
         Given Index 0-5
         Returns dictionary of type -> (seller, buyer) : (player, fee, year), *Optional, also returns list of teams of domestic league
     """
-    soccer, teams = prep.create_dict(4)
+    soccer, teams = prep.create_dict(5)
+    
     teams = sorted(teams)
     mapping = prep.get_universal_mapping()
     
@@ -101,28 +124,37 @@ def main():
     comm = Community()
     sc = StatsAndCommunities()
     stats = prep.average_stats()
-    
-    
+ 
+ 
     soccer = prep.dictionary_name_mapping(soccer, mapping)
-    order_comm, trimmed_graph = comm.process_community_graph(soccer, True, 4, teams)
+    order_comm, trimmed_graph = comm.process_community_graph(soccer, False, 5, teams)
     
     # # # Print ordered communites (True -> Trim community given stats dicitonary)
     
     ordered = data_community(order_comm, stats, False)
-    print(ordered)
     
-    #trimmed_graph = prep.trim_graph(trimmed_graph)
-    print(trimmed_graph)
+   
+    #print(ordered)
+    #print(trimmed_graph)
+    #print([e for e in trimmed_graph.edges.data()])
+    
+    
+    """
+        Get clustering coefficient of the graph given
+    """
+    #coeff = prep.get_graph_clustering_ceff(trimmed_graph)
+    
+    #print(coeff)
     
     """
         Obtain how much money has been spent by community   
     """
     # Get the money dict
-    #money_dict = prep.get_dict_money_spent(trimmed_graph)
+    # money_dict = prep.get_dict_money_spent(trimmed_graph)
 
     # Calculate how much each community spends.
-    #money_dict = sc.all_community_money(money_dict, ordered)
-    #print(money_dict)
+    # money_dict = sc.all_community_money(money_dict, ordered)
+    # print(money_dict)
 
     
     """
@@ -166,16 +198,16 @@ def main():
             sc.study -> Correlation between performance and sub-communites
     """
     
-    #sc.study(ordered, stats, soccer)
-    #sc.whole_league_community(stats, soccer)
-    #print("Premier League ordered communites :",  ordered)
+    # sc.study(ordered, stats, soccer)
+    # sc.whole_league_community(stats, soccer)
+    # print("Premier League ordered communites :",  ordered)
     
     """
         Study the Betweenness, closeness centrality and degree centrality of a particular community.
         Compare it to their overall performance (stats)
     
     """
-    #btw_centr, graph = sc.community_attributes(stats, ordered, trimmed_graph)
+    # btw_centr, graph = sc.community_attributes(stats, ordered, trimmed_graph)
     # """ Helper function to create a community index {team : comm_idx} based on a given community (ordered)"""
     #community_index = prep.create_com_index(ordered)
     
@@ -186,8 +218,8 @@ def main():
     #print(btw_centr)
     
     """ Obtain omega value to calculate the small-world property of the given graph"""
-    omega = sc.obtain_omega_small_world(trimmed_graph)
-    print(omega)
+    # omega = sc.obtain_omega_small_world(trimmed_graph)
+    # print(omega)
     
     
     """ Communities
@@ -255,7 +287,7 @@ def main():
     # eur_winners = win.europa_league(soccer_champ, europa_league_winners)
     # ch_process.process_data(eur_winners, 1, False)
 
-main()
+main(True)
 
 """
     TODO:   
