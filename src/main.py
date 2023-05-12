@@ -79,6 +79,8 @@ def new_execution():
     util = Utils()
     prep = Preprocessing()
     soccer_dict, teams = util.create_dict(5)
+    print(len(teams))
+    print(sorted(teams))
     stats = prep.average_stats()
     
     comm = Community()
@@ -86,10 +88,10 @@ def new_execution():
     
     
     #print([e for e in graph.edges.data()])
-    coeff = prep.get_graph_clustering_ceff(graph)
-    print(prep.sort_dictionary_by_value(coeff))
+    #coeff = prep.get_graph_clustering_ceff(graph)
+    #print(prep.sort_dictionary_by_value(coeff))
     
-    ordered = data_community(order_comm, stats, False)
+    #ordered = data_community(order_comm, stats, False)
     #print(ordered)
     print(graph)
     exit()

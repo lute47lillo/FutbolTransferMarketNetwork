@@ -360,7 +360,7 @@ class Preprocessing:
         Returns clustering coefficient for all nodes in the graph.
     """
     def get_graph_clustering_ceff(self, graph):
-        graph = nx.Graph(graph)
+        graph = nx.DiGraph(graph)
         coeff = nx.clustering(graph) 
         return coeff
     

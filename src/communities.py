@@ -129,14 +129,14 @@ class Community:
         for ((seller, buyer), transfer_list) in soccer_dict.items():
             for transfer in transfer_list:
                 player, fee_cleaned, year = transfer
-                #if seller in teams and buyer in teams: # Use only for particular domestic league datasets
-                trim_graph.add_weighted_edges_from(ebunch_to_add=[(seller, buyer, fee_cleaned)], weight="fee")
+                if seller in teams and buyer in teams: # Use only for particular domestic league datasets
+                    trim_graph.add_weighted_edges_from(ebunch_to_add=[(seller, buyer, fee_cleaned)], weight="fee")
 
         
         # buyer, seller is oppositte as how it should be, but result is correct
         # Remove all fees with 0 (either were NAN (free agent), or 0 (free transfers))
         low_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in trim_graph.edges(data=True) if attrs["fee"] == 0.0]
-        trim_graph.remove_edges_from(low_fee_edges)
+        #trim_graph.remove_edges_from(low_fee_edges)
         
         # REMOVE innecesary and noise nodes form the graph
         low_degree = [n for n, d in trim_graph.degree() if d < 70] # ALL dataset
