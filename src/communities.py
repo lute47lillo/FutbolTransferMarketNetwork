@@ -128,29 +128,29 @@ class Community:
         
         for ((seller, buyer), transfer_list) in soccer_dict.items():
             for transfer in transfer_list:
-                player, fee_cleaned, year = transfer
+                player, fee_cleaned, year = transfer        
                 if seller in teams and buyer in teams: # Use only for particular domestic league datasets
                     trim_graph.add_weighted_edges_from(ebunch_to_add=[(seller, buyer, fee_cleaned)], weight="fee")
 
         
         # buyer, seller is oppositte as how it should be, but result is correct
         # Remove all fees with 0 (either were NAN (free agent), or 0 (free transfers))
-        low_fee_edges = [(seller, buyer) for (buyer, seller, attrs) in trim_graph.edges(data=True) if attrs["fee"] == 0.0]
-        #trim_graph.remove_edges_from(low_fee_edges)
+        low_fee_edges = [(u,v, keys) for u, v, keys, weight in trim_graph.edges(data='fee', keys=True) if weight == 0.0]
+        trim_graph.remove_edges_from(low_fee_edges)
         
         # REMOVE innecesary and noise nodes form the graph
-        low_degree = [n for n, d in trim_graph.degree() if d < 70] # ALL dataset
-        trim_graph.remove_nodes_from(low_degree) 
+        low_degree = [n for n, d in trim_graph.degree() if d < 60] # ALL dataset
+        #trim_graph.remove_nodes_from(low_degree) 
 
         components = nx.connected_components(trim_graph)
         largest_component = max(components, key=len)
         trim_graph = trim_graph.subgraph(largest_component)
 
         # Compute centrality
-        centrality = nx.betweenness_centrality(trim_graph, k=149, weight="fee", normalized=True, endpoints=True)
+        centrality = nx.betweenness_centrality(trim_graph, k=235, weight='fee', normalized=True, endpoints=True)
 
         # Run algorithm
-        comm = nx.community.greedy_modularity_communities(trim_graph, best_n=10, resolution=1)
+        comm = nx.community.greedy_modularity_communities(trim_graph, weight='fee', best_n=10, resolution=1)
         community_index = {n: i for i, com in enumerate(comm) for n in com}
     
         order_comm = {}

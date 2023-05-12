@@ -75,24 +75,34 @@ def deconstruct_com_idx(order):
         
     return ord
 def new_execution():
+    
     # Preprocess the data 
     util = Utils()
     prep = Preprocessing()
-    soccer_dict, teams = util.create_dict(5)
-    print(len(teams))
-    print(sorted(teams))
-    stats = prep.average_stats()
     
+    
+    soccer_dict, teams = util.create_dict(5)
+    
+    # Teams -> 240 nodes. 
+    #print(sorted(teams))
+    
+    # Get communities and graph
     comm = Community()
     order_comm, graph = comm.process_community_graph_update(soccer_dict, False, 5, teams)
     
-    
+    # MultiGraph has 95 nodes and 6041 edges after removing nodes d<75 and no 0.0 $transfers
+    # MultiGraph has 117 nodes and 7222 edges after removing nodes d<60 and no 0.0 $transfers
+    # MultiGraph has 235 nodes and 10127 edges after reomving no 0.0$ transfers
+    # MultiGraph has 224 nodes and 38040 edges after removing nodes d<75
     #print([e for e in graph.edges.data()])
+    
+    
     #coeff = prep.get_graph_clustering_ceff(graph)
     #print(prep.sort_dictionary_by_value(coeff))
     
-    #ordered = data_community(order_comm, stats, False)
-    #print(ordered)
+    stats = prep.average_stats() # Legacy code. Needs to be removed
+    ordered = data_community(order_comm, stats, False)
+    print(ordered)
     print(graph)
     exit()
     

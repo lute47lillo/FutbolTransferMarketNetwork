@@ -1,7 +1,8 @@
 First things first, if I want to study the whole market for top-5 leagues. I need to 
 
     - Get only teams that have participated in those leagues. 
-        - I need to trim transfer with lower division teams (that never participated in 1st tier)
+        - I need to trim transfer with lower division teams (that never participated in 1st tier) DONE
+        - Remove edges where is a loan in and out (player and fee match and buyer and seller match) DONE
 
 
 
