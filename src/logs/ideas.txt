@@ -4,6 +4,9 @@ First things first, if I want to study the whole market for top-5 leagues. I nee
         - I need to trim transfer with lower division teams (that never participated in 1st tier) DONE
         - Remove edges where is a loan in and out (player and fee match and buyer and seller match) DONE
 
+    - More accurate picture: Probably introducing Liga-nos (Portugal) and Eredivise (Liga Holandesa)
+        - If not, winners community picture is not full (2/13 CH not showing) and (6/19 not showing for EUL)
+
 
 
 

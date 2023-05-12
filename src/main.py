@@ -24,19 +24,16 @@ import math
     5   ../dataset/all.csv
 """
 
-champ_league_winners = ['Olympique Marseille','Marseille', 'AC Milan', 'Ajax', 'Juventus FC', 'Bor. Dortmund', 'Real Madrid',
-                        'Manchester United', 'Real Madrid', 'Bayern Munich', 'Real Madrid', 'AC Milan',
-                        'FC Porto', 'Liverpool FC', 'FC Barcelona', 'AC Milan', 'Man Utd', 'Barcelona',
-                        'Inter', 'Barcelona', 'Chelsea', 'Bayern Munich', 'Real Madrid','Barcelona',
-                        'Real Madrid', 'Real Madrid', 'Real Madrid', 'Liverpool', 'Bayern Munich',
-                        'Chelsea FC', 'Real Madrid', 'Borussia Dortmund', 'Inter Milan']
+champ_league_winners = ['Olympique Marseille', 'Ajax', 'Juventus FC', 'Manchester United',
+                        'FC Porto', 'Liverpool FC', 'FC Barcelona', 'AC Milan', 'Chelsea FC',
+                        'Bayern Munich', 'Real Madrid', 'Borussia Dortmund', 'Inter Milan']
 
 
-europa_league_winners = ['Juventus FC', 'Inter Milan', 'Inter', 'Parma', 'Bayern Munich', 'Parma FC', 'Schalke 04',
-                         'FC Schalke 04', 'Galatasaray', 'Liverpool FC', 'Liverpool', 'Feyenoord', 'FC Porto', 
-                         'Valencia', 'Valencia CF', 'CSKA Moscow', 'Sevilla FC', 'Zenit S-Pb', 'Shakhtar D.', 
-                         'Atlético Madrid', 'Atlético de Madrid', 'Chelsea', 'Chelsea FC', 'Manchester United',
-                         'Man Utd', 'Villarreal', 'Villarreal CF', 'E. Frankfurt', 'Eintracht Frankfurt']
+europa_league_winners = ['Juventus FC', 'Inter Milan', 'AC Parma', 'Bayern Munich', 'FC Schalke 04',
+                        'Galatasaray', 'Liverpool FC', 'Feyenoord', 'FC Porto', 
+                        'Valencia CF', 'CSKA Moscow', 'Sevilla FC', 'Zenit S-Pb', 'Shakhtar D.', 
+                        'Atlético de Madrid', 'Chelsea FC', 'Manchester United',
+                        'Villarreal CF', 'Eintracht Frankfurt']
 
 
 ''' Helper function that returns a dictionary with the ordered communities'''
