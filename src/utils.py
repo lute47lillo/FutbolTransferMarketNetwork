@@ -72,3 +72,50 @@ class Utils:
                     soccer_dict.update({(seller, buyer) : current})
                     
         return soccer_dict, league
+    
+    """ Creates a sub-community of international champions teams - money spent"""
+    def sub_champions_spent_community(self, soccer, champs):
+        prep = Preprocessing()
+        spent = {}
+        for ((seller, buyer), transfer_list) in soccer.items():
+            if buyer in champs:
+                for transfer in transfer_list:
+                    player, fee_cleaned, year = transfer 
+                    
+                    # Update spent dictionary
+                    if buyer not in spent:
+                        spent.update({ buyer : fee_cleaned })
+                    else:
+                        current_spent = spent.get(buyer)
+                        spent.update({ buyer : (fee_cleaned + current_spent) })
+                    
+        #print(spent)
+        # for k, v in spent.items():
+        #     print(k, " spent ", v)
+        
+        spent = prep.sort_dictionary(spent)
+        return spent
+    
+    """ Creates a sub-community of international champions teams - money received""" 
+    def sub_champions_received_community(self, soccer, champs):
+        prep = Preprocessing()
+        received = {}
+        for ((seller, buyer), transfer_list) in soccer.items():
+            if seller in champs:
+                
+                for transfer in transfer_list:
+                    player, fee_cleaned, year = transfer 
+                        
+                    # Update received dictionary
+                    if seller not in received:
+                        received.update({ seller : fee_cleaned })
+                    else:
+                        current_spent = received.get(seller)
+                        received.update({ seller : (fee_cleaned + current_spent) })
+                    
+        #print(received)
+        # for k, v in received.items():
+        #     print(k, " received ", v)
+        
+        received = prep.sort_dictionary(received)
+        return received

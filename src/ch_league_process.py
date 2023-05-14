@@ -63,14 +63,13 @@ class ChampionsDataProcess:
         data = dict(zip(teams, money))
         data = prep.sort_dictionary(data)
         
-        #self.calculating_pearson_corr(data, n, dinero)
+        #self.calculating_pearson_corr(data, n)
         #self.plotting_categorical(data, n, dinero) # All plots are correct and saved
 
-    def calculating_pearson_corr(self, data, n, dinero):
+    def calculating_pearson_corr(self, data, n):
         teams = list(data.keys())
         money = list(data.values())
     
-        
         if n == 0:
             trophies = [3, 1, 3, 1, 2, 4, 1, 1, 1, 2, 2, 1, 8] 
 
@@ -81,7 +80,7 @@ class ChampionsDataProcess:
         x = np.array(money)
         corr_coeff = sp.stats.spearmanr(y, x)
         
-        print("For ", teams, " and based on money spent/received, the Pearsons correlation coefficient is: ", corr_coeff)
+        print("For ", teams, " and based on money spent/received, the Spearman Rank correlation coefficient is: ", corr_coeff)
         
     def plotting_categorical(self, data, n, dinero):
         names = list(data.keys())

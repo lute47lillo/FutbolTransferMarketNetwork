@@ -4,8 +4,24 @@ First things first, if I want to study the whole market for top-5 leagues. I nee
         - I need to trim transfer with lower division teams (that never participated in 1st tier) DONE
         - Remove edges where is a loan in and out (player and fee match and buyer and seller match) DONE
 
-    - More accurate picture: Probably introducing Liga-nos (Portugal) and Eredivise (Liga Holandesa)
-        - If not, winners community picture is not full  and (4/19 not showing for EUL)
+    - More accurate picture:
+        - If not, winners community picture is not full (4/19 not showing for EUL) DONE
+        - NOT DATA FROM Turkish or Russian League
+
+
+1. Study composition of communities for champions.
+2. Money spent on the transfer Market -> how much they have won international trophies.
+
+3. Premier League Case Study
+    - Study community (Using multigraph)
+
+4. Small-world for all 7 leagues
+    - Small World -> for adjacent pair of leagues. (Prem-LaLiga) ... 21 different combinations
+
+5. Betwenness centrality
+    - Whole League
+    - Case Study: Premier League
+
 
 
 

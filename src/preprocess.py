@@ -129,19 +129,12 @@ class Preprocessing:
         return sort
     
     """ Creates a sub-community of international champions teams - money spent"""
-    def sub_champions_spent_community(self, soccer, champs, mapp):
-        # if mapp == 0:
-        #     soccer = self.dictionary_name_mapping(soccer, CH_mapping)
-        # else:
-        #     soccer = self.dictionary_name_mapping(soccer, EUR_mapping)
+    def sub_champions_spent_community(self, soccer, champs):
         
         spent = {}
         for ((seller, buyer), (player, fee_cleaned, year)) in soccer.items():
             if buyer in champs:
                 
-                # Set fee_cleaned to float type value
-                #isinstance(fee_cleaned, float):
-                #math.isnan(fee_cleaned):
                 if math.isnan(fee_cleaned):
                     fee = 0.0
                 else:

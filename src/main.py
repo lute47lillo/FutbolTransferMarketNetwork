@@ -33,7 +33,7 @@ europa_league_winners = ['Juventus FC', 'Inter Milan', 'AC Parma', 'Bayern Munic
                         'Galatasaray', 'Liverpool FC', 'Feyenoord Rotterdam', 'FC Porto', 
                         'Valencia CF', 'CSKA Moscow', 'Sevilla FC', 'Zenit S-Pb', 'Shakhtar D.', 
                         'Atlético de Madrid', 'Chelsea FC', 'Manchester United',
-                        'Villarreal CF', 'Eintracht Frankfurt']
+                        'Villareal CF', 'Eintracht Frankfurt']
 
 
 ''' Helper function that returns a dictionary with the ordered communities'''
@@ -71,6 +71,19 @@ def deconstruct_com_idx(order):
             ord.update({idx:curr})
         
     return ord
+
+def get_champions_league_spent_received_money(soccer, competition):
+    util = Utils()
+    spent = util.sub_champions_spent_community(soccer, competition)
+    received = util.sub_champions_received_community(soccer, competition)
+    
+    return spent, received
+
+def calc_pearson_winners(spent, received, type):
+    ch_process = ChampionsDataProcess()
+    ch_process.calculating_pearson_corr(spent, type)
+    ch_process.calculating_pearson_corr(received, type)
+
 def new_execution():
     
     # Preprocess the data 
@@ -86,44 +99,46 @@ def new_execution():
     #print(len(teams))
     
     # Get communities and graph
-    order_comm, graph = comm.process_community_graph_update(soccer_dict, False, 5, teams)
-    
-    #Top5
-    # MultiGraph has 95 nodes and 6041 edges after removing nodes d<75 and no 0.0 $transfers
-    # MultiGraph has 117 nodes and 7222 edges after removing nodes d<60 and no 0.0 $transfers
-    # MultiGraph has 235 nodes and 10127 edges after removing no 0.0$ transfers
-    # MultiGraph has 224 nodes and 38040 edges after removing nodes d<75
-    
-    # inlude liga nos
-    # MultiGraph has 272 nodes and 10913 edges after removing 0.0$ transfers
-    # MultiGraph has 122 nodes and 7682 edges after removing nodes d<60 and no 0.0 $transfers
-    # MultiGraph has 139 nodes and 8449 edges after removing nodes d<50 and no 0.0 $transfers (BEST)
-    
-    #include eredivise
-    # MultiGraph has 303 nodes and 11797 edges after removing 0.0$ transfers
+    # Include all Leagues
     # MultiGraph has 188 nodes and 10357 edges after removing nodes d<30 and no 0.0 $transfers (BEST) 7/13 -> Group 1
-    
-    
-    
-    #print([e for e in graph.edges.data()])
-    
-    
-    #coeff = prep.get_graph_clustering_ceff(graph)
-    #print(prep.sort_dictionary_by_value(coeff))
+    order_comm, graph = comm.process_community_graph_update(soccer_dict, False, 5, teams)
     
     stats = prep.average_stats() # Legacy code. Needs to be removed
     ordered = data_community(order_comm, stats, False)
     
+    # print(ordered)
+    print(graph)
+    #print([e for e in graph.edges.data()])
+    
+    
+    """ Clustering Coefficient """
+    #coeff = prep.get_graph_clustering_ceff(graph)
+    #print(prep.sort_dictionary_by_value(coeff))
+    
+    
     
     # Get the money dict
-    money_dict = prep.get_dict_money_spent(graph)
+    # money_dict = prep.get_dict_money_spent(graph)
 
-    # # Calculate how much each community spends.
-    money_dict = sc.all_community_money(money_dict, ordered)
-    print(money_dict)
+    # # # Calculate how much each community spends.
+    # money_dict = sc.all_community_money(money_dict, ordered)
+    # print(money_dict)
     
-    print(ordered)
-    print(graph)
+    
+    """
+        Obtain how much money Champions League and Europa League winners have spent and received.
+    """
+    spent_ch, received_ch = get_champions_league_spent_received_money(soccer_dict, champ_league_winners)
+    spent_el, received_el = get_champions_league_spent_received_money(soccer_dict, europa_league_winners)
+    
+    
+    """ 
+        Calculates the Pearson Correlation Coefficient for Champions League and Europa LEague Winners
+    """
+    calc_pearson_winners(spent_ch, received_ch, 0)
+    calc_pearson_winners(spent_el, received_el, 1)
+ 
+
     exit()
     
     
