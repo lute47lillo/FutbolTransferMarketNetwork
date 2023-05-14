@@ -140,7 +140,7 @@ class Community:
         
         # REMOVE innecesary and noise nodes form the graph
         low_degree = [n for n, d in trim_graph.degree() if d < 30] # ALL dataset
-        trim_graph.remove_nodes_from(low_degree) 
+        #trim_graph.remove_nodes_from(low_degree) 
 
         components = nx.connected_components(trim_graph)
         largest_component = max(components, key=len)
@@ -148,10 +148,10 @@ class Community:
         # print(largest_component)
 
         # Compute centrality
-        centrality = nx.betweenness_centrality(trim_graph, k=188, normalized=True, endpoints=False)
+        centrality = nx.betweenness_centrality(trim_graph, k=44, normalized=True, endpoints=False)
 
         # Run algorithm
-        comm = nx.community.greedy_modularity_communities(trim_graph, weight='fee', best_n=10, resolution=1)
+        comm = nx.community.greedy_modularity_communities(trim_graph, weight='fee', best_n=3)
         community_index = {n: i for i, com in enumerate(comm) for n in com}
     
         order_comm = {}

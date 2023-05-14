@@ -83,6 +83,13 @@ def calc_pearson_winners(spent, received, type):
     ch_process = ChampionsDataProcess()
     ch_process.calculating_pearson_corr(spent, type)
     ch_process.calculating_pearson_corr(received, type)
+    
+def get_domestic_teams(teams, stats):
+    prem_teams = []
+    for k, v in stats.items():
+        if k in teams:
+            prem_teams.append(k)
+    return prem_teams
 
 def new_execution():
     
@@ -93,7 +100,7 @@ def new_execution():
     comm = Community()
     ch_process = ChampionsDataProcess()
     
-    soccer_dict, teams = util.create_dict(5)
+    #soccer_dict, teams = util.create_dict(5)
     
     # Teams -> 314 nodes. 
     #print(sorted(teams))
@@ -104,13 +111,13 @@ def new_execution():
         MultiGraph has 188 nodes and 10357 edges after removing nodes d<30 and no 0.0 $transfers (BEST) 7/13 -> Group 1
     """
     # MultiGraph has 188 nodes and 10357 edges after removing nodes d<30 and no 0.0 $transfers (BEST) 7/13 -> Group 1
-    order_comm, graph = comm.process_community_graph_update(soccer_dict, False, 5, teams)
+    # order_comm, graph = comm.process_community_graph_update(soccer_dict, False, 5, teams)
     
-    stats = prep.average_stats() # Legacy code. Needs to be removed
-    ordered = data_community(order_comm, stats, False)
+    # stats = prep.average_stats() # Legacy code. Needs to be removed
+    # ordered = data_community(order_comm, stats, False)
     
-    print(ordered)
-    print(graph)
+    #print(ordered)
+    #print(graph)
     #print([e for e in graph.edges.data()])
     
     
@@ -123,16 +130,16 @@ def new_execution():
         Obtain a dictionary {community : total money spent}
         for all communities
     """
-    money_dict = prep.get_dict_money_spent(graph)
-    money_dict = sc.all_community_money(money_dict, ordered)
-    print(money_dict)
+    # money_dict = prep.get_dict_money_spent(graph)
+    # money_dict = sc.all_community_money(money_dict, ordered)
+    # print(money_dict)
     
     
     """
         Obtain how much money Champions League and Europa League winners have spent and received.
     """
-    spent_ch, received_ch = get_champions_league_spent_received_money(soccer_dict, champ_league_winners)
-    spent_el, received_el = get_champions_league_spent_received_money(soccer_dict, europa_league_winners)
+    # spent_ch, received_ch = get_champions_league_spent_received_money(soccer_dict, champ_league_winners)
+    # spent_el, received_el = get_champions_league_spent_received_money(soccer_dict, europa_league_winners)
     
     
     """ 
@@ -144,11 +151,48 @@ def new_execution():
     """
         Plot Spearman Rank Correlation Coefficient for Champions League and Europa League Winners
     """
-    ch_process.plotting_categorical(spent_ch, 0, True)
-    ch_process.plotting_categorical(received_ch, 0, False)
+    # ch_process.plotting_categorical(spent_ch, 0, True)
+    # ch_process.plotting_categorical(received_ch, 0, False)
     
-    ch_process.plotting_categorical(spent_el, 1, True)
-    ch_process.plotting_categorical(received_el, 1, False)
+    # ch_process.plotting_categorical(spent_el, 1, True)
+    # ch_process.plotting_categorical(received_el, 1, False)
+    
+    
+    """
+        Domestic Case study: Premier League
+    """
+    
+    prem_soccer, _ = util.create_dict(5)
+    prem_stats = prep.average_stats()
+    prem_teams = list(prem_stats.keys())
+
+    prem_order_comm, prem_graph = comm.process_community_graph_update(prem_soccer, False, 3, prem_teams)
+    
+    prem_ordered = data_community(prem_order_comm, prem_stats, False)
+    print(prem_ordered)
+    print(prem_graph)
+    
+    
+    """
+        Given community index creation of based performance teams:
+        Average position
+        Total Money spent within community
+        Plot them,
+    
+    """
+    pos_com_idx, points_pos_idx = prep.organize_teams(prem_stats)
+    print("\nThe pos_com_idx: ", pos_com_idx)
+    print("\nThe points_com_idx: ", points_pos_idx)
+    
+    # Get ordered communities for both avg_pos, and total points
+    pos_ordered = deconstruct_com_idx(pos_com_idx)
+    points_ordered = deconstruct_com_idx(points_pos_idx)
+    
+    print("\n The position communities are: ", pos_ordered)
+    print("\n The points communities are: ", points_ordered)
+    
+    
+    
 
     exit()
     
@@ -197,24 +241,6 @@ def main(args):
     #print(ordered)
     #print(trimmed_graph)
     #print([e for e in trimmed_graph.edges.data()])
-    
-    
-    """
-        Get clustering coefficient of the graph given
-    """
-    #coeff = prep.get_graph_clustering_ceff(trimmed_graph)
-    
-    #print(coeff)
-    
-    """
-        Obtain how much money has been spent by community   
-    """
-    # Get the money dict
-    # money_dict = prep.get_dict_money_spent(trimmed_graph)
-
-    # Calculate how much each community spends.
-    # money_dict = sc.all_community_money(money_dict, ordered)
-    # print(money_dict)
 
     
     """

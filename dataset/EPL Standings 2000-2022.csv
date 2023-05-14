@@ -12,7 +12,7 @@ Season,Pos,Team,Pld,W,D,L,GF,GA,GD,Pts,Result
 2000-01,11,Newcastle United,38,14,9,15,44,50,-6,51,Qualification for the Intertoto Cup third round
 2000-01,12,Tottenham Hotspur,38,13,10,15,47,54,-7,49,Not Applicable
 2000-01,13,Leicester City,38,14,6,18,39,51,-12,48,Not Applicable
-2000-01,14,Middlesbrough,38,9,15,14,44,44,0,42,Not Applicable
+2000-01,14,Middlesbrough FC,38,9,15,14,44,44,0,42,Not Applicable
 2000-01,15,West Ham United,38,10,12,16,45,50,-5,42,Not Applicable
 2000-01,16,Everton FC,38,11,9,18,45,59,-14,42,Not Applicable
 2000-01,17,Derby County,38,10,12,16,37,59,-22,42,Not Applicable
@@ -30,7 +30,7 @@ Season,Pos,Team,Pld,W,D,L,GF,GA,GD,Pts,Result
 2001-02,9,Tottenham Hotspur,38,14,8,16,49,53,-4,50,Not Applicable
 2001-02,10,Blackburn Rovers,38,12,10,16,55,51,4,46,Qualification for the UEFA Cup first round[c]
 2001-02,11,Southampton FC,38,12,9,17,46,54,-8,45,Not Applicable
-2001-02,12,Middlesbrough,38,12,9,17,35,47,-12,45,Not Applicable
+2001-02,12,Middlesbrough FC,38,12,9,17,35,47,-12,45,Not Applicable
 2001-02,13,Fulham FC,38,10,14,14,36,44,-8,44,Qualification for the Intertoto Cup second round
 2001-02,14,Charlton Athletic,38,10,14,14,38,49,-11,44,Not Applicable
 2001-02,15,Everton FC,38,11,10,17,45,57,-12,43,Not Applicable
@@ -49,7 +49,7 @@ Season,Pos,Team,Pld,W,D,L,GF,GA,GD,Pts,Result
 2002-03,8,Southampton FC,38,13,13,12,43,46,-3,52,Qualification for the UEFA Cup first round[b]
 2002-03,9,Manchester City,38,15,6,17,47,54,-7,51,Qualification for the UEFA Cup qualifying round[c]
 2002-03,10,Tottenham Hotspur,38,14,8,16,51,62,-11,50,Not Applicable
-2002-03,11,Middlesbrough,38,13,10,15,48,44,4,49,Not Applicable
+2002-03,11,Middlesbrough FC,38,13,10,15,48,44,4,49,Not Applicable
 2002-03,12,Charlton Athletic,38,14,7,17,45,56,-11,49,Not Applicable
 2002-03,13,Birmingham City,38,13,9,16,41,49,-8,48,Not Applicable
 2002-03,14,Fulham FC,38,13,9,16,41,50,-9,48,Not Applicable
@@ -69,7 +69,7 @@ Season,Pos,Team,Pld,W,D,L,GF,GA,GD,Pts,Result
 2003-04,8,Bolton Wanderers,38,14,11,13,48,56,-8,53,Not Applicable
 2003-04,9,Fulham FC,38,14,10,14,52,46,6,52,Not Applicable
 2003-04,10,Birmingham City,38,12,14,12,43,48,-5,50,Not Applicable
-2003-04,11,Middlesbrough,38,13,9,16,44,52,-8,48,Qualification for the UEFA Cup first round[b]
+2003-04,11,Middlesbrough FC,38,13,9,16,44,52,-8,48,Qualification for the UEFA Cup first round[b]
 2003-04,12,Southampton FC,38,12,11,15,44,45,-1,47,Not Applicable
 2003-04,13,Portsmouth FC,38,12,9,17,47,54,-7,45,Not Applicable
 2003-04,14,Tottenham Hotspur,38,13,6,19,47,57,-10,45,Not Applicable
@@ -85,7 +85,7 @@ Season,Pos,Team,Pld,W,D,L,GF,GA,GD,Pts,Result
 2004-05,4,Everton FC,38,18,7,13,45,46,-1,61,Qualification for the Champions League third qualifying round
 2004-05,5,Liverpool FC,38,17,7,14,52,41,11,58,Qualification for the Champions League first qualifying round[a]
 2004-05,6,Bolton Wanderers,38,16,10,12,49,44,5,58,Qualification for the UEFA Cup first round[b]
-2004-05,7,Middlesbrough,38,14,13,11,53,46,7,55,Qualification for the UEFA Cup first round[b]
+2004-05,7,Middlesbrough FC,38,14,13,11,53,46,7,55,Qualification for the UEFA Cup first round[b]
 2004-05,8,Manchester City,38,13,13,12,47,39,8,52,Not Applicable
 2004-05,9,Tottenham Hotspur,38,14,10,14,47,41,6,52,Not Applicable
 2004-05,10,Aston Villa,38,12,11,15,45,52,-7,47,Not Applicable
@@ -112,7 +112,7 @@ Season,Pos,Team,Pld,W,D,L,GF,GA,GD,Pts,Result
 2005-06,11,Everton FC,38,14,8,16,34,49,-15,50,Not Applicable
 2005-06,12,Fulham FC,38,14,6,18,48,58,-10,48,Not Applicable
 2005-06,13,Charlton Athletic,38,13,8,17,41,55,-14,47,Not Applicable
-2005-06,14,Middlesbrough,38,12,9,17,48,58,-10,45,Not Applicable
+2005-06,14,Middlesbrough FC,38,12,9,17,48,58,-10,45,Not Applicable
 2005-06,15,Manchester City,38,13,4,21,43,48,-5,43,Not Applicable
 2005-06,16,Aston Villa,38,10,12,16,42,55,-13,42,Not Applicable
 2005-06,17,Portsmouth FC,38,10,8,20,37,62,-25,38,Not Applicable
@@ -130,7 +130,7 @@ Season,Pos,Team,Pld,W,D,L,GF,GA,GD,Pts,Result
 2006-07,9,Portsmouth FC,38,14,12,12,45,42,3,54,Not Applicable
 2006-07,10,Blackburn Rovers,38,15,7,16,52,54,-2,52,Qualification for the Intertoto Cup third round[b]
 2006-07,11,Aston Villa,38,11,17,10,43,41,2,50,Not Applicable
-2006-07,12,Middlesbrough,38,12,10,16,44,49,-5,46,Not Applicable
+2006-07,12,Middlesbrough FC,38,12,10,16,44,49,-5,46,Not Applicable
 2006-07,13,Newcastle United,38,11,10,17,38,47,-9,43,Not Applicable
 2006-07,14,Manchester City,38,11,9,18,29,44,-15,42,Not Applicable
 2006-07,15,West Ham United,38,12,5,21,35,59,-24,41,Not Applicable
@@ -151,7 +151,7 @@ Season,Pos,Team,Pld,W,D,L,GF,GA,GD,Pts,Result
 2007-08,10,West Ham United,38,13,10,15,42,50,-8,49,Not Applicable
 2007-08,11,Tottenham Hotspur,38,11,13,14,66,61,5,46,Qualification for the UEFA Cup first round[c]
 2007-08,12,Newcastle United,38,11,10,17,45,65,-20,43,Not Applicable
-2007-08,13,Middlesbrough,38,10,12,16,43,53,-10,42,Not Applicable
+2007-08,13,Middlesbrough FC,38,10,12,16,43,53,-10,42,Not Applicable
 2007-08,14,Wigan Athletic,38,10,10,18,34,51,-17,40,Not Applicable
 2007-08,15,Sunderland AFC,38,11,6,21,36,59,-23,39,Not Applicable
 2007-08,16,Bolton Wanderers,38,9,10,19,36,54,-18,37,Not Applicable
@@ -177,7 +177,7 @@ Season,Pos,Team,Pld,W,D,L,GF,GA,GD,Pts,Result
 2008-09,16,Sunderland AFC,38,9,9,20,34,54,-20,36,Not Applicable
 2008-09,17,Hull City,38,8,11,19,39,64,-25,35,Not Applicable
 2008-09,18,Newcastle United,38,7,13,18,40,59,-19,34,Relegation to the Football League Championship
-2008-09,19,Middlesbrough,38,7,11,20,28,57,-29,32,Relegation to the Football League Championship
+2008-09,19,Middlesbrough FC,38,7,11,20,28,57,-29,32,Relegation to the Football League Championship
 2008-09,20,West Bromwich Albion,38,8,8,22,36,67,-31,32,Relegation to the Football League Championship
 2009-10,1,Chelsea FC,38,27,5,6,103,32,71,86,Qualification for the Champions League group stage
 2009-10,2,Manchester United,38,27,4,7,86,28,58,85,Qualification for the Champions League group stage
@@ -217,7 +217,7 @@ Season,Pos,Team,Pld,W,D,L,GF,GA,GD,Pts,Result
 2010-11,16,Wigan Athletic,38,9,15,14,40,61,-21,42,Not Applicable
 2010-11,17,Wolverhampton Wanderers,38,11,7,20,46,66,-20,40,Not Applicable
 2010-11,18,Birmingham City,38,8,15,15,37,58,-21,39,Qualification for the Europa League play-off round[a]Relegation to the Football League Championship
-2010-11,19,Blackpool,38,10,9,19,55,78,-23,39,Relegation to the Football League Championship
+2010-11,19,Blackpool FC,38,10,9,19,55,78,-23,39,Relegation to the Football League Championship
 2010-11,20,West Ham United,38,7,12,19,43,70,-27,33,Relegation to the Football League Championship
 2011-12,1,Manchester City,38,28,5,5,93,29,64,89,Qualification for the Champions League group stage
 2011-12,2,Manchester United,38,28,5,5,89,33,56,89,Qualification for the Champions League group stage
@@ -314,7 +314,7 @@ Season,Pos,Team,Pld,W,D,L,GF,GA,GD,Pts,Result
 2015-16,13,Watford,38,12,9,17,40,50,-10,45,Not Applicable
 2015-16,14,West Bromwich Albion,38,10,13,15,34,48,-14,43,Not Applicable
 2015-16,15,Crystal Palace,38,11,9,18,39,51,-12,42,Not Applicable
-2015-16,16,Bournemouth,38,11,9,18,45,67,-22,42,Not Applicable
+2015-16,16,AFC Bournemouth,38,11,9,18,45,67,-22,42,Not Applicable
 2015-16,17,Sunderland AFC,38,9,12,17,48,62,-14,39,Not Applicable
 2015-16,18,Newcastle United,38,9,10,19,44,65,-21,37,Relegation to the EFL Championship
 2015-16,19,Norwich City,38,9,7,22,39,67,-28,34,Relegation to the EFL Championship
@@ -327,7 +327,7 @@ Season,Pos,Team,Pld,W,D,L,GF,GA,GD,Pts,Result
 2016-17,6,Manchester United,38,18,15,5,54,29,25,69,Qualification for the Champions League group stage[b]
 2016-17,7,Everton FC,38,17,10,11,62,44,18,61,Qualification for the Europa League third qualifying round[c]
 2016-17,8,Southampton FC,38,12,10,16,41,48,-7,46,Not Applicable
-2016-17,9,Bournemouth,38,12,10,16,55,67,-12,46,Not Applicable
+2016-17,9,AFC Bournemouth,38,12,10,16,55,67,-12,46,Not Applicable
 2016-17,10,West Bromwich Albion,38,12,9,17,43,51,-8,45,Not Applicable
 2016-17,11,West Ham United,38,12,9,17,47,64,-17,45,Not Applicable
 2016-17,12,Leicester City,38,12,8,18,48,63,-15,44,Not Applicable
@@ -337,7 +337,7 @@ Season,Pos,Team,Pld,W,D,L,GF,GA,GD,Pts,Result
 2016-17,16,Burnley FC,38,11,7,20,39,55,-16,40,Not Applicable
 2016-17,17,Watford,38,11,7,20,40,68,-28,40,Not Applicable
 2016-17,18,Hull City,38,9,7,22,37,80,-43,34,Relegation to the EFL Championship
-2016-17,19,Middlesbrough,38,5,13,20,27,53,-26,28,Relegation to the EFL Championship
+2016-17,19,Middlesbrough FC,38,5,13,20,27,53,-26,28,Relegation to the EFL Championship
 2016-17,20,Sunderland AFC,38,6,6,26,29,69,-40,24,Relegation to the EFL Championship
 2017-18,1,Manchester City,38,32,4,2,106,27,79,100,Qualification for the Champions League group stage
 2017-18,2,Manchester United,38,25,6,7,68,28,40,81,Qualification for the Champions League group stage
@@ -350,7 +350,7 @@ Season,Pos,Team,Pld,W,D,L,GF,GA,GD,Pts,Result
 2017-18,9,Leicester City,38,12,11,15,56,60,-4,47,Not Applicable
 2017-18,10,Newcastle United,38,12,8,18,39,47,-8,44,Not Applicable
 2017-18,11,Crystal Palace,38,11,11,16,45,55,-10,44,Not Applicable
-2017-18,12,Bournemouth,38,11,11,16,45,61,-16,44,Not Applicable
+2017-18,12,AFC Bournemouth,38,11,11,16,45,61,-16,44,Not Applicable
 2017-18,13,West Ham United,38,10,12,16,48,68,-20,42,Not Applicable
 2017-18,14,Watford,38,11,8,19,44,64,-20,41,Not Applicable
 2017-18,15,Brighton & Hove Albion,38,9,13,16,34,54,-20,40,Not Applicable
@@ -372,7 +372,7 @@ Season,Pos,Team,Pld,W,D,L,GF,GA,GD,Pts,Result
 2018-19,11,Watford,38,14,8,16,52,59,-7,50,Not Applicable
 2018-19,12,Crystal Palace,38,14,7,17,51,53,-2,49,Not Applicable
 2018-19,13,Newcastle United,38,12,9,17,42,48,-6,45,Not Applicable
-2018-19,14,Bournemouth,38,13,6,19,56,70,-14,45,Not Applicable
+2018-19,14,AFC Bournemouth,38,13,6,19,56,70,-14,45,Not Applicable
 2018-19,15,Burnley FC,38,11,7,20,45,68,-23,40,Not Applicable
 2018-19,16,Southampton FC,38,9,12,17,45,65,-20,39,Not Applicable
 2018-19,17,Brighton & Hove Albion,38,9,9,20,35,60,-25,36,Not Applicable
@@ -396,7 +396,7 @@ Season,Pos,Team,Pld,W,D,L,GF,GA,GD,Pts,Result
 2019-20,15,Brighton & Hove Albion,38,9,14,15,39,54,-15,41,Not Applicable
 2019-20,16,West Ham United,38,10,9,19,49,62,-13,39,Not Applicable
 2019-20,17,Aston Villa,38,9,8,21,41,67,-26,35,Not Applicable
-2019-20,18,Bournemouth,38,9,7,22,40,65,-25,34,Relegation to the EFL Championship
+2019-20,18,AFC Bournemouth,38,9,7,22,40,65,-25,34,Relegation to the EFL Championship
 2019-20,19,Watford,38,8,10,20,36,64,-28,34,Relegation to the EFL Championship
 2019-20,20,Norwich City,38,5,6,27,26,75,-49,21,Relegation to the EFL Championship
 2020-21,1,Manchester City,38,27,5,6,83,32,51,86,Qualification for the Champions League group stage
