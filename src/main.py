@@ -98,15 +98,17 @@ def new_execution():
     #print(sorted(teams))
     #print(len(teams))
     
-    # Get communities and graph
-    # Include all Leagues
+    """
+        Get communities and graph
+        MultiGraph has 188 nodes and 10357 edges after removing nodes d<30 and no 0.0 $transfers (BEST) 7/13 -> Group 1
+    """
     # MultiGraph has 188 nodes and 10357 edges after removing nodes d<30 and no 0.0 $transfers (BEST) 7/13 -> Group 1
     order_comm, graph = comm.process_community_graph_update(soccer_dict, False, 5, teams)
     
     stats = prep.average_stats() # Legacy code. Needs to be removed
     ordered = data_community(order_comm, stats, False)
     
-    # print(ordered)
+    print(ordered)
     print(graph)
     #print([e for e in graph.edges.data()])
     
@@ -115,14 +117,14 @@ def new_execution():
     #coeff = prep.get_graph_clustering_ceff(graph)
     #print(prep.sort_dictionary_by_value(coeff))
     
-    
-    
-    # Get the money dict
-    # money_dict = prep.get_dict_money_spent(graph)
 
-    # # # Calculate how much each community spends.
-    # money_dict = sc.all_community_money(money_dict, ordered)
-    # print(money_dict)
+    """ 
+        Obtain a dictionary {community : total money spent}
+        for all communities
+    """
+    money_dict = prep.get_dict_money_spent(graph)
+    money_dict = sc.all_community_money(money_dict, ordered)
+    print(money_dict)
     
     
     """
@@ -135,8 +137,8 @@ def new_execution():
     """ 
         Calculates the Pearson Correlation Coefficient for Champions League and Europa LEague Winners
     """
-    calc_pearson_winners(spent_ch, received_ch, 0)
-    calc_pearson_winners(spent_el, received_el, 1)
+    #calc_pearson_winners(spent_ch, received_ch, 0)
+    #calc_pearson_winners(spent_el, received_el, 1)
  
 
     exit()
