@@ -24,13 +24,13 @@ import math
     5   ../dataset/all.csv
 """
 
-champ_league_winners = ['Olympique Marseille', 'Ajax', 'Juventus FC', 'Manchester United',
+champ_league_winners = ['Olympique Marseille', 'Ajax Amsterdam', 'Juventus FC', 'Manchester United',
                         'FC Porto', 'Liverpool FC', 'FC Barcelona', 'AC Milan', 'Chelsea FC',
                         'Bayern Munich', 'Real Madrid', 'Borussia Dortmund', 'Inter Milan']
 
 
 europa_league_winners = ['Juventus FC', 'Inter Milan', 'AC Parma', 'Bayern Munich', 'FC Schalke 04',
-                        'Galatasaray', 'Liverpool FC', 'Feyenoord', 'FC Porto', 
+                        'Galatasaray', 'Liverpool FC', 'Feyenoord Rotterdam', 'FC Porto', 
                         'Valencia CF', 'CSKA Moscow', 'Sevilla FC', 'Zenit S-Pb', 'Shakhtar D.', 
                         'Atlético de Madrid', 'Chelsea FC', 'Manchester United',
                         'Villarreal CF', 'Eintracht Frankfurt']
@@ -76,21 +76,35 @@ def new_execution():
     # Preprocess the data 
     util = Utils()
     prep = Preprocessing()
-    
+    sc = StatsAndCommunities()
+    comm = Community()
     
     soccer_dict, teams = util.create_dict(5)
     
-    # Teams -> 240 nodes. 
+    # Teams -> 314 nodes. 
     #print(sorted(teams))
+    #print(len(teams))
     
     # Get communities and graph
-    comm = Community()
     order_comm, graph = comm.process_community_graph_update(soccer_dict, False, 5, teams)
     
+    #Top5
     # MultiGraph has 95 nodes and 6041 edges after removing nodes d<75 and no 0.0 $transfers
     # MultiGraph has 117 nodes and 7222 edges after removing nodes d<60 and no 0.0 $transfers
-    # MultiGraph has 235 nodes and 10127 edges after reomving no 0.0$ transfers
+    # MultiGraph has 235 nodes and 10127 edges after removing no 0.0$ transfers
     # MultiGraph has 224 nodes and 38040 edges after removing nodes d<75
+    
+    # inlude liga nos
+    # MultiGraph has 272 nodes and 10913 edges after removing 0.0$ transfers
+    # MultiGraph has 122 nodes and 7682 edges after removing nodes d<60 and no 0.0 $transfers
+    # MultiGraph has 139 nodes and 8449 edges after removing nodes d<50 and no 0.0 $transfers (BEST)
+    
+    #include eredivise
+    # MultiGraph has 303 nodes and 11797 edges after removing 0.0$ transfers
+    # MultiGraph has 188 nodes and 10357 edges after removing nodes d<30 and no 0.0 $transfers (BEST) 7/13 -> Group 1
+    
+    
+    
     #print([e for e in graph.edges.data()])
     
     
@@ -99,6 +113,15 @@ def new_execution():
     
     stats = prep.average_stats() # Legacy code. Needs to be removed
     ordered = data_community(order_comm, stats, False)
+    
+    
+    # Get the money dict
+    money_dict = prep.get_dict_money_spent(graph)
+
+    # # Calculate how much each community spends.
+    money_dict = sc.all_community_money(money_dict, ordered)
+    print(money_dict)
+    
     print(ordered)
     print(graph)
     exit()
