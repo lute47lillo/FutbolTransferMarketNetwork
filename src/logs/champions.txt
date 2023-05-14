@@ -1,0 +1,156 @@
+1. Spearman Rank for winners
+
+For  ['AC Milan', 'Ajax Amsterdam', 'Bayern Munich', 'Borussia Dortmund', 'Chelsea FC',
+'FC Barcelona', 'FC Porto', 'Inter Milan', 'Juventus FC', 'Liverpool FC', 'Manchester United',
+'Olympique Marseille', 'Real Madrid']
+
+and based on money spent, the Spearman Rank correlation coefficient is:
+
+  SignificanceResult(statistic=0.5823804648455101, pvalue=0.03675621795567292)
+
+
+For  ['AC Milan', 'Ajax Amsterdam', 'Bayern Munich', 'Borussia Dortmund', 'Chelsea FC',
+'FC Barcelona', 'FC Porto', 'Inter Milan', 'Juventus FC', 'Liverpool FC', 'Manchester United',
+'Olympique Marseille', 'Real Madrid']
+
+and based on money received, the Spearman Rank correlation coefficient is:
+  
+  SignificanceResult(statistic=-0.3960187160949469, pvalue=0.18039129720721345)
+
+
+
+For  ['AC Parma', 'Atlético de Madrid', 'Bayern Munich', 'CSKA Moscow',
+'Chelsea FC', 'Eintracht Frankfurt', 'FC Porto', 'FC Schalke 04',
+'Feyenoord Rotterdam', 'Galatasaray', 'Inter Milan', 'Juventus FC',
+'Liverpool FC', 'Manchester United', 'Sevilla FC', 'Shakhtar D.',
+'Valencia CF', 'Villareal CF', 'Zenit S-Pb'] 
+
+and based on money spent, the Spearman Rank correlation coefficient is:
+
+  SignificanceResult(statistic=-0.2343566623992981, pvalue=0.3341812337938067)
+
+
+For  ['AC Parma', 'Atlético de Madrid', 'Bayern Munich', 'CSKA Moscow',
+'Chelsea FC', 'Eintracht Frankfurt', 'FC Porto', 'FC Schalke 04',
+'Feyenoord Rotterdam', 'Galatasaray', 'Inter Milan', 'Juventus FC',
+'Liverpool FC', 'Manchester United', 'Sevilla FC', 'Shakhtar D.',
+'Valencia CF', 'Villareal CF', 'Zenit S-Pb']
+
+and based on money spent/received, the Spearman Rank correlation coefficient is:
+
+  SignificanceResult(statistic=-0.3049846976429222, pvalue=0.20420652327347255)
+
+
+2. Communities 
+
+A Graph with 188 teams, and 10357 transfers.
+Deleting, teams with a degree < 30. Because I want to see teams that have had more impact.
+And deleting all transfers that were either free agents, or free transfers.
+Because I'm interested in see how much money was moved.
+
+Community 1
+
+    ['Real Madrid', 'Arsenal FC', 'Rayo Vallecano', 'CD Leganés', 'RCD Espanyol Barcelona',
+    'Ajax Amsterdam', 'Getafe CF', 'Atlético de Madrid', 'Málaga CF', 'Deportivo Alavés',
+    'Chelsea FC', 'Manchester City', 'SD Eibar', 'Real Betis Balompié', 'RCD Mallorca',
+    'Everton FC', 'Deportivo de La Coruña', 'Celta de Vigo', 'UD Las Palmas', 'AS Monaco',
+    'Real Zaragoza', 'SL Benfica', 'Sporting Gijón', 'Real Sociedad', 'FC Porto', 'Levante UD',
+    'Athletic Bilbao', 'FC Barcelona', 'Sporting CP', 'Villareal CF', 'Leicester City',
+    'CD Tenerife', 'Brighton & Hove Albion', 'Paris Saint-Germain', 'CA Osasuna', 'UD Almería',
+    'Manchester United', 'Vitória Guimarães SC', 'SC Braga', 'Real Valladolid CF',
+    'Racing Santander', 'Valencia CF', 'Borussia Dortmund', 'Sevilla FC']
+
+Champions League -> 7/13
+Europa League -> 7/15 (7/15 -> but 4 are not on dataset)
+
+Community 2
+
+    ['Hertha BSC', 'Karlsruher SC', 'SC Heerenveen', '1. FC Köln', 'FC Energie Cottbus',
+    'Hamburger SV', '1.FSV Mainz 05', 'SpVgg Greuther Fürth', 'Eintracht Frankfurt',
+    'VfB Stuttgart', 'MSV Duisburg', 'Vitesse Arnhem', 'AZ Alkmaar', 'Arminia Bielefeld',
+    'TSV 1860 Munich', 'FC Groningen', 'PSV Eindhoven', 'FC Augsburg', 'FC Ingolstadt 04',
+    'SV Werder Bremen', 'TSG Hoffenheim', 'FC Hansa Rostock', 'Heracles Almelo', 'SG Dynamo Dresden',
+    'FC St. Pauli', 'Fortuna Düsseldorf', 'VfL Bochum', 'Bayern Munich', 'SC Freiburg',
+    'VfL Wolfsburg', 'FC Schalke 04', '1.FC Nuremberg', 'Hannover 96', '1.FC Kaiserslautern',
+    'Roda JC Kerkrade', 'FC Utrecht', 'Bayer 04 Leverkusen', 'Borussia Mönchengladbach',
+    'RB Leipzig', 'Twente Enschede FC', 'Union Berlin']
+
+Champions League -> 1/13
+Europa League -> 3/15 (3/15 -> but 4 are not on dataset)
+
+Community 3
+
+    ['Charlton Athletic', 'Wigan Athletic', 'Reading FC', 'Queens Park Rangers', 'Ipswich Town',
+    'Cardiff City', 'Tottenham Hotspur', 'Swansea City', 'Aston Villa', 'Wimbledon FC',
+    'Coventry City', 'Leeds United', 'Hull City', 'Newcastle United', 'Portsmouth FC',
+    'Stoke City', 'Crystal Palace', 'Nottingham Forest', 'Huddersfield Town', 'Burnley FC',
+    'Norwich City', 'AFC Bournemouth', 'Sunderland AFC', 'Wolverhampton Wanderers', 'Fulham FC',
+    'Birmingham City', 'West Ham United', 'Watford', 'Feyenoord Rotterdam', 'Middlesbrough FC',
+    'Liverpool FC', 'Bolton Wanderers', 'Sheffield Wednesday', 'Blackburn Rovers', 'Sheffield United',
+    'Southampton FC', 'West Bromwich Albion', 'Derby County']
+
+Champions League -> 1/13
+Europa League -> 2/15 (2/15 -> but 4 are not on dataset)
+
+Community 4
+
+    ['Ascoli Calcio 1898', 'Atletico Catania', 'Inter Milan', 'AS Livorno', 'Hellas Verona',
+    'Bologna FC 1909', 'Brescia Calcio', 'US Sassuolo', 'UC Sampdoria', 'Reggina Calcio',
+    'US Palermo', 'AC Perugia', 'Delfino Pescara 1936', 'AS Bari', 'Cagliari Calcio', 'FC Crotone',
+    'FC Empoli', 'AC Siena', 'Genoa 1893', 'AC Cesena', 'Atalanta', 'Vicenza Calcio', 'Juventus FC',
+    'Chievo Verona', 'AC Milan', 'Benevento Calcio', 'US Lecce', 'Torino FC', 'Spezia Calcio', 'SPAL 2013',
+    'US Salernitana 1919', 'AC Parma', 'ACF Fiorentina', 'SSC Napoli', 'SS Lazio', 'Novara Calcio 1908',
+    'Udinese Calcio', 'AS Roma']
+
+Champions League -> 3/13
+Europa League -> 3/15 (3/15 -> but 4 are not on dataset)
+
+Community 5
+
+    ['Stade Reims', 'Association Association Troyes Aube Champagne', 'AJ Auxerre', 'Olympique Lyon',
+    'AS Saint-Étienne', 'Angers SCO', 'OGC Nice', 'SM Caen', 'Granada CF', 'EA Guingamp', 'FC Nantes',
+    'Olympique Marseille', 'FC Sochaux-Montbéliard', 'FC Toulouse', 'FC Girondins Bordeaux', 'FC Metz',
+    'AS Nancy', 'RC Strasbourg Alsace ', 'US Valenciennes', 'RC Lens', 'Montpellier HSC', 'AC Le Havre',
+    'Stade Brestois', 'LOSC Lille', 'Stade Rennais FC', 'Dijon FCO', 'FC Lorient']
+
+Champions League -> 1/13
+Europa League -> 1/15 (1/15 -> but 4 are not on dataset)
+
+
+    Results:
+    Community 1:    Champions League -> 54%
+                    Europa League    -> 47%
+
+    Community 2:    Champions League -> 7.7%
+                    Europa League    -> 20%  
+
+    Community 3:    Champions League -> 7.7%
+                    Europa League    -> 13.3%
+
+    Community 4:    Champions League -> 23%
+                    Europa League    -> 20%
+
+    Community 5:    Champions League -> 7.7%
+                    Europa League    -> 6.7%   
+
+    Winners are condensed in community 1.  
+
+2.1. 
+
+- Communities money spent
+    {
+        1: 24835.604000000007,
+        2: 3966.6120000000005,
+        3: 11538.444000000001,
+        4: 14614.642999999998,
+        5: 4729.381000000001 
+    }
+
+    Between how many teams?
+
+Top 2 spending communities (1 and 4) have:
+
+    Champions League -> 77%
+    Europa League    -> 67%  
+    
+    of winners
