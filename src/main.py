@@ -91,6 +91,7 @@ def new_execution():
     prep = Preprocessing()
     sc = StatsAndCommunities()
     comm = Community()
+    ch_process = ChampionsDataProcess()
     
     soccer_dict, teams = util.create_dict(5)
     
@@ -135,11 +136,19 @@ def new_execution():
     
     
     """ 
-        Calculates the Pearson Correlation Coefficient for Champions League and Europa LEague Winners
+        Calculates the Spearman Rank Correlation Coefficient for Champions League and Europa League Winners
     """
     #calc_pearson_winners(spent_ch, received_ch, 0)
     #calc_pearson_winners(spent_el, received_el, 1)
- 
+    
+    """
+        Plot Spearman Rank Correlation Coefficient for Champions League and Europa League Winners
+    """
+    ch_process.plotting_categorical(spent_ch, 0, True)
+    ch_process.plotting_categorical(received_ch, 0, False)
+    
+    ch_process.plotting_categorical(spent_el, 1, True)
+    ch_process.plotting_categorical(received_el, 1, False)
 
     exit()
     

@@ -9,8 +9,8 @@ First things first, if I want to study the whole market for top-5 leagues. I nee
         - NOT DATA FROM Turkish or Russian League
 
 
-1. Study composition of communities for champions.
-2. Money spent on the transfer Market -> how much they have won international trophies.
+1. Study composition of communities for champions. DONE
+2. Money spent on the transfer Market -> how much they have won international trophies. DONE
 
 3. Premier League Case Study
     - Study community (Using multigraph)
