@@ -149,6 +149,7 @@ class Community:
 
         # Compute centrality
         centrality = nx.betweenness_centrality(trim_graph, k=44, normalized=True, endpoints=False)
+        print(centrality)
 
         # Run algorithm
         comm = nx.community.greedy_modularity_communities(trim_graph, weight='fee', best_n=3)

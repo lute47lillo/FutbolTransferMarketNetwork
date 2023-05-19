@@ -1,5 +1,6 @@
 """ Study teams on same community and map them to their performance across the years """
 from preprocess import Preprocessing
+from utils import Utils
 import scipy as sp
 import numpy as np
 import math
@@ -18,13 +19,13 @@ class StatsAndCommunities:
     """
 
     def study(self, communities, stats, soccer):
-        prep = Preprocessing()
+        util = Utils()
         n_com = len(communities)
         
         for i in range(n_com):
             teams = communities.get(i+1)
             
-            spent_community = prep.sub_champions_spent_community(soccer, teams, 1)
+            spent_community = util.sub_champions_spent_community(soccer, teams)
             
             sub_comm_pos = {}
             sub_comm_points = {}
@@ -37,14 +38,14 @@ class StatsAndCommunities:
                     sub_comm_pos.update({ money : avg_pos})
                     sub_comm_points.update({money:  points})
                     
-                    #print(team, "spends ", money, " million euros to achieve ", avg_pos, " average position")
-                    #print(team, "spends ", money, " million euros to achieve ", points, " points")
+                    print(team, "spends ", money, " million euros to achieve ",
+                          avg_pos, " average position and ", points, " points")
             
-            position_corr = self.calculating_pearson_corr_stats(sub_comm_pos)
+            position_corr = self.calculating_spearmanr_corr_comms(sub_comm_pos)
             print("The position - money corr. coeff. for teams ", sub_teams, " is ", position_corr, "\n")
             
             
-            points_corr = self.calculating_pearson_corr_stats(sub_comm_points)
+            points_corr = self.calculating_spearmanr_corr_comms(sub_comm_points)
             print("The points - money corr. coeff. for teams ", sub_teams, " is ", points_corr, "\n")
                     
                     
@@ -78,19 +79,27 @@ class StatsAndCommunities:
         points_corr = self.calculating_pearson_corr_stats(sub_comm_points)
         print("The points - money corr. coeff. for teams ", teams, " is ", points_corr, "\n")
         
-        
-    def calculating_pearson_corr_stats(self, data):
+    def calculating_spearmanr_corr_comms(self, data):
         # For sub-communities
         attrs = list(data.keys())
         values = list(data.values())
         
-       # For attributes study
-        # values = []
-        # attrs = []
+        y = np.array(attrs)
+        x = np.array(values)
+        corr_coeff = sp.stats.spearmanr(y, x)
+        
+        return corr_coeff
+    
+    def calculating_spearmanr_corr_stats(self, data):
+        attrs = list(data.keys())
+        
+        # For attributes study
+        values = []
+        attrs = []
 
-        # for (ts, attr) in data.values():
-        #     values.append(ts)
-        #     attrs.append(attr)
+        for (ts, attr) in data.values():
+            values.append(ts)
+            attrs.append(attr)
         
         y = np.array(attrs)
         x = np.array(values)
@@ -115,8 +124,8 @@ class StatsAndCommunities:
         n_com = len(communities)
         
         # Create an unfrozen copy of the graph and narrow by community of stats
-        unfrozen_graph = nx.Graph(graph)
-        graph = self.narrow_graph(unfrozen_graph, stats)
+        #unfrozen_graph = nx.MultiGraph(graph)
+        #graph = self.narrow_graph(unfrozen_graph, stats) # Used to get only teams on needed community
         
         # Obtain attributes of the graph community
         betw = prep.get_betweenness(graph)
@@ -126,15 +135,16 @@ class StatsAndCommunities:
         for i in range(n_com):
             
             teams = communities.get(i+1)
-            print("\nCommunity nº: ", i+1)
+            #print("\nCommunity nº: ", i+1)
             for team, (avg_pos, points) in stats.items():
                 if team in graph.nodes() and team in teams:
                     pass
+                    
                     #print(f"Betweenness Centrality {team:2} {betw[team]:.3f}")
                     #print(f"Closeness Centrality { team:2} {close[team]:.3f}")
                     #print(f"Degree Centrality {team:2} {deg_centrality[team]:.3f}\n")
         
-        #self.study_betwenneess(betw, stats)
+        self.study_betwenneess(betw, stats)
         #self.study_closenes(close, stats)
         #self.study_degree(deg_centrality, stats)
         return betw, graph
@@ -178,14 +188,14 @@ class StatsAndCommunities:
             b_pos.update({team:(avg_pos, betw[team])})
                 
                 
-        points_corr = self.calculating_pearson_corr_stats(b_points)
-        print("The points - betwenneess corr. coeff. for teams is ", points_corr, "\n")
+        points_corr = self.calculating_spearmanr_corr_stats(b_points)
+        print("The points - betwenness corr. coeff. for teams is ", points_corr, "\n")
         
-        position_corr = self.calculating_pearson_corr_stats(b_pos)
-        print("The position - betwenneess corr. coeff. for teams is ", position_corr, "\n")
+        position_corr = self.calculating_spearmanr_corr_stats(b_pos)
+        print("The position - betwenness corr. coeff. for teams is ", position_corr, "\n")
         
-        # self.plotting_categorical(b_points,  "Points", "Betwenneess")
-        # self.plotting_categorical(b_pos,  "Avg. Position", "Betwenneess")
+        #self.plotting_categorical(b_points,  "Points", "Betwenneess")
+        #self.plotting_categorical(b_pos,  "Avg. Position", "Betwenneess")
         
     def study_closenes(self, close, stats):
         b_points = {}
@@ -230,7 +240,7 @@ class StatsAndCommunities:
         graph = nx.Graph(graph)
 
         #print([e for e in graph.edges.data()])
-        print(graph)
+        #print(graph)
         
         omega = algorithms.smallworld.omega(graph, niter=5, nrand=8, seed=4572321)
         return omega
@@ -249,8 +259,6 @@ class StatsAndCommunities:
         for (ts, attr) in data.values():
             values.append(ts)
             attrs.append(attr)
-            
-        print(len(attrs))
         
         df = pd.DataFrame(list(zip(values, attrs)),
                columns =['Value', 'Attribute'])

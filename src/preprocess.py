@@ -73,10 +73,6 @@ class Preprocessing:
             
             # Remove double edges (Ex: 2 Transactions happen, in and out. Keep only out transactions)
             if ((seller, buyer), (player, fee_cleaned, year)) not in soccer_dict.items():
-                # if player == 'Cristiano Ronaldo':
-                #     print(seller, buyer, fee_cleaned, year)
-                #     print(type(seller), type(buyer), type(fee_cleaned), type(year))
-                #if int(year) >= 2000: # Premier League Data
                 if isinstance(fee_cleaned, str):
                     fee_cleaned = float(fee_cleaned)
                 if math.isnan(fee_cleaned):
@@ -95,24 +91,6 @@ class Preprocessing:
             M.append(money)
         
         return T, M
-
-    """ Helper Function that maps International Champions names on dictionary with different names """
-    def dictionary_name_mapping(self, old, mapping):
-        
-        # Fix dictionary naming 
-        soccer = {}
-        for ((seller, buyer), (fee_cleaned, player, year)) in old.items():
-            if seller in mapping: # it is a key
-                seller = mapping.get(seller)
-                
-            if buyer in mapping:
-                buyer = mapping.get(buyer)
-
-            soccer.update({(seller, buyer):(fee_cleaned, player, year)})
-        return soccer
-    
-    def get_universal_mapping(self):
-        return universal_mapping
             
     """ Helper function that sorts dictionary by key alphabetically"""
     def sort_dictionary(self, unsorted):
@@ -128,32 +106,43 @@ class Preprocessing:
         sort = sorted(unsorted.items(), key=lambda x:x[1])
         return sort
     
-    """ Creates a sub-community of international champions teams - money spent"""
-    def sub_champions_spent_community(self, soccer, champs):
+            
+    """ 
+        Creates a sub-community of teams - money spent
+        Given 
+            soccer: dict -> {(seller, buyer): transfer_list},
+            where transfer_list is a list of tuples of all transfers between seller -> buyer
+            
+                transfer_list: list -> [(player, fee, year)]
+                
+            teams: list of teams of community
+            
+        Returns
+            spent: dict -> {team : total spent}
+    """
+    def spent_community_multi(self, soccer, teams):
         
         spent = {}
-        for ((seller, buyer), (player, fee_cleaned, year)) in soccer.items():
-            if buyer in champs:
-                
-                if math.isnan(fee_cleaned):
-                    fee = 0.0
-                else:
-                    fee = float(fee_cleaned)
+        for ((seller, buyer), transfer_list) in soccer.items():
+            if buyer in teams:
+                for transfer in transfer_list:
+                    player, fee_cleaned, year = transfer 
                         
-                # Update spent dictionary
-                if buyer not in spent:
-                    spent.update({ buyer : fee })
-                else:
-                    current_spent = spent.get(buyer)
-                    spent.update({ buyer : (fee + current_spent) })
-                    
+                    # Update spent dictionary
+                    if buyer not in spent:
+                        spent.update({ buyer : fee_cleaned })
+                    else:
+                        current_spent = spent.get(buyer)
+                        spent.update({ buyer : (fee_cleaned + current_spent) })
+                        
+        spent = self.sort_dictionary(spent)    
         #print(spent)
         # for k, v in spent.items():
         #     print(k, " spent ", v)
         
-        spent = self.sort_dictionary(spent)
         return spent
-            
+    
+    
     """ Creates a sub-community of international champions teams - money received"""        
     def sub_champions_received_community(self, soccer, champs, mapp):
         if mapp == 0:
@@ -240,7 +229,7 @@ class Preprocessing:
     
     def get_betweenness(self, graph):
         #print("Betweenness")
-        b = nx.betweenness_centrality(graph, k=43, normalized=True, endpoints=True)
+        b = nx.betweenness_centrality(graph, k=44, normalized=True, endpoints=True)
         return b
         
     def get_closeness(self, graph):
@@ -302,11 +291,11 @@ class Preprocessing:
     def get_money_community(self, stats):
         mon = {}
         for t, m in stats.items():
-            if m <= 200:
+            if m <= 300:
                 mon.update({t:4})
-            elif m > 200 and m <= 500:
+            elif m > 300 and m <= 650:
                 mon.update({t:3})
-            elif m > 500 and m <= 800:
+            elif m > 650 and m <= 1150:
                 mon.update({t:2})
             else:
                 mon.update({t:1})

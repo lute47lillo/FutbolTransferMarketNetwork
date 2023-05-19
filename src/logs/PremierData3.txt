@@ -1,0 +1,292 @@
+1. Communities formed on Premier League
+
+MultiGraph with 44 nodes and 1371 edges
+
+Community 1
+
+    ['Charlton Athletic', 'Fulham FC', 'Derby County', 'Hull City', 'Tottenham Hotspur',
+    'Huddersfield Town', 'AFC Bournemouth', 'Watford', 'Newcastle United', 'Stoke City',
+    'Middlesbrough FC', 'Burnley FC', 'Sheffield United', 'Bradford City', 'West Ham United',
+    'Norwich City', 'Wolverhampton Wanderers', 'Swansea City', 'Bolton Wanderers', 'Portsmouth FC']
+
+Community 2
+
+    ['Ipswich Town', 'Southampton FC', 'Sunderland AFC', 'Coventry City', 'Liverpool FC', 'Birmingham City',
+    'Queens Park Rangers', 'Cardiff City', 'Crystal Palace', 'Wigan Athletic', 'West Bromwich Albion',
+    'Blackburn Rovers', 'Blackpool FC', 'Reading FC']
+
+Community 3
+
+    ['Arsenal FC', 'Chelsea FC', 'Leeds United', 'Aston Villa', 'Manchester United',
+    'Leicester City', 'Brentford FC', 'Brighton & Hove Albion', 'Everton FC', 'Manchester City']
+
+
+2. Performance against community
+
+Position communities
+
+    Community 1 (Positions 1-6) 5 teams
+
+        ['Arsenal FC', 'Chelsea FC', 'Liverpool FC', 'Manchester City', 'Manchester United']
+
+    Community 2 (Positions 7-17) 31 teams 
+
+        ['AFC Bournemouth', 'Aston Villa', 'Birmingham City', 'Blackburn Rovers',
+        'Bolton Wanderers', 'Brentford FC', 'Brighton & Hove Albion', 'Burnley FC',
+        'Charlton Athletic', 'Crystal Palace', 'Everton FC', 'Fulham FC', 'Ipswich Town',
+        'Leeds United', 'Leicester City', 'Middlesbrough FC', 'Newcastle United', 'Norwich City'
+        'Portsmouth FC', 'Reading FC', 'Sheffield United', 'Southampton FC', 'Stoke City', 'Sunderland AFC',
+        'Swansea City', 'Tottenham Hotspur', 'Watford', 'West Bromwich Albion', 'West Ham United',
+        'Wigan Athletic', 'Wolverhampton Wanderers']
+
+    Community 3 (Positions 18-20) 8 teams 
+
+        ['Blackpool FC', 'Bradford City', 'Cardiff City', 'Coventry City', 'Derby County',
+        'Huddersfield Town', 'Hull City', 'Queens Park Rangers']
+
+    - Based on modularity, how many on position groups:
+
+    Community 1 (based on modularity) has:
+
+        0/20 on Community_pos 1 -> 0%
+        16/20 on Community_pos 2 -> 80%
+        4/20 on Community_pos 3 -> 20%
+
+    Community 2 (based on modularity) has:
+
+        1/14 on Community_pos 1 -> 7%
+        9/14 on Community_pos 2 -> 64%
+        4/14 on Community_pos 3 -> 29%
+
+    Community 3 (based on modularity) has:
+
+        4/10 on Community_pos 1 ->40%
+        6/10 on Community_pos 2 -> 60%
+        0/10 on Community_pos 3 -> 0%
+
+
+    - Based on position groups, how many on modularity communities:
+
+    Community 1 (1-6) has:
+
+        0/5 on Community_mod 1 -> 0%
+        1/5 on Community_mod 2 -> 20%
+        4/5 on Community_mod 3 -> 80%
+
+    Community 2 (7/17) has:
+
+        16/31 on Community_mod 1 -> 52%
+        9/31 on Community_mod 2 -> 29%
+        6/31 on Community_mod 3 -> 19%
+
+    Community 3  (18-20) has:
+
+        4/8 on Community_mod 1 -> 50%
+        4/8 on Community_mod 2 -> 50%
+        0/8 on Community_mod 3 -> 0%
+
+    Notes:
+        High performing teams share community (based on modularity).
+        Average teams are concentrated in one community, but spread.
+        Low performing are divided equally between 2 larger communities
+
+Community 1
+
+    ['Charlton Athletic', 'Fulham FC', 'Derby County', 'Hull City', 'Tottenham Hotspur',
+    'Huddersfield Town', 'AFC Bournemouth', 'Watford', 'Newcastle United', 'Stoke City',
+    'Middlesbrough FC', 'Burnley FC', 'Sheffield United', 'Bradford City', 'West Ham United',
+    'Norwich City', 'Wolverhampton Wanderers', 'Swansea City', 'Bolton Wanderers', 'Portsmouth FC']
+
+Community 2
+
+    ['Ipswich Town', 'Southampton FC', 'Sunderland AFC', 'Coventry City', 'Liverpool FC', 'Birmingham City',
+    'Queens Park Rangers', 'Cardiff City', 'Crystal Palace', 'Wigan Athletic', 'West Bromwich Albion',
+    'Blackburn Rovers', 'Blackpool FC', 'Reading FC']
+
+Community 3
+
+    ['Arsenal FC', 'Chelsea FC', 'Leeds United', 'Aston Villa', 'Manchester United',
+    'Leicester City', 'Brentford FC', 'Brighton & Hove Albion', 'Everton FC', 'Manchester City']
+
+
+3. Group teams by money spent on the league. 
+
+    Group 1 ($ > 1150 Euros)
+    ['Arsenal FC', 'Chelsea FC', 'Liverpool FC', 'Manchester City', 'Manchester United',
+    'Tottenham Hotspur', 'West Ham United']
+
+    Group 2 ($ > 650 and $ <= 1150)
+    ['Aston Villa', 'Everton FC', 'Leicester City', 'Newcastle United', 'Southampton FC']
+
+    Group 3 ($ < 650 and $ >= 300)
+    ['AFC Bournemouth', 'Brighton & Hove Albion', 'Crystal Palace', 'Fulham FC', 'Leeds United',
+    'Middlesbrough FC', 'Stoke City', 'Sunderland AFC', 'Watford', 'West Bromwich Albion', 'Wolverhampton Wanderers']
+
+    Group 4 ($ < 300)
+    ['Birmingham City', 'Blackburn Rovers', 'Blackpool FC', 'Bolton Wanderers', 'Bradford City',
+    'Brentford FC', 'Burnley FC', 'Cardiff City', 'Charlton Athletic', 'Coventry City', 'Derby County',
+    'Huddersfield Town', 'Hull City', 'Ipswich Town', 'Norwich City', 'Portsmouth FC', 'Queens Park Rangers',
+    'Reading FC', 'Sheffield United', 'Swansea City', 'Wigan Athletic']
+
+
+    From Money Groups (There are x/len(money_group) in community y from modularity)
+    Group 1
+        Community 1 ->  1/7     14%
+        Coomunity 2 ->  1/7     14%
+        Community 3 ->  5/7     72%
+
+    Group 2
+        Community 1 ->  1/5     20%
+        Coomunity 2 ->  1/5     20%
+        Community 3 ->  3/5     60%
+
+    Group 3
+        Community 1 ->  6/11    55%
+        Coomunity 2 ->  4/11    36%
+        Community 3 ->  1/11    9%
+
+    Group 4
+        Community 1 ->  11/21   52%
+        Coomunity 2 ->  9/21    43%
+        Community 3 ->  1/21    5%
+
+    Notes:
+        Teams with medium to high tend to transfer more between themselves 8/12 are in community 3 67%
+            - Groups 1 and 2.
+        Teams with medium to low are spread out between 2 predominant communities (1 and 2). 
+        With barely contact with community 3.
+
+
+3.1 Group teams by money spent overall.
+    - 
+
+
+
+4. Betweenness Centrality per team per community
+
+    Community nº:  1
+        Betweenness Centrality AFC Bournemouth 0.051
+        Betweenness Centrality Bolton Wanderers 0.055
+        Betweenness Centrality Bradford City 0.046
+        Betweenness Centrality Burnley FC 0.051
+        Betweenness Centrality Charlton Athletic 0.053
+        Betweenness Centrality Derby County 0.051
+        Betweenness Centrality Fulham FC 0.056
+        Betweenness Centrality Huddersfield Town 0.047
+        Betweenness Centrality Hull City 0.056
+        Betweenness Centrality Middlesbrough FC 0.066
+        Betweenness Centrality Newcastle United 0.064
+        Betweenness Centrality Norwich City 0.055
+        Betweenness Centrality Portsmouth FC 0.052
+        Betweenness Centrality Sheffield United 0.050
+        Betweenness Centrality Stoke City 0.054
+        Betweenness Centrality Swansea City 0.055
+        Betweenness Centrality Tottenham Hotspur 0.054
+        Betweenness Centrality Watford 0.049
+        Betweenness Centrality West Ham United 0.057
+        Betweenness Centrality Wolverhampton Wanderers 0.051
+
+    Community nº:  2
+        Betweenness Centrality Birmingham City 0.059
+        Betweenness Centrality Blackburn Rovers 0.061
+        Betweenness Centrality Blackpool FC 0.046
+        Betweenness Centrality Cardiff City 0.048
+        Betweenness Centrality Coventry City 0.046
+        Betweenness Centrality Crystal Palace 0.060
+        Betweenness Centrality Ipswich Town 0.047
+        Betweenness Centrality Liverpool FC 0.060
+        Betweenness Centrality Queens Park Rangers 0.055
+        Betweenness Centrality Reading FC 0.052
+        Betweenness Centrality Southampton FC 0.056
+        Betweenness Centrality Sunderland AFC 0.055
+        Betweenness Centrality West Bromwich Albion 0.055
+        Betweenness Centrality Wigan Athletic 0.052
+
+    Community nº:  3
+        Betweenness Centrality Arsenal FC 0.055
+        Betweenness Centrality Aston Villa 0.068
+        Betweenness Centrality Brentford FC 0.047
+        Betweenness Centrality Brighton & Hove Albion 0.053
+        Betweenness Centrality Chelsea FC 0.053
+        Betweenness Centrality Everton FC 0.054
+        Betweenness Centrality Leeds United 0.055
+        Betweenness Centrality Leicester City 0.056
+        Betweenness Centrality Manchester City 0.052
+        Betweenness Centrality Manchester United 0.050
+
+(WHY Spearman: Consider Spearman’s rank order correlation when you have pairs of continuous variables
+and the relationships between them don’t follow a straight line, or you have pairs of ordinal data)
+
+The data on points - betwenness using Spearman Rank Correlation shows that:
+
+    The points - betwenneess corr. coeff. for teams is
+        SignificanceResult(
+            statistic=0.5850100430003556,
+            pvalue=3.038904536692636e-05
+        ) 
+
+    The position - betwenneess corr. coeff. for teams is
+        SignificanceResult(
+            statistic=-0.38459960674971483,
+            pvalue=0.009946224839354176
+        ) 
+
+    The more points
+
+5. Correlations of Teams in Premier league
+
+    Community 1
+    ['AFC Bournemouth', 'Bolton Wanderers', 'Bradford City', 'Burnley FC', 'Charlton Athletic',
+    'Derby County', 'Fulham FC', 'Huddersfield Town', 'Hull City', 'Middlesbrough FC', 'Newcastle United',
+    'Norwich City', 'Portsmouth FC', 'Sheffield United', 'Stoke City', 'Swansea City', 'Tottenham Hotspur',
+    'Watford', 'West Ham United', 'Wolverhampton Wanderers']
+
+    The position - money corr. coeff. for teams
+    is  SignificanceResult(
+        statistic=-0.577129663783995,
+        pvalue=0.007714192577744301
+    ) 
+
+    The points - money corr. coeff. for teams
+    is
+    SignificanceResult(
+        statistic=0.7122979067096435,
+        pvalue=0.00042574960567962565
+    ) 
+
+    Community 2
+    ['Birmingham City', 'Blackburn Rovers', 'Blackpool FC', 'Cardiff City', 'Coventry City',
+    'Crystal Palace', 'Ipswich Town', 'Liverpool FC', 'Queens Park Rangers', 'Reading FC',
+    'Southampton FC', 'Sunderland AFC', 'West Bromwich Albion', 'Wigan Athletic']
+
+    The position - money corr. coeff. for teams  
+    
+    is  SignificanceResult(
+        statistic=-0.5680303989457115,
+         pvalue=0.034080373357778665
+    ) 
+
+    The points - money corr. coeff. for teams
+    
+    is  SignificanceResult(
+        statistic=0.9252747252747253,
+        pvalue=2.1365703496108153e-06
+    ) 
+
+    Community 3
+    ['Arsenal FC', 'Aston Villa', 'Brentford FC', 'Brighton & Hove Albion', 'Chelsea FC',
+    'Everton FC', 'Leeds United', 'Leicester City', 'Manchester City', 'Manchester United']
+
+    The position - money corr. coeff. for teams  
+    
+    is  SignificanceResult(
+        statistic=-0.8902604526458922,
+        pvalue=0.0005547038179406103
+    ) 
+
+    The points - money corr. coeff. for teams  
+    
+    is  SignificanceResult(
+        statistic=0.9393939393939393,
+        pvalue=5.484052998513666e-05
+    ) 

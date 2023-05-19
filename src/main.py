@@ -169,7 +169,8 @@ def new_execution():
     prem_order_comm, prem_graph = comm.process_community_graph_update(prem_soccer, False, 3, prem_teams)
     
     prem_ordered = data_community(prem_order_comm, prem_stats, False)
-    print(prem_ordered)
+    #print(prem_ordered)
+    #print([e for e in prem_graph.edges.data()])
     print(prem_graph)
     
     
@@ -181,101 +182,32 @@ def new_execution():
     
     """
     pos_com_idx, points_pos_idx = prep.organize_teams(prem_stats)
-    print("\nThe pos_com_idx: ", pos_com_idx)
-    print("\nThe points_com_idx: ", points_pos_idx)
+    # print("\nThe pos_com_idx: ", pos_com_idx)
+    # print("\nThe points_com_idx: ", points_pos_idx)
     
-    # Get ordered communities for both avg_pos, and total points
-    pos_ordered = deconstruct_com_idx(pos_com_idx)
-    points_ordered = deconstruct_com_idx(points_pos_idx)
+    # # Get ordered communities for both avg_pos, and total points
+    # pos_ordered = deconstruct_com_idx(pos_com_idx)
+    # points_ordered = deconstruct_com_idx(points_pos_idx)
     
-    print("\n The position communities are: ", pos_ordered)
-    print("\n The points communities are: ", points_ordered)
-    
-    
-    
-
-    exit()
-    
-    
-def main(args):
-    
-    if args:
-        new_execution()
-        
-    # Preprocess the data 
-    prep = Preprocessing()
-    """
-        'create_dict' function from Preprocessing
-        Given Index 0-5
-        Returns dictionary of type -> (seller, buyer) : (player, fee, year), *Optional, also returns list of teams of domestic league
-    """
-    soccer, teams = prep.create_dict(5)
-    
-    teams = sorted(teams)
-    mapping = prep.get_universal_mapping()
-    
-    
-    """
-        Given a historical classification dataset
-        Return a stats dictionary {team : average position, total points}
-        
-        & 
-        
-        Given an ordered community from ONLY Premier league and ALL leagues
-        Map Relationship to results
-    
-    """
-    comm = Community()
-    sc = StatsAndCommunities()
-    stats = prep.average_stats()
- 
- 
-    soccer = prep.dictionary_name_mapping(soccer, mapping)
-    order_comm, trimmed_graph = comm.process_community_graph(soccer, False, 5, teams)
-    
-    # # # Print ordered communites (True -> Trim community given stats dicitonary)
-    
-    ordered = data_community(order_comm, stats, False)
-    
-   
-    #print(ordered)
-    #print(trimmed_graph)
-    #print([e for e in trimmed_graph.edges.data()])
-
-    
-    """
-        Given community index creation of based performance teams:
-        Average position
-        Total Money spent within community
-        Plot them,
-    
-    """
-    '''pos_com_idx, points_pos_idx = prep.organize_teams(stats)
-    print("The pos_com_idx: ", pos_com_idx)
-    print("\nThe points_com_idx: ", points_pos_idx)
-    
-    # Get ordered communities for both avg_pos, and total points
-    pos_ordered = deconstruct_com_idx(pos_com_idx)
-    points_ordered = deconstruct_com_idx(points_pos_idx)
-    
-    print("\n The position communities are: ", pos_ordered)
-    print("\n The points communities are: ", points_ordered)'''
-    
-    # Plot the communities wrt betw centrality, and their pos, or total points community index
-    # btw_centr, graph = sc.community_attributes(stats, ordered, trimmed_graph)
-    # comm.plot_community(graph, pos_com_idx, btw_centr, 6)
+    # print("\n The position communities are: ", pos_ordered)
+    # print("\n The points communities are: ", points_ordered)
     
     """ 
         Obtain the community total spent of a team within a sub-community
         Example: Premier league (seasons 2000 - 2022)
-        stats -> Teams : avg_pos, total points
-        soccer -> dict ({(seller, buyer):(fee_cleaned, player, year)})
+        prem_teams -> list teams of domestic league
+        prem_soccer -> dict ({(seller, buyer):(fee_cleaned, player, year)})
     """
-    # champs = list(stats.keys())
-    # spent = prep.sub_champions_spent_community(soccer, champs, 0)
+    # spent = util.sub_champions_spent_community(prem_soccer, prem_teams)
     # money_comm_idx = prep.get_money_community(spent)
     # money_comm_idx = deconstruct_com_idx(money_comm_idx)
     # print(money_comm_idx)
+    
+    """
+        Study Betweenness centrality of teams in the given community.
+        (There's an option to study both degree and centrality)
+    """
+    # btw_centr, graph = sc.community_attributes(prem_stats, prem_ordered, prem_graph)
     
     """
         Given the statistics and the soccer prepped dictionary, and the ordered communities based on modularity.
@@ -283,29 +215,19 @@ def main(args):
         Return
             sc.study -> Correlation between performance and sub-communites
     """
-    
-    # sc.study(ordered, stats, soccer)
-    # sc.whole_league_community(stats, soccer)
-    # print("Premier League ordered communites :",  ordered)
-    
-    """
-        Study the Betweenness, closeness centrality and degree centrality of a particular community.
-        Compare it to their overall performance (stats)
-    
-    """
-    # btw_centr, graph = sc.community_attributes(stats, ordered, trimmed_graph)
-    # """ Helper function to create a community index {team : comm_idx} based on a given community (ordered)"""
-    #community_index = prep.create_com_index(ordered)
-    
-    # """ Plot communities """
-    #comm.plot_community(graph, community_index, btw_centr, 3)
-    
-    #btw_centr = prep.sort_dictionary_by_value(btw_centr)
-    #print(btw_centr)
+    # sc.study(prem_ordered, prem_stats, prem_soccer)
     
     """ Obtain omega value to calculate the small-world property of the given graph"""
-    # omega = sc.obtain_omega_small_world(trimmed_graph)
-    # print(omega)
+    omega = sc.obtain_omega_small_world(prem_graph)
+    print(omega)
+    
+    exit()
+    
+    
+def main(args):
+    
+    if args:
+        new_execution()
     
     
     """ Communities
@@ -375,21 +297,4 @@ def main(args):
 
 main(True)
 
-"""
-    TODO:   
-    1. Create A Dictionary by year {team : {list of position of players transferred into team} }
-        - Compare to following season records.
-        - Are teams getting more cbs, strikers, gks... doing better or worse?
-
-    2. Relegation Study:
-        From dataset, collect teams in 18,19,20th position -> Relegation.
-        Collect teams in 7th - 17th position -> Nothing obtained.
-        Create a dictionary, of those teams : how many relegations, year of relegation. Now, go to transfer_market dataset (Prem + Championship example).
-        Create a graph where nodes are teams that have been relegated, and study that spending community.
-        Do the same for teams on 7th - 17th position. How have they spent that money, have they spent more after getting relegated?
-        
-    3. Obtain LaLiga dataset as the one of Premier LEague.
-    
-    4. Get The league, obtain nodes with highest attributes, map to the results
-"""
 

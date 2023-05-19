@@ -13,7 +13,12 @@ First things first, if I want to study the whole market for top-5 leagues. I nee
 2. Money spent on the transfer Market -> how much they have won international trophies. DONE
 
 3. Premier League Case Study
-    - Study community (Using multigraph)
+    - Study community (Using multigraph) DONE
+    - Group teams by money spent overall and in own league:
+        1. How much percentage of in-league vs total spent?
+        2. Do worse teams spend more within same league?
+        3. Compare that to results of small - world and btw centrality
+
 
 4. Small-world for all 7 leagues
     - Small World -> for adjacent pair of leagues. (Prem-LaLiga) ... 21 different combinations
@@ -21,6 +26,10 @@ First things first, if I want to study the whole market for top-5 leagues. I nee
 5. Betwenness centrality
     - Whole League
     - Case Study: Premier League
+
+6. Create A Dictionary by year {team : {list of position of players transferred into team} }
+        - Compare to following season records.
+        - Are teams getting more cbs, strikers, gks... doing better or worse?
 
 
 
