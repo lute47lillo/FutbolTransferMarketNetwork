@@ -289,4 +289,9 @@ The data on points - betwenness using Spearman Rank Correlation shows that:
     is  SignificanceResult(
         statistic=0.9393939393939393,
         pvalue=5.484052998513666e-05
-    ) 
+    )
+
+
+6. Omega-world value
+
+    w = 0.02263442745588773

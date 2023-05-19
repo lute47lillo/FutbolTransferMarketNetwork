@@ -240,7 +240,7 @@ class StatsAndCommunities:
         graph = nx.Graph(graph)
 
         #print([e for e in graph.edges.data()])
-        #print(graph)
+        print(graph)
         
         omega = algorithms.smallworld.omega(graph, niter=5, nrand=8, seed=4572321)
         return omega
