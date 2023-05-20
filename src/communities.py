@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from networkx.algorithms import approximation as approx
 import itertools
 from stats_comm import StatsAndCommunities
+from utils import Utils
 import math
 
 
@@ -25,7 +26,7 @@ class Community:
         fig, ax = plt.subplots(figsize=(20, 15))
         pos = nx.spring_layout(graph, k=0.15, seed=4572321)
         node_color = [com_index[n] for n in graph]
-        node_size = [v * 3500 for v in centrality.values()]
+        node_size = [v * 2000 for v in centrality.values()]
         nx.draw_networkx(
             graph,
             pos=pos,
@@ -120,7 +121,7 @@ class Community:
         Refined MultiGraph dictionary. UTILS()
     """
     def process_community_graph_update(self, soccer_dict, is_plotting, title_text, teams):
-        
+        util = Utils()
         trim_graph = nx.MultiGraph() # MultiGraph will hold parallel edges, but for the study we've done so far, that's not relevant.
         trim_graph.add_nodes_from(teams)
 
@@ -146,7 +147,8 @@ class Community:
         # print(largest_component)
 
         # Compute centrality
-        centrality = nx.betweenness_centrality(trim_graph, k=31, normalized=False, endpoints=False)
+        centrality = nx.betweenness_centrality(trim_graph, k=44, normalized=False, endpoints=False)
+        centrality = util.normalize_btw(centrality)
 
         # Run algorithm
         comm = nx.community.greedy_modularity_communities(trim_graph, weight='fee', best_n=5)

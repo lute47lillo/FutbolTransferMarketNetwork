@@ -168,9 +168,9 @@ def new_execution():
     prem_stats = prep.average_stats()
     prem_teams = list(prem_stats.keys())
 
-    # prem_order_comm, prem_graph = comm.process_community_graph_update(prem_soccer, False, 3, prem_teams)
+    prem_order_comm, prem_graph = comm.process_community_graph_update(prem_soccer, True, 3, prem_teams)
     
-    # prem_ordered = data_community(prem_order_comm, prem_stats, False)
+    prem_ordered = data_community(prem_order_comm, prem_stats, False)
     #print(prem_ordered)
     #print([e for e in prem_graph.edges.data()])
     #print(prem_graph)
@@ -223,18 +223,17 @@ def new_execution():
     # sc.study(prem_ordered, prem_stats, prem_soccer)
     
     """ Obtain omega value to calculate the small-world property of the given graph"""
-    league_soccer, league_teams = util.create_dict(6)
-    #league_teams = list(league_soccer.keys())
-    print(len(league_teams))
+    # league_soccer, league_teams = util.create_dict(6)
+    # print(len(league_teams))
     
-    league_order_comm, league_graph = comm.process_community_graph_update(league_soccer, False, 3, league_teams)
+    # league_order_comm, league_graph = comm.process_community_graph_update(league_soccer, False, 3, league_teams)
     
-    league_ordered = data_community(league_order_comm, prem_stats, False)
-    print(league_ordered)
-    print(league_graph)
+    # league_ordered = data_community(league_order_comm, prem_stats, False)
+    # print(league_ordered)
+    # print(league_graph)
     
-    omega = sc.obtain_omega_small_world(league_graph)
-    print(omega)
+    # omega = sc.obtain_omega_small_world(league_graph)
+    # print(omega)
     
     exit()
     
