@@ -164,55 +164,123 @@ Community 3
 
 4. Betweenness Centrality per team per community
 
-    Community nº:  1
-        Betweenness Centrality AFC Bournemouth 0.051
-        Betweenness Centrality Bolton Wanderers 0.055
-        Betweenness Centrality Bradford City 0.046
-        Betweenness Centrality Burnley FC 0.051
-        Betweenness Centrality Charlton Athletic 0.053
-        Betweenness Centrality Derby County 0.051
-        Betweenness Centrality Fulham FC 0.056
-        Betweenness Centrality Huddersfield Town 0.047
-        Betweenness Centrality Hull City 0.056
-        Betweenness Centrality Middlesbrough FC 0.066
-        Betweenness Centrality Newcastle United 0.064
-        Betweenness Centrality Norwich City 0.055
-        Betweenness Centrality Portsmouth FC 0.052
-        Betweenness Centrality Sheffield United 0.050
-        Betweenness Centrality Stoke City 0.054
-        Betweenness Centrality Swansea City 0.055
-        Betweenness Centrality Tottenham Hotspur 0.054
-        Betweenness Centrality Watford 0.049
-        Betweenness Centrality West Ham United 0.057
-        Betweenness Centrality Wolverhampton Wanderers 0.051
+    
+Community nº:  1
+Betweenness Centrality AFC Bournemouth 0.230
+Betweenness Centrality Bolton Wanderers 0.407
+Betweenness Centrality Bradford City 0.010
+Betweenness Centrality Burnley FC 0.256
+Betweenness Centrality Charlton Athletic 0.338
+Betweenness Centrality Derby County 0.239
+Betweenness Centrality Fulham FC 0.449
+Betweenness Centrality Huddersfield Town 0.077
+Betweenness Centrality Hull City 0.440
+Betweenness Centrality Middlesbrough FC 0.913
+Betweenness Centrality Newcastle United 0.814
+Betweenness Centrality Norwich City 0.418
+Betweenness Centrality Portsmouth FC 0.259
+Betweenness Centrality Sheffield United 0.206
+Betweenness Centrality Stoke City 0.373
+Betweenness Centrality Swansea City 0.415
+Betweenness Centrality Tottenham Hotspur 0.358
+Betweenness Centrality Watford 0.136
+Betweenness Centrality West Ham United 0.496
+Betweenness Centrality Wolverhampton Wanderers 0.224
 
-    Community nº:  2
-        Betweenness Centrality Birmingham City 0.059
-        Betweenness Centrality Blackburn Rovers 0.061
-        Betweenness Centrality Blackpool FC 0.046
-        Betweenness Centrality Cardiff City 0.048
-        Betweenness Centrality Coventry City 0.046
-        Betweenness Centrality Crystal Palace 0.060
-        Betweenness Centrality Ipswich Town 0.047
-        Betweenness Centrality Liverpool FC 0.060
-        Betweenness Centrality Queens Park Rangers 0.055
-        Betweenness Centrality Reading FC 0.052
-        Betweenness Centrality Southampton FC 0.056
-        Betweenness Centrality Sunderland AFC 0.055
-        Betweenness Centrality West Bromwich Albion 0.055
-        Betweenness Centrality Wigan Athletic 0.052
+Community nº:  2
+Betweenness Centrality Birmingham City 0.585
+Betweenness Centrality Blackburn Rovers 0.652
+Betweenness Centrality Blackpool FC 0.000
+Betweenness Centrality Cardiff City 0.086
+Betweenness Centrality Coventry City 0.037
+Betweenness Centrality Crystal Palace 0.624
+Betweenness Centrality Ipswich Town 0.055
+Betweenness Centrality Liverpool FC 0.650
+Betweenness Centrality Queens Park Rangers 0.395
+Betweenness Centrality Reading FC 0.270
+Betweenness Centrality Southampton FC 0.443
+Betweenness Centrality Sunderland AFC 0.413
+Betweenness Centrality West Bromwich Albion 0.424
+Betweenness Centrality Wigan Athletic 0.267
 
-    Community nº:  3
-        Betweenness Centrality Arsenal FC 0.055
-        Betweenness Centrality Aston Villa 0.068
-        Betweenness Centrality Brentford FC 0.047
-        Betweenness Centrality Brighton & Hove Albion 0.053
-        Betweenness Centrality Chelsea FC 0.053
-        Betweenness Centrality Everton FC 0.054
-        Betweenness Centrality Leeds United 0.055
-        Betweenness Centrality Leicester City 0.056
-        Betweenness Centrality Manchester City 0.052
-        Betweenness Centrality Manchester United 0.050
+Community nº:  3
+Betweenness Centrality Arsenal FC 0.405
+Betweenness Centrality Aston Villa 1.000
+Betweenness Centrality Brentford FC 0.063
+Betweenness Centrality Brighton & Hove Albion 0.308
+Betweenness Centrality Chelsea FC 0.304
+Betweenness Centrality Everton FC 0.347
+Betweenness Centrality Leeds United 0.419
+Betweenness Centrality Leicester City 0.466
+Betweenness Centrality Manchester City 0.281
+Betweenness Centrality Manchester United 0.199
+
+Nodes that have a high betw > 0.5 centrality:
+    ('Birmingham City', 0.5846813863643194), ('Crystal Palace', 0.624188306095834),
+    ('Liverpool FC', 0.6499554016459861), ('Blackburn Rovers', 0.6524092153479186),
+    ('Newcastle United', 0.8144709392655992), ('Middlesbrough FC', 0.913105281078823),
+    ('Aston Villa', 1.0)
+
+Nodes that have a low betw < 0.1 centrality:
+    ('Blackpool FC', 0.0), ('Bradford City', 0.010236145750131318), ('Coventry City', 0.037226037417502154),
+    ('Ipswich Town', 0.055255481178254726), ('Brentford FC', 0.06336435372633166), ('Huddersfield Town', 0.07672553903961966),
+    ('Cardiff City', 0.08587463087309079)
+
+They have all attributes in common:
+
+    Performance:
+        Individual positions:
+            HIGH BC:
+                Birmingham City: 15
+                Crystal Palace: 14
+                Liverpool FC: 5
+                Blackburn Rovers: 12
+                Newcastle United: 12
+                Middlesbrough FC: 14
+                Aston Villa: 12
+
+            They average a 12-15 position (~13)
+
+            LOW BC:
+                Blackpool FC: 19
+                Bradford City: 20
+                Coventry City: 19
+                Ipswich Town: 12
+                Brentford FC: 13
+                Huddersfield Town: 18
+                Cardiff City: 19
+
+        
+        They average a 12-20 position (Relegation levels)
+
+    The better connected, the better you will do. Not necessarily to a High performing level.
+    But, no connection implies worse results.
+
+    Money Spent: 
+        HIGH BC:
+            Birmingham City: 159.37
+            Crystal Palace: 428.51
+            Liverpool FC: 1799.41
+            Blackburn Rovers: 178.77
+            Newcastle United: 1116.8
+            Middlesbrough FC: 321.1
+            Aston Villa: 939.54
+
+        LOW BC:
+            Blackpool FC: 5.8
+            Bradford City: 6.6
+            Coventry City: 24.3
+            Ipswich Town: 41.98
+            Brentford FC: 88.49
+            Huddersfield Town: 138.30
+            Cardiff City: 123.875
+
+    Decision Support: If were to be a player. Do not go to High BC teams, they change a lot. Go to lower BC,
+    but avoid teams that have historically performed under 18.
+
+    Also, need to understand that positions are calculated based in an average years of play on premier league.
+
+
 
 (WHY Spearman: Consider Spearman’s rank order correlation when you have pairs of continuous variables
 and the relationships between them don’t follow a straight line, or you have pairs of ordinal data)
@@ -294,4 +362,23 @@ The data on points - betwenness using Spearman Rank Correlation shows that:
 
 6. Omega-world value
 
-    w = 0.02263442745588773
+    Premier League
+    w = 0.023
+
+    La Liga
+    w = 0.178
+
+    Bundesliga 
+    w = 0.033
+
+    Serie A (Not a connected graph)
+    w = 0.054
+
+    Ligue 1 (Not a connected graph)
+    w = 0.013
+
+    Liga NOS (Not a connected graph)
+    w = 0.057
+
+    Eredivisie
+    w = 0.063

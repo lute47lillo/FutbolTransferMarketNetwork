@@ -121,6 +121,7 @@ class StatsAndCommunities:
     """
     def community_attributes(self, stats, communities, graph):
         prep = Preprocessing()
+        util = Utils()
         n_com = len(communities)
         
         # Create an unfrozen copy of the graph and narrow by community of stats
@@ -128,7 +129,8 @@ class StatsAndCommunities:
         #graph = self.narrow_graph(unfrozen_graph, stats) # Used to get only teams on needed community
         
         # Obtain attributes of the graph community
-        betw = prep.get_betweenness(graph)
+        btw_centr = prep.get_betweenness(graph)
+        btw_centr = util.normalize_btw(btw_centr)
         close = prep.get_closeness(graph)
         deg_centrality = prep.get_deg_centrality(graph)
         
@@ -140,14 +142,14 @@ class StatsAndCommunities:
                 if team in graph.nodes() and team in teams:
                     pass
                     
-                    #print(f"Betweenness Centrality {team:2} {betw[team]:.3f}")
+                    #print(f"Betweenness Centrality {team:2} {btw_centr[team]:.3f}")
                     #print(f"Closeness Centrality { team:2} {close[team]:.3f}")
                     #print(f"Degree Centrality {team:2} {deg_centrality[team]:.3f}\n")
         
-        self.study_betwenneess(betw, stats)
+        #self.study_betwenneess(btw_centr, stats)
         #self.study_closenes(close, stats)
         #self.study_degree(deg_centrality, stats)
-        return betw, graph
+        return btw_centr, graph
         
     def trim_communities(self, ord, stats):
         teams = list(ord.values())
@@ -183,7 +185,7 @@ class StatsAndCommunities:
         teams = []
         for team, (avg_pos, points) in stats.items():
             teams.append(team)
-            print(f"Betweenness Centrality {team:2} {betw[team]:.3f}")
+            #print(f"Betweenness Centrality {team:2} {betw[team]:.3f}")
             b_points.update({team:(points, betw[team])})
             b_pos.update({team:(avg_pos, betw[team])})
                 
@@ -240,7 +242,7 @@ class StatsAndCommunities:
         graph = nx.Graph(graph)
 
         #print([e for e in graph.edges.data()])
-        print(graph)
+        #print(graph)
         
         omega = algorithms.smallworld.omega(graph, niter=5, nrand=8, seed=4572321)
         return omega

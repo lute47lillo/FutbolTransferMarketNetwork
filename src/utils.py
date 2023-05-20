@@ -58,19 +58,19 @@ class Utils:
                 fee_cleaned = 0.0
             
             # Remove double edges (Ex: 2 Transactions happen, in and out. Keep only out transactions)
-            if int(year) >= 2000: # Domestic Case: Premier League
-                if (seller, buyer) not in soccer_dict.keys():
-                    transfers_list = []
+            #if int(year) >= 2000: # Domestic Case: Premier League
+            if (seller, buyer) not in soccer_dict.keys():
+                transfers_list = []
                         
-                    transfers_list.append((player, fee_cleaned, year))
-                    soccer_dict.update({(seller, buyer) : transfers_list})
+                transfers_list.append((player, fee_cleaned, year))
+                soccer_dict.update({(seller, buyer) : transfers_list})
                     
-                else:
-                    current = soccer_dict.get((seller, buyer))
+            else:
+                current = soccer_dict.get((seller, buyer))
             
-                    if (player, fee_cleaned, year) not in current:
-                        current.append((player, fee_cleaned, year))
-                        soccer_dict.update({(seller, buyer) : current})
+                if (player, fee_cleaned, year) not in current:
+                    current.append((player, fee_cleaned, year))
+                    soccer_dict.update({(seller, buyer) : current})
                     
         return soccer_dict, league
     
@@ -120,3 +120,21 @@ class Utils:
         
         received = prep.sort_dictionary(received)
         return received
+
+
+    def normalize_btw(self, btw):
+        # Get minimum btw centr value
+        min_k = min(btw, key=btw.get)
+        min_v = btw[min_k]
+            
+        # Get maximum btw centr value
+        max_k = max(btw, key=btw.get)
+        max_v = btw[max_k]
+            
+        for k, v in btw.items():
+            normal_v = (v - min_v) / (max_v - min_v)
+            btw.update({k: normal_v})
+            
+        return btw
+            
+            

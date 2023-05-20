@@ -21,7 +21,9 @@ import math
     2   ../dataset/serie-a.csv 
     3   ../dataset/premier-league.csv
     4   ../dataset/ligue-1.csv
-    5   ../dataset/all.csv
+    5   ../dataset/liga-nos.csv
+    6   ../dataset/eredivisie.csv
+    7   ../dataset/all.csv
 """
 
 champ_league_winners = ['Olympique Marseille', 'Ajax Amsterdam', 'Juventus FC', 'Manchester United',
@@ -162,17 +164,17 @@ def new_execution():
         Domestic Case study: Premier League
     """
     
-    prem_soccer, _ = util.create_dict(5)
+    prem_soccer, _ = util.create_dict(7)
     prem_stats = prep.average_stats()
     prem_teams = list(prem_stats.keys())
 
-    prem_order_comm, prem_graph = comm.process_community_graph_update(prem_soccer, False, 3, prem_teams)
+    # prem_order_comm, prem_graph = comm.process_community_graph_update(prem_soccer, False, 3, prem_teams)
     
-    prem_ordered = data_community(prem_order_comm, prem_stats, False)
+    # prem_ordered = data_community(prem_order_comm, prem_stats, False)
     #print(prem_ordered)
     #print([e for e in prem_graph.edges.data()])
-    print(prem_graph)
-    
+    #print(prem_graph)
+    #print(prem_stats)
     
     """
         Given community index creation of based performance teams:
@@ -181,8 +183,8 @@ def new_execution():
         Plot them,
     
     """
-    pos_com_idx, points_pos_idx = prep.organize_teams(prem_stats)
-    # print("\nThe pos_com_idx: ", pos_com_idx)
+    #pos_com_idx, points_pos_idx = prep.organize_teams(prem_stats)
+    #print("\nThe pos_com_idx: ", pos_com_idx)
     # print("\nThe points_com_idx: ", points_pos_idx)
     
     # # Get ordered communities for both avg_pos, and total points
@@ -199,6 +201,7 @@ def new_execution():
         prem_soccer -> dict ({(seller, buyer):(fee_cleaned, player, year)})
     """
     # spent = util.sub_champions_spent_community(prem_soccer, prem_teams)
+    # print(spent)
     # money_comm_idx = prep.get_money_community(spent)
     # money_comm_idx = deconstruct_com_idx(money_comm_idx)
     # print(money_comm_idx)
@@ -208,6 +211,8 @@ def new_execution():
         (There's an option to study both degree and centrality)
     """
     # btw_centr, graph = sc.community_attributes(prem_stats, prem_ordered, prem_graph)
+    # btw_centr = prep.sort_dictionary_by_value(btw_centr)
+    # print(btw_centr)
     
     """
         Given the statistics and the soccer prepped dictionary, and the ordered communities based on modularity.
@@ -218,7 +223,17 @@ def new_execution():
     # sc.study(prem_ordered, prem_stats, prem_soccer)
     
     """ Obtain omega value to calculate the small-world property of the given graph"""
-    omega = sc.obtain_omega_small_world(prem_graph)
+    league_soccer, league_teams = util.create_dict(6)
+    #league_teams = list(league_soccer.keys())
+    print(len(league_teams))
+    
+    league_order_comm, league_graph = comm.process_community_graph_update(league_soccer, False, 3, league_teams)
+    
+    league_ordered = data_community(league_order_comm, prem_stats, False)
+    print(league_ordered)
+    print(league_graph)
+    
+    omega = sc.obtain_omega_small_world(league_graph)
     print(omega)
     
     exit()
@@ -229,71 +244,6 @@ def main(args):
     if args:
         new_execution()
     
-    
-    """ Communities
-    
-        Given a dictionary:
-            - Plot if TRUE
-    
-        Returns and ordered dictionary of communities based on the greedy_modularity_communities algorithm
-        and the trimmed graph
-    
-    """
-    
-    #soccer = prep.dictionary_name_mapping(soccer, mapping)
-    #order_comm, trimmed_graph = comm.process_community_graph(soccer, True, 5)
-    
-    #ordered = data_community(order_comm)
-    #print("The ordered community: ", ordered)
-    
-    
-    # Process International Champions DATA
-    # ch_process = ChampionsDataProcess()
-    
-    """
-        Given a dictionary of all teams of all datasets
-        Create small subcommunity of International Champions
-        To calculate Pearson Correlation Coefficients
-        Based on:
-        Trophies won - Money Spent 
-                    &
-        Trophies won - Money Spent 
-    """
-    # soccer_champ = prep.create_dict(5)
-    # soccer_champ = prep.dictionary_name_mapping(soccer_champ, mapping)
-    # CHAMPIONS LEAGUE
-    # champs_money_spent = prep.sub_champions_spent_community(soccer_champ, champ_league_winners, 0)
-    # champs_money_received = prep.sub_champions_received_community(soccer_champ, champ_league_winners, 0)
-    
-    # # EUROPA LEAGUE
-    # champs_money_spent_eur = prep.sub_champions_spent_community(soccer_champ, europa_league_winners, 1)
-    # champs_money_received_eur = prep.sub_champions_received_community(soccer_champ, europa_league_winners, 1)
-    
-    
-    # """ Calculates the Pearson Correlation Coefficient """
-    # ch_process.calculating_pearson_corr(champs_money_spent, 0, True)
-    # ch_process.calculating_pearson_corr(champs_money_received, 0, False)
-    
-    # ch_process.calculating_pearson_corr(champs_money_spent_eur, 1, True)
-    # ch_process.calculating_pearson_corr(champs_money_received_eur, 1, False)
-    
-    
-    
-    """     Given arguments for 'process_data' function:
-                #   0 -> Champions League
-                #   1 -> Europa League
-                #   True -> Money Spent
-                #   False -> Money Received
-        'champ_league' function: Returns winners dict (seller, buyer) : (fee, player)
-        Also returns graph of sub-community of champions if plot function uncommented
-    """
-    # ONLY CHAMPIONS COMMUNITIES
-    # win = Winners()
-    # ch_winners = win.champ_league(soccer_champ, champ_league_winners)
-    # ch_process.process_data(ch_winners, 0, False)
-  
-    # eur_winners = win.europa_league(soccer_champ, europa_league_winners)
-    # ch_process.process_data(eur_winners, 1, False)
 
 main(True)
 

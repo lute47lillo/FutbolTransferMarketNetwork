@@ -32,7 +32,8 @@ class Preprocessing:
     def select_league(self, arg_n):
         leagues = ['../dataset/primera-division.csv', '../dataset/1-bundesliga.csv',
                    '../dataset/serie-a.csv', '../dataset/premier-league.csv',
-                   '../dataset/ligue-1.csv', '../dataset/all.csv']
+                   '../dataset/ligue-1.csv', '../dataset/liga-nos.csv',
+                   '../dataset/eredivisie.csv', '../dataset/all.csv']
         
         return leagues[arg_n]
         
@@ -229,7 +230,7 @@ class Preprocessing:
     
     def get_betweenness(self, graph):
         #print("Betweenness")
-        b = nx.betweenness_centrality(graph, k=44, normalized=True, endpoints=True)
+        b = nx.betweenness_centrality(graph, k=44, normalized=False, endpoints=False)
         return b
         
     def get_closeness(self, graph):
