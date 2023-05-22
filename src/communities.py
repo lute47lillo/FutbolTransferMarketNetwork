@@ -141,9 +141,9 @@ class Community:
         #trim_graph.remove_nodes_from(low_degree) 
 
         # Use when node not easily declared
-        # components = nx.connected_components(trim_graph)
-        # largest_component = max(components, key=len)
-        # trim_graph = trim_graph.subgraph(largest_component)
+        components = nx.connected_components(trim_graph)
+        largest_component = max(components, key=len)
+        trim_graph = trim_graph.subgraph(largest_component)
         # print(largest_component)
 
         # Compute centrality
@@ -163,3 +163,23 @@ class Community:
             self.plot_community(trim_graph, community_index, centrality, title_text)
             
         return order_comm, trim_graph
+    
+    
+    def graph_creation(self, soccer_dict, teams):
+        graph = nx.MultiGraph()
+        graph.add_nodes_from(teams)
+        
+        for ((seller, buyer), transfer_list) in soccer_dict.items():
+            for transfer in transfer_list:
+                player, fee_cleaned, year = transfer        
+                if seller in teams and buyer in teams: # Use only for particular domestic league datasets
+                    graph.add_weighted_edges_from(ebunch_to_add=[(seller, buyer, fee_cleaned)], weight="fee")
+ 
+        # Remove all fees with 0 (either were NAN (free agent), or 0 (free transfers))
+        low_fee_edges = [(u,v, keys) for u, v, keys, weight in graph.edges(data='fee', keys=True) if weight == 0.0]
+        graph.remove_edges_from(low_fee_edges)
+        
+        low_degree = [n for n, d in graph.degree() if d < 20] # ALL dataset
+        #graph.remove_nodes_from(low_degree) 
+
+        return graph

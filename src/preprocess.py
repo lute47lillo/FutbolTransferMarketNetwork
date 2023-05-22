@@ -36,6 +36,13 @@ class Preprocessing:
                    '../dataset/eredivisie.csv', '../dataset/all.csv']
         
         return leagues[arg_n]
+    
+    def select_league_names(self, arg_n):
+        leagues = ['Primera Division', 'Bundesliga',
+                   'Serie A', 'Premier League', 'Ligue 1',
+                   'Liga Nos', 'Eredivisie']
+        
+        return leagues[arg_n]
         
     def create_dict(self, league_n):
         

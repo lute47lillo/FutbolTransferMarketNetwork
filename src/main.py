@@ -93,6 +93,24 @@ def get_domestic_teams(teams, stats):
             prem_teams.append(k)
     return prem_teams
 
+def calc_pair_omegas():
+    util = Utils()
+    sc = StatsAndCommunities()
+    comm = Community()
+    
+    i = 0
+    for i in range(0, 7):
+        for j in range(i + 1, 7):
+            print(i, j)
+            dict_soccer, dict_teams = util.create_double_dict(7, i, j)
+            print(dict_teams)
+            
+            league_graph = comm.graph_creation(dict_soccer, dict_teams)
+            print(league_graph)
+    
+            omega = sc.obtain_omega_small_world(league_graph)
+            print("League ", i, " and ", j, " have an omega value of ", omega)
+
 def new_execution():
     
     # Preprocess the data 
@@ -164,13 +182,13 @@ def new_execution():
         Domestic Case study: Premier League
     """
     
-    prem_soccer, _ = util.create_dict(7)
-    prem_stats = prep.average_stats()
-    prem_teams = list(prem_stats.keys())
+    # prem_soccer, _ = util.create_dict(7)
+    # prem_stats = prep.average_stats()
+    # prem_teams = list(prem_stats.keys())
 
-    prem_order_comm, prem_graph = comm.process_community_graph_update(prem_soccer, True, 3, prem_teams)
+    # prem_order_comm, prem_graph = comm.process_community_graph_update(prem_soccer, False, 3, prem_teams)
     
-    prem_ordered = data_community(prem_order_comm, prem_stats, False)
+    #prem_ordered = data_community(prem_order_comm, prem_stats, False)
     #print(prem_ordered)
     #print([e for e in prem_graph.edges.data()])
     #print(prem_graph)
@@ -222,18 +240,30 @@ def new_execution():
     """
     # sc.study(prem_ordered, prem_stats, prem_soccer)
     
-    """ Obtain omega value to calculate the small-world property of the given graph"""
+    """
+        Obtain omega value to calculate the small-world property of the given graph 
+        For particular Domestic Leagues
+    """
     # league_soccer, league_teams = util.create_dict(6)
     # print(len(league_teams))
     
     # league_order_comm, league_graph = comm.process_community_graph_update(league_soccer, False, 3, league_teams)
-    
     # league_ordered = data_community(league_order_comm, prem_stats, False)
-    # print(league_ordered)
-    # print(league_graph)
     
     # omega = sc.obtain_omega_small_world(league_graph)
     # print(omega)
+    
+    """
+        Calculate omega values for all pair of combinations of the 7 different leagues.
+        Arguments:
+            7 -> All.csv dataset
+            lg_1 -> league 1 to be used.
+            lg_2 -> league 2 to be used.
+    """
+    calc_pair_omegas()
+            
+            
+    
     
     exit()
     

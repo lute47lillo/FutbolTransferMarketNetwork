@@ -244,8 +244,13 @@ class StatsAndCommunities:
         #print([e for e in graph.edges.data()])
         #print(graph)
         
-        omega = algorithms.smallworld.omega(graph, niter=5, nrand=8, seed=4572321)
+        omega = algorithms.smallworld.omega(graph, niter=5, nrand=7, seed=4572321)
         return omega
+    
+    """
+        Calculate the omega value for the small - world attribute 
+        for all pair combinations of the 7 different leagues
+    """ 
     
     # sigma (niter=50, nrand=5) -> 1.0258586515689005
     # omega (niter=5, nrand=10) -> 0.018400902591983903 For all graph
