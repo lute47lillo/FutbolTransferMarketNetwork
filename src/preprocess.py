@@ -301,9 +301,9 @@ class Preprocessing:
         for t, m in stats.items():
             if m <= 300:
                 mon.update({t:4})
-            elif m > 300 and m <= 650:
+            elif m > 300 and m <= 600:
                 mon.update({t:3})
-            elif m > 650 and m <= 1150:
+            elif m > 600 and m <= 1100:
                 mon.update({t:2})
             else:
                 mon.update({t:1})

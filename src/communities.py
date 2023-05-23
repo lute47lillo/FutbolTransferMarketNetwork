@@ -147,11 +147,11 @@ class Community:
         # print(largest_component)
 
         # Compute centrality
-        centrality = nx.betweenness_centrality(trim_graph, k=44, normalized=False, endpoints=False)
+        centrality = nx.betweenness_centrality(trim_graph, k=10, normalized=False, endpoints=False)
         centrality = util.normalize_btw(centrality)
 
         # Run algorithm
-        comm = nx.community.greedy_modularity_communities(trim_graph, weight='fee', best_n=5)
+        comm = nx.community.greedy_modularity_communities(trim_graph, weight='fee', best_n=4)
         community_index = {n: i for i, com in enumerate(comm) for n in com}
     
         order_comm = {}
@@ -166,7 +166,8 @@ class Community:
     
     
     def graph_creation(self, soccer_dict, teams):
-        graph = nx.MultiGraph()
+        graph = nx.MultiDiGraph()
+        print(teams)
         graph.add_nodes_from(teams)
         
         for ((seller, buyer), transfer_list) in soccer_dict.items():

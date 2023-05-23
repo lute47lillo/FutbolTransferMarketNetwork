@@ -93,6 +93,8 @@ def get_domestic_teams(teams, stats):
             prem_teams.append(k)
     return prem_teams
 
+# TODO: Do not account for transfer between teams of same to same league. Only between 1 to the other.
+# And they cannot be repeated cannot go both ways, only add for one.
 def calc_pair_omegas():
     util = Utils()
     sc = StatsAndCommunities()
@@ -106,7 +108,7 @@ def calc_pair_omegas():
             print(dict_teams)
             
             league_graph = comm.graph_creation(dict_soccer, dict_teams)
-            print(league_graph)
+            #print(league_graph)
     
             omega = sc.obtain_omega_small_world(league_graph)
             print("League ", i, " and ", j, " have an omega value of ", omega)
@@ -188,9 +190,9 @@ def new_execution():
 
     # prem_order_comm, prem_graph = comm.process_community_graph_update(prem_soccer, False, 3, prem_teams)
     
-    #prem_ordered = data_community(prem_order_comm, prem_stats, False)
-    #print(prem_ordered)
-    #print([e for e in prem_graph.edges.data()])
+    # prem_ordered = data_community(prem_order_comm, prem_stats, False)
+    # # print(prem_ordered)
+    # print([e for e in prem_graph.edges.data()])
     #print(prem_graph)
     #print(prem_stats)
     
@@ -201,8 +203,8 @@ def new_execution():
         Plot them,
     
     """
-    #pos_com_idx, points_pos_idx = prep.organize_teams(prem_stats)
-    #print("\nThe pos_com_idx: ", pos_com_idx)
+    # pos_com_idx, points_pos_idx = prep.organize_teams(prem_stats)
+    # print("\nThe pos_com_idx: ", pos_com_idx)
     # print("\nThe points_com_idx: ", points_pos_idx)
     
     # # Get ordered communities for both avg_pos, and total points
@@ -239,16 +241,18 @@ def new_execution():
             sc.study -> Correlation between performance and sub-communites
     """
     # sc.study(prem_ordered, prem_stats, prem_soccer)
+    # print(prem_stats)
     
     """
         Obtain omega value to calculate the small-world property of the given graph 
         For particular Domestic Leagues
     """
-    # league_soccer, league_teams = util.create_dict(6)
+    # league_soccer, league_teams = util.create_dict(1)
     # print(len(league_teams))
+    # print(sorted(league_teams))
     
     # league_order_comm, league_graph = comm.process_community_graph_update(league_soccer, False, 3, league_teams)
-    # league_ordered = data_community(league_order_comm, prem_stats, False)
+    # #league_ordered = data_community(league_order_comm, prem_stats, False)
     
     # omega = sc.obtain_omega_small_world(league_graph)
     # print(omega)

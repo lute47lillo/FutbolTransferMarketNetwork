@@ -137,16 +137,16 @@ class StatsAndCommunities:
         for i in range(n_com):
             
             teams = communities.get(i+1)
-            #print("\nCommunity nº: ", i+1)
+            print("\nCommunity nº: ", i+1)
             for team, (avg_pos, points) in stats.items():
                 if team in graph.nodes() and team in teams:
-                    pass
+                    #pass
                     
-                    #print(f"Betweenness Centrality {team:2} {btw_centr[team]:.3f}")
+                    print(f"Betweenness Centrality {team:2} {btw_centr[team]:.3f}")
                     #print(f"Closeness Centrality { team:2} {close[team]:.3f}")
                     #print(f"Degree Centrality {team:2} {deg_centrality[team]:.3f}\n")
         
-        #self.study_betwenneess(btw_centr, stats)
+        self.study_betwenneess(btw_centr, stats)
         #self.study_closenes(close, stats)
         #self.study_degree(deg_centrality, stats)
         return btw_centr, graph
@@ -241,10 +241,10 @@ class StatsAndCommunities:
     def obtain_omega_small_world(self, graph):
         graph = nx.Graph(graph)
 
-        #print([e for e in graph.edges.data()])
-        #print(graph)
+        #print([e for e in graph.edges.data() if e[1] == "Real Madrid"])
+        print(graph)
         
-        omega = algorithms.smallworld.omega(graph, niter=5, nrand=7, seed=4572321)
+        omega = algorithms.smallworld.omega(graph, niter=5, nrand=10, seed=4572321)
         return omega
     
     """
