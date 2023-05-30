@@ -108,7 +108,8 @@ def calc_pair_omegas():
             print(dict_teams)
             
             league_graph = comm.graph_creation(dict_soccer, dict_teams)
-            #print(league_graph)
+            print(league_graph)
+            # print([e for e in league_graph.edges.data()])
     
             omega = sc.obtain_omega_small_world(league_graph)
             print("League ", i, " and ", j, " have an omega value of ", omega)
@@ -247,7 +248,7 @@ def new_execution():
         Obtain omega value to calculate the small-world property of the given graph 
         For particular Domestic Leagues
     """
-    # league_soccer, league_teams = util.create_dict(1)
+    # league_soccer, league_teams = util.create_dict(6)
     # print(len(league_teams))
     # print(sorted(league_teams))
     
@@ -264,8 +265,15 @@ def new_execution():
             lg_1 -> league 1 to be used.
             lg_2 -> league 2 to be used.
     """
-    calc_pair_omegas()
-            
+    #calc_pair_omegas()
+    
+    
+    """
+        Normalize omega values for small-world property to see which pair to pair leagues has a better relationship
+    """
+    dict_omega, omega_graph = util.normalize_pair_league_omegas()
+    print(prep.sort_dictionary_by_value(dict_omega))
+    util.plot_omegas(dict_omega)
             
     
     

@@ -166,21 +166,23 @@ class Community:
     
     
     def graph_creation(self, soccer_dict, teams):
-        graph = nx.MultiDiGraph()
-        print(teams)
-        graph.add_nodes_from(teams)
+        graph = nx.MultiGraph()
+        
+        checked_transfers = []
+        
+        graph.add_nodes_from(teams[0])
+        graph.add_nodes_from(teams[1])
         
         for ((seller, buyer), transfer_list) in soccer_dict.items():
-            for transfer in transfer_list:
-                player, fee_cleaned, year = transfer        
-                if seller in teams and buyer in teams: # Use only for particular domestic league datasets
-                    graph.add_weighted_edges_from(ebunch_to_add=[(seller, buyer, fee_cleaned)], weight="fee")
- 
-        # Remove all fees with 0 (either were NAN (free agent), or 0 (free transfers))
-        low_fee_edges = [(u,v, keys) for u, v, keys, weight in graph.edges(data='fee', keys=True) if weight == 0.0]
-        graph.remove_edges_from(low_fee_edges)
+            if seller in teams[0] and buyer in teams[1] or seller in teams[1] and buyer in teams[0]:
+                for transfer in transfer_list:
+                    if transfer not in checked_transfers:
+                        checked_transfers.append(transfer)  
+                        player, fee_cleaned, year = transfer 
+                        graph.add_weighted_edges_from(ebunch_to_add=[(seller, buyer, fee_cleaned)], weight="fee")
         
-        low_degree = [n for n, d in graph.degree() if d < 20] # ALL dataset
-        #graph.remove_nodes_from(low_degree) 
-
+        components = nx.connected_components(graph)
+        largest_component = max(components, key=len)
+        graph = graph.subgraph(largest_component)
+        
         return graph

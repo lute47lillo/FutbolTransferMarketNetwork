@@ -2,6 +2,7 @@ import networkx as nx
 import pandas as pd
 import math
 from preprocess import Preprocessing
+import matplotlib.pyplot as plt
 
 class Utils:
     """
@@ -90,9 +91,12 @@ class Utils:
         prep = Preprocessing()
         league = prep.select_league(league_n)
         
-        leagues = []
-        leagues.append(prep.select_league_names(lg1))
-        leagues.append(prep.select_league_names(lg2))
+        # Get pair league names
+        leagues_names = []
+        l1 = prep.select_league_names(lg1)
+        l2 = prep.select_league_names(lg2)
+        leagues_names.append(l1)
+        leagues_names.append(l2)
         
         df = pd.read_csv(league)
         G = nx.from_pandas_edgelist(df, source='club_name', target='club_involved_name',
@@ -109,19 +113,26 @@ class Utils:
         
         # Clean-up data
         soccer_dict = {}
-        league = []
+        league_1 =[]
+        league_2 =[]
         for (teams, move), (_,player), (_,year),  (_, fee_cleaned), (_, league_name) in zip(move_edge_labels.items(),
                                                                                 player_edge_labels.items(),
                                                                                 year_edge_labels.items(),
                                                                                 fee_cleaned_edge_labels.items(),
                                                                                 league_edge_labels.items()):
-            if league_name in leagues:
+            # If is any of the 2 leagues being compared
+            if league_name in leagues_names:
                 # n_transaction is a count of number of edges between seller and buyer
                 seller, buyer, n_transaction = teams
                 
-                if seller not in league:
-                    league.append(seller)
+                # Add to correct league group
+                if league_name == l1 and seller not in league_1:
+                    league_1.append(seller)
                     
+                elif league_name == l2 and seller not in league_2:
+                    league_2.append(seller)
+                  
+                # Set all transfers to seller -> buyer
                 if move == 'in':
                     temp = buyer
                     buyer = seller
@@ -148,7 +159,10 @@ class Utils:
                         current.append((player, fee_cleaned, year))
                         soccer_dict.update({(seller, buyer) : current})
                     
-        return soccer_dict, league
+        final_league = []
+        final_league.append(league_1)
+        final_league.append(league_2)
+        return soccer_dict, final_league
     
     """ Creates a sub-community of international champions teams - money spent"""
     def sub_champions_spent_community(self, soccer, champs):
@@ -212,5 +226,62 @@ class Utils:
             btw.update({k: normal_v})
             
         return btw
+    
+    def normalize_pair_league_omegas(self):
+        df = pd.read_csv('../dataset/omegas.csv')
+        G = nx.from_pandas_edgelist(df, source='league1', target='league2',
+                                    edge_attr=['omegas'],
+                                    create_using=nx.MultiGraph())
+        
+        omega_labels = nx.get_edge_attributes(G, "omegas")
+        
+        dict_omegas ={}
+        for(leagues, omega) in omega_labels.items():
             
+            l1 = leagues[0]
+            l2 = leagues[1]
             
+            dict_omegas.update({(l1,l2):omega})
+            
+        dict_omegas = self.normalize_btw(dict_omegas)
+        
+        return dict_omegas, G
+    
+    """ 
+        Plot scatter description:
+            node = unique IDentifier for joint pair league (1-21)
+            x = number of teams participating in transfers
+            y = number of edges (transfers)
+            node size = normalized omega value
+    """
+    def plot_omegas(self, data):
+        leagues = list(data.keys())
+        omegas = list(data.values())
+        
+        # assign numerical ID to joint-pair leagues
+        
+
+        
+        
+        
+        # print(df) # Print list of the names
+        fig = plt.figure(figsize=(36,11)) # Create matplotlib figure
+        axs = fig.add_subplot(111) # Create matplotlib axes
+        ax2 = axs.twinx() # Create another axes that shares the same x-axis as ax.
+
+        width = 0.2
+
+        df.Value.plot(kind='bar', color='green', ax=axs, width=width, position=1)
+        df.Attribute.plot(kind='bar', color='blue', ax=ax2, width=width, position=0)
+
+        axs.set_xlabel('Team')
+        ax2.set_ylabel(leagues)
+        axs.set_ylabel(omegas)
+        
+        font = {"color": "k", "fontweight": "bold", "fontsize": 20}
+        ax.set_title('League-Pairs omegas', font)
+        fig.autofmt_xdate()
+        
+        plt.title('League-Pairs omegas')
+        plt.savefig("../plots/omegas_league", format="PNG")
+        plt.show()

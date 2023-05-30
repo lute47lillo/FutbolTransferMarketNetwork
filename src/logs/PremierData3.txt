@@ -254,6 +254,44 @@ Nodes that have a low betw < 0.1 centrality:
     ('Ipswich Town', 0.0855506403530235), ('Huddersfield Town', 0.09145178278862223),
     ('Cardiff City', 0.10226427506056855)
 
+Community 1 -> 14 teams
+
+    ['Fulham FC', 'Charlton Athletic', 'Blackburn Rovers', 'Blackpool FC', 'Tottenham Hotspur',
+    'Portsmouth FC', 'Hull City', 'Bradford City', 'Liverpool FC', 'West Ham United', 'Bolton Wanderers',
+    'Swansea City', 'Southampton FC', 'Newcastle United']
+
+Community 2 -> 12 teams
+
+    ['West Bromwich Albion', 'Watford', 'Stoke City', 'Burnley FC', 'Huddersfield Town',
+    'Wolverhampton Wanderers', 'Derby County', 'Middlesbrough FC', 'AFC Bournemouth',
+    'Sheffield United', 'Norwich City', 'Coventry City']
+
+Community 3 -> 10 teams
+
+    ['Manchester United', 'Aston Villa', 'Leicester City', 'Brentford FC', 'Leeds United',
+    'Everton FC', 'Chelsea FC', 'Arsenal FC', 'Manchester City', 'Brighton & Hove Albion']
+
+Community 4 -> 8 teams
+
+    ['Crystal Palace', 'Queens Park Rangers', 'Cardiff City', 'Sunderland AFC', 'Wigan Athletic',
+    'Reading FC', 'Ipswich Town', 'Birmingham City']
+
+
+HIGH BC
+
+    Community 1 ->  4/8    50%
+    Community 2 ->  1/8    
+    Community 3 ->  2/8
+    Community 4 ->  1/8
+
+
+LOW BC
+
+    Community 1 ->  2/6    50%
+    Community 2 ->  1/6    
+    Community 3 ->  1/6
+    Community 4 ->  2/6
+
 
 They have all attributes in common:
 
@@ -304,6 +342,7 @@ They have all attributes in common:
             Huddersfield Town: 138.30
             Cardiff City: 123.875
 
+MENTION ON CONClUSIONS
     Decision Support: If were to be a player. Do not go to High BC teams, they change a lot. Go to lower BC,
     but avoid teams that have historically performed under 18.
 
@@ -345,7 +384,7 @@ The data on points - betwenness using Spearman Rank Correlation shows that:
     The points - money corr. coeff. for teams
     is
     SignificanceResult(
-        (statistic=0.9296703296703297,
+        statistic=0.9296703296703297,
         pvalue=1.499525070329149e-06
     ) 
 
@@ -414,10 +453,10 @@ The data on points - betwenness using Spearman Rank Correlation shows that:
     Bundesliga -> Graph with 43 nodes and 451 edges
     w = 0.032
 
-    Serie A (Not a connected graph) -> 
+    Serie A (Not a connected graph) -> Graph with 50 nodes and 577 edges
     w = 0.054
 
-    Ligue 1 (Not a connected graph) -> 
+    Ligue 1 (Not a connected graph) -> Graph with 39 nodes and 370 edges
     w = 0.013
 
     Liga NOS (Not a connected graph) -> 

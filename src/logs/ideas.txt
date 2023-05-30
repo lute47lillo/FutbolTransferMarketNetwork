@@ -1,3 +1,5 @@
+In the paper, include communities of modularity, on an appendix.
+
 First things first, if I want to study the whole market for top-5 leagues. I need to 
 
     - Get only teams that have participated in those leagues. 
