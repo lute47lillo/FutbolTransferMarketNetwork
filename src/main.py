@@ -123,7 +123,7 @@ def new_execution():
     comm = Community()
     ch_process = ChampionsDataProcess()
     
-    #soccer_dict, teams = util.create_dict(5)
+    # soccer_dict, teams = util.create_dict(5)
     
     # Teams -> 314 nodes. 
     #print(sorted(teams))
@@ -142,11 +142,6 @@ def new_execution():
     #print(ordered)
     #print(graph)
     #print([e for e in graph.edges.data()])
-    
-    
-    """ Clustering Coefficient """
-    #coeff = prep.get_graph_clustering_ceff(graph)
-    #print(prep.sort_dictionary_by_value(coeff))
     
 
     """ 
@@ -174,10 +169,10 @@ def new_execution():
     """
         Plot Spearman Rank Correlation Coefficient for Champions League and Europa League Winners
     """
-    # ch_process.plotting_categorical(spent_ch, 0, True)
+    #ch_process.plotting_categorical(spent_ch, 0, True)
     # ch_process.plotting_categorical(received_ch, 0, False)
     
-    # ch_process.plotting_categorical(spent_el, 1, True)
+    #ch_process.plotting_categorical(spent_el, 1, True)
     # ch_process.plotting_categorical(received_el, 1, False)
     
     
@@ -231,9 +226,13 @@ def new_execution():
         Study Betweenness centrality of teams in the given community.
         (There's an option to study both degree and centrality)
     """
-    # btw_centr, graph = sc.community_attributes(prem_stats, prem_ordered, prem_graph)
+    #btw_centr, graph = sc.community_attributes(prem_stats, prem_ordered, prem_graph)
     # btw_centr = prep.sort_dictionary_by_value(btw_centr)
     # print(btw_centr)
+    
+    """ Clustering Coefficient """
+    #coeff = prep.get_graph_clustering_ceff(graph)
+    #print("the clustering coeff: ", prep.sort_dictionary_by_value(coeff))
     
     """
         Given the statistics and the soccer prepped dictionary, and the ordered communities based on modularity.
@@ -248,11 +247,12 @@ def new_execution():
         Obtain omega value to calculate the small-world property of the given graph 
         For particular Domestic Leagues
     """
-    # league_soccer, league_teams = util.create_dict(6)
+    #league_soccer, league_teams = util.create_dict(0)
     # print(len(league_teams))
     # print(sorted(league_teams))
     
-    # league_order_comm, league_graph = comm.process_community_graph_update(league_soccer, False, 3, league_teams)
+    #league_order_comm, league_graph = comm.process_community_graph_update(league_soccer, False, 3, league_teams)
+    
     # #league_ordered = data_community(league_order_comm, prem_stats, False)
     
     # omega = sc.obtain_omega_small_world(league_graph)
@@ -271,9 +271,9 @@ def new_execution():
     """
         Normalize omega values for small-world property to see which pair to pair leagues has a better relationship
     """
-    dict_omega, omega_graph = util.normalize_pair_league_omegas()
-    print(prep.sort_dictionary_by_value(dict_omega))
-    util.plot_omegas(dict_omega)
+    dict_omega, plot_dict, omega_graph = util.normalize_pair_league_omegas()
+    # print(prep.sort_dictionary_by_value(dict_omega))
+    util.plot_omegas(plot_dict)
             
     
     

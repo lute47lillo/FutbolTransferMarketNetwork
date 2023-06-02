@@ -2,31 +2,6 @@ import networkx as nx
 import pandas as pd
 import math
 
-CH_mapping = {'Barcelona': 'FC Barcelona', 'Bor. Dortmund': 'Borussia Dortmund', 'Man Utd': 'Manchester United',
-                   'Chelsea' : 'Chelsea FC', 'Liverpool' : 'Liverpool FC', 'Marseille' : 'Olympique Marseille',
-                   'Inter': 'Inter Milan'}
-
-EUR_mapping = {'Bor. Dortmund': 'Borussia Dortmund', 'Man Utd': 'Manchester United',
-                   'Chelsea' : 'Chelsea FC', 'Liverpool' : 'Liverpool FC', 'Villarreal' : 'Villarreal CF',
-                   'Inter': 'Inter Milan', 'Schalke 04' : 'FC Schalke 04', 'Parma' : 'Parma FC',
-                   'E. Frankfurt' : 'Eintracht Frankfurt', 'Atlético Madrid' : 'Atlético de Madrid',
-                   'Valencia' : 'Valencia CF'}
-
-universal_mapping = {'Barcelona': 'FC Barcelona', 'Bor. Dortmund': 'Borussia Dortmund', 'Man Utd': 'Manchester United',
-                   'Chelsea' : 'Chelsea FC', 'Liverpool' : 'Liverpool FC', 'Marseille' : 'Olympique Marseille',
-                   'Inter': 'Inter Milan', 'Man Utd': 'Manchester United',
-                   'Liverpool' : 'Liverpool FC', 'Villarreal' : 'Villarreal CF',
-                   'Inter': 'Inter Milan', 'Schalke 04' : 'FC Schalke 04', 'Parma' : 'Parma FC',
-                   'E. Frankfurt' : 'Eintracht Frankfurt', 'Atlético Madrid' : 'Atlético de Madrid',
-                   'Valencia' : 'Valencia CF', 'Real Betis' : 'Real Betis Balompié', 'RCD Mallorca B':'RCD Mallorca',
-                   'CF Extremadura (- 2010)':'CF Extremadura', 'Atl. Madrid B':'Atlético de Madrid', 'Real Murcia':'Real Murcia CF',
-                   'Real Madrid B':'Real Madrid', 'Barcelona B':'FC Barcelona', 'RM Castilla':'Real Madrid',
-                   'Albacete':'Albacete Balompié', 'Levante':'Levante UD', 'Gimnàstic':'Gimnàstic de Tarragona',
-                   'Girona':'Girona FC', 'Celta Vigo B':'Celta de Vigo', 'Athletic':'Athletic Bilbao', 'Getafe ':'Getafe CF',
-                   'Cádiz B': 'Cádiz CF', 'UD Almería B':'UD Almería', 'Almería':'UD Almería', 'Dep. La Coruña':'Deportivo de La Coruña',
-                   'Burgos CF':'Real Burgos CF', 'Racing': 'Racing Santander', 'Real Zaragoza B':'Real Zaragoza',
-                   'Recr. Huelva':'Recreativo Huelva', 'Real Sociedad B':'Real Sociedad'}
-
 class Preprocessing:
     
     def select_league(self, arg_n):
@@ -148,39 +123,7 @@ class Preprocessing:
         # for k, v in spent.items():
         #     print(k, " spent ", v)
         
-        return spent
-    
-    
-    """ Creates a sub-community of international champions teams - money received"""        
-    def sub_champions_received_community(self, soccer, champs, mapp):
-        if mapp == 0:
-            soccer = self.dictionary_name_mapping(soccer, CH_mapping)
-        else:
-            soccer = self.dictionary_name_mapping(soccer, EUR_mapping)
-        
-        spent = {}
-        for ((seller, buyer), (player, fee_cleaned, year)) in soccer.items():
-            if seller in champs:
-                
-                # Set fee_cleaned to float type value
-                if isinstance(fee_cleaned, float):
-                        fee = 0.0
-                else:
-                        fee = float(fee_cleaned)
-                        
-                # Update spent dictionary
-                if seller not in spent:
-                    spent.update({ seller : fee })
-                else:
-                    current_spent = spent.get(seller)
-                    spent.update({ seller : (fee + current_spent) })
-                    
-        #print(spent)
-        # for k, v in spent.items():
-        #     print(k, " spent ", v)
-        
-        spent = self.sort_dictionary(spent)
-        return spent    
+        return spent 
     
     ''' Helper function to obtain the average position and points obtained by teams of a particular league '''
     def average_stats(self):

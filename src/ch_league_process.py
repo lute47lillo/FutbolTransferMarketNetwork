@@ -112,7 +112,7 @@ class ChampionsDataProcess:
         df.Trophies.plot(kind='bar', color='blue', ax=ax2, width=width, position=0)
 
         axs.set_xlabel('Team')
-        axs.set_ylabel('Money Received')
+        axs.set_ylabel('Money Spent')
         ax2.set_ylabel('Trophies Won')
         
         fig.autofmt_xdate()

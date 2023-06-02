@@ -45,22 +45,22 @@ class Community:
         # Change font color for legend
         font["color"] = "r"
 
-        ax.text(
-            0.80,
-            0.10,
-            "node color = community structure",
-            horizontalalignment="center",
-            transform=ax.transAxes,
-            fontdict=font,
-        )
-        ax.text(
-            0.80,
-            0.06,
-            "node size = betweenness centrality",
-            horizontalalignment="center",
-            transform=ax.transAxes,
-            fontdict=font,
-        )
+        # ax.text(
+        #     0.80,
+        #     0.10,
+        #     "node color = community structure",
+        #     horizontalalignment="center",
+        #     transform=ax.transAxes,
+        #     fontdict=font,
+        # )
+        # ax.text(
+        #     0.80,
+        #     0.06,
+        #     "node size = betweenness centrality",
+        #     horizontalalignment="center",
+        #     transform=ax.transAxes,
+        #     fontdict=font,
+        # )
 
         # Resize figure for label readability
         ax.margins(0.1, 0.05)

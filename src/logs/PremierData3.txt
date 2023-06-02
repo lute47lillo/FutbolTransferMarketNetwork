@@ -466,4 +466,19 @@ The data on points - betwenness using Spearman Rank Correlation shows that:
     w = 0.063
 
 
-7. Study what leagues are cliques and which ones do not show that property
+
+[('Middlesbrough FC', 0.7211948790896159), ('AFC Bournemouth', 0.7233201581027668), ('Southampton FC', 0.7238095238095238),
+('Crystal Palace', 0.7277310924369748), ('Aston Villa', 0.732051282051282), ('Newcastle United', 0.7395411605937922),
+('Reading FC', 0.7435897435897436), ('Charlton Athletic', 0.7440860215053764), ('Brighton & Hove Albion', 0.7446153846153846),
+('Brentford FC', 0.7472527472527473), ('Bolton Wanderers', 0.7505376344086021), ('West Ham United', 0.7507936507936508),
+('Liverpool FC', 0.7587301587301587), ('Birmingham City', 0.761344537815126), ('Manchester United', 0.7613636363636364),
+('Arsenal FC', 0.7634408602150538), ('Swansea City', 0.7663817663817664), ('Norwich City', 0.7663865546218488),
+('Sunderland AFC', 0.7667140825035562), ('Hull City', 0.7671957671957672), ('Leeds United', 0.7672672672672672),
+('Blackburn Rovers', 0.7682539682539683), ('Sheffield United', 0.7720430107526882), ('Wigan Athletic', 0.7720430107526882),
+('Stoke City', 0.7721774193548387), ('Huddersfield Town', 0.7777777777777778), ('Tottenham Hotspur', 0.7807807807807807),
+('Everton FC', 0.7825311942959001), ('Leicester City', 0.786096256684492), ('West Bromwich Albion', 0.7896613190730838),
+('Derby County', 0.7914438502673797), ('Chelsea FC', 0.7935483870967742), ('Manchester City', 0.7935606060606061),
+('Bradford City', 0.7941176470588235), ('Queens Park Rangers', 0.7956989247311828), ('Fulham FC', 0.7966386554621848),
+('Burnley FC', 0.8), ('Portsmouth FC', 0.8092307692307692), ('Wolverhampton Wanderers', 0.8206896551724138),
+('Ipswich Town', 0.8235294117647058), ('Watford', 0.84), ('Coventry City', 0.8461538461538461), ('Cardiff City', 0.8473684210526315),
+('Blackpool FC', 0.9523809523809523)]

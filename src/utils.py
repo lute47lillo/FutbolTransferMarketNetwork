@@ -230,22 +230,28 @@ class Utils:
     def normalize_pair_league_omegas(self):
         df = pd.read_csv('../dataset/omegas.csv')
         G = nx.from_pandas_edgelist(df, source='league1', target='league2',
-                                    edge_attr=['omegas'],
+                                    edge_attr=['omegas', 'teams', 'transfers'],
                                     create_using=nx.MultiGraph())
         
         omega_labels = nx.get_edge_attributes(G, "omegas")
+        teams_labels = nx.get_edge_attributes(G, "teams") # number of teams in the pair leagues
+        transfers_labels = nx.get_edge_attributes(G, "transfers") # number of sinlge edge transfers between leagues.
         
         dict_omegas ={}
-        for(leagues, omega) in omega_labels.items():
+        plot_dict = {}
+        for(leagues, omega), (_, teams), (_, transfers) in zip(omega_labels.items(),
+                                                               teams_labels.items(),
+                                                               transfers_labels.items()):
             
             l1 = leagues[0]
             l2 = leagues[1]
             
+            plot_dict.update({(l1,l2):(omega, teams, transfers)})
             dict_omegas.update({(l1,l2):omega})
             
         dict_omegas = self.normalize_btw(dict_omegas)
         
-        return dict_omegas, G
+        return dict_omegas, plot_dict, G
     
     """ 
         Plot scatter description:
@@ -255,33 +261,29 @@ class Utils:
             node size = normalized omega value
     """
     def plot_omegas(self, data):
-        leagues = list(data.keys())
-        omegas = list(data.values())
+        keys = list(data.keys()) # names of leagues
         
-        # assign numerical ID to joint-pair leagues
+        # Assing Unique Identifier
+        id_leagues = {}
+        for i in range(len(keys)):
+            id_leagues.update({keys[i]:i+1})
+            
+        ids = list(id_leagues.values())
         
+        y_omegas =[]
+        x_transfers = []
+        x_teams = []
+        for (omega, teams, transfers) in data.values():
+            y_omegas.append(omega)
+            x_transfers.append(transfers)
+            x_teams.append(teams)
 
-        
-        
-        
-        # print(df) # Print list of the names
-        fig = plt.figure(figsize=(36,11)) # Create matplotlib figure
-        axs = fig.add_subplot(111) # Create matplotlib axes
-        ax2 = axs.twinx() # Create another axes that shares the same x-axis as ax.
+        fig, ax = plt.subplots()
+        ax.scatter(x_transfers, y_omegas)
 
-        width = 0.2
-
-        df.Value.plot(kind='bar', color='green', ax=axs, width=width, position=1)
-        df.Attribute.plot(kind='bar', color='blue', ax=ax2, width=width, position=0)
-
-        axs.set_xlabel('Team')
-        ax2.set_ylabel(leagues)
-        axs.set_ylabel(omegas)
+        for i, txt in enumerate(ids):
+            ax.annotate(txt, (x_transfers[i], y_omegas[i]))
         
-        font = {"color": "k", "fontweight": "bold", "fontsize": 20}
-        ax.set_title('League-Pairs omegas', font)
-        fig.autofmt_xdate()
-        
-        plt.title('League-Pairs omegas')
-        plt.savefig("../plots/omegas_league", format="PNG")
+        plt.title('Pairs of Leagues - Small World')
+        plt.savefig("../plots/omegas_league.png", format="PNG")
         plt.show()
