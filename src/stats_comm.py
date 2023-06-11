@@ -137,12 +137,12 @@ class StatsAndCommunities:
         for i in range(n_com):
             
             teams = communities.get(i+1)
-            print("\nCommunity nº: ", i+1)
+            #print("\nCommunity nº: ", i+1)
             for team, (avg_pos, points) in stats.items():
                 if team in graph.nodes() and team in teams:
-                    #pass
+                    pass
                     
-                    print(f"Betweenness Centrality {team:2} {btw_centr[team]:.3f}")
+                    #print(f"Betweenness Centrality {team:2} {btw_centr[team]:.3f}")
                     #print(f"Closeness Centrality { team:2} {close[team]:.3f}")
                     #print(f"Degree Centrality {team:2} {deg_centrality[team]:.3f}\n")
         
@@ -191,10 +191,10 @@ class StatsAndCommunities:
                 
                 
         points_corr = self.calculating_spearmanr_corr_stats(b_points)
-        print("The points - betwenness corr. coeff. for teams is ", points_corr, "\n")
+        #print("The points - betwenness corr. coeff. for teams is ", points_corr, "\n")
         
         position_corr = self.calculating_spearmanr_corr_stats(b_pos)
-        print("The position - betwenness corr. coeff. for teams is ", position_corr, "\n")
+       # print("The position - betwenness corr. coeff. for teams is ", position_corr, "\n")
         
         #self.plotting_categorical(b_points,  "Points", "Betwenneess")
         #self.plotting_categorical(b_pos,  "Avg. Position", "Betwenneess")

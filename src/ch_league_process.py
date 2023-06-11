@@ -70,11 +70,12 @@ class ChampionsDataProcess:
         teams = list(data.keys())
         money = list(data.values())
     
+        print(teams)
         if n == 0:
-            trophies = [3, 1, 3, 1, 2, 4, 1, 1, 1, 2, 2, 1, 8] 
+            trophies = [3, 1, 3, 1, 2, 4, 1, 1, 1, 2, 1, 2, 1, 8] 
 
         else:
-            trophies = [3,1,1,2,1,2,1,1,1,2,1,1,1,2,6,1,1,1,1]
+            trophies = [3,1,1,2,1,2,1,1,1,2,1,1,1,2,7,1,1,1,1]
         
         y = np.array(trophies)
         x = np.array(money)
@@ -87,19 +88,22 @@ class ChampionsDataProcess:
         values = list(data.values())
         
         if n == 0:
-            trophies = [3, 1, 3, 1, 2, 4, 1, 1, 1, 2, 2, 1, 8] 
+            trophies = [3, 1, 3, 1, 2, 4, 1, 1, 1, 2, 1, 2, 1, 8] 
             if not dinero: # Money Received
                 n = 2
             
         else:
-            trophies = [3,1,1,2,1,2,1,1,1,2,1,1,1,2,6,1,1,1,1]
+            trophies = [3,1,1,2,1,2,1,1,1,2,1,1,1,2,7,1,1,1,1]
             if not dinero:
                 n = 3
     
+        print(names)
+        print(trophies)
         df = pd.DataFrame(list(zip(values, trophies)),
                columns =['Money', 'Trophies'])
         
         df = df.set_axis(names)
+        print(df['Trophies'])
 
         # print(df) # Print list of the names
         fig = plt.figure() # Create matplotlib figure

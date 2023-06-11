@@ -3,6 +3,10 @@ import pandas as pd
 import math
 from preprocess import Preprocessing
 import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy.optimize import curve_fit
+import numpy as np
+
 
 class Utils:
     """
@@ -260,30 +264,122 @@ class Utils:
             y = number of edges (transfers)
             node size = normalized omega value
     """
-    def plot_omegas(self, data):
+    def plot_omegas(self, data, omegas_norm):
+        
         keys = list(data.keys()) # names of leagues
+        y_omegas = list(omegas_norm.values())
+        
         
         # Assing Unique Identifier
         id_leagues = {}
         for i in range(len(keys)):
             id_leagues.update({keys[i]:i+1})
-            
+        
+        ids_names = list(id_leagues.keys())
         ids = list(id_leagues.values())
         
-        y_omegas =[]
         x_transfers = []
-        x_teams = []
-        for (omega, teams, transfers) in data.values():
-            y_omegas.append(omega)
+        for (omega, _, transfers) in data.values():
             x_transfers.append(transfers)
-            x_teams.append(teams)
+    
 
+        print(x_transfers, y_omegas)
         fig, ax = plt.subplots()
-        ax.scatter(x_transfers, y_omegas)
+        scatter = ax.scatter(x_transfers, y_omegas)
 
         for i, txt in enumerate(ids):
             ax.annotate(txt, (x_transfers[i], y_omegas[i]))
+            print(ids_names[i], txt, x_transfers[i], y_omegas[i])
+            
+        # plt.xlabel("Nº transfers", fontsize = 15, c = "black")
+        # plt.ylabel("Omega", fontsize = 15, c = "black")     
+        # sns.regplot(x=x_transfers, y=y_omegas)
         
-        plt.title('Pairs of Leagues - Small World')
-        plt.savefig("../plots/omegas_league.png", format="PNG")
+        # plt.title('Pairs of Leagues - Small World')
+        # plt.savefig("../plots/omegas_league_trasnfers_regression.png", format="PNG")
+        # plt.show()
+        
+    """ 
+        Plot Btw Centrality vs money and positions
+            Do a mapping to dictionary where
+            {team:(position, money, btw_centr, money_community)}
+            
+        x -> Positions or money spent.
+        y -> Betweenness centrality value.
+    """
+    def objective(self, x, a, b, c, d, e, f):
+        return (a * x) + (b * x**2) + (c * x**3) + (d * x**4) + (e * x**5) + f
+    
+    def objective4(self, x, a, b, c, d, e):
+        return (a * x) + (b * x**2) + (c * x**3) + (d * x**4) + e
+    
+    def objective2(self, x, a, b, c,):
+        return (a * x) + (b * x**2) + c
+    
+    def plot_betwenness(self, btw_centr, prem_stats, money_comm_idx, spent):
+        
+        btw_plot = {}
+        # Assing Unique Identifier to team
+        id_leagues = {}
+        for i in range(len(btw_centr)):
+            team, bc = btw_centr[i]
+            id_leagues.update({team:i+1})
+            
+            # Get average historical position per team
+            pos, _ = prem_stats.get(team)
+            
+            # Get total money spent per teams
+            money = spent.get(team)
+            
+            # Get waht group of money is from
+            money_comm = money_comm_idx.get(team)
+            print(team, money_comm)
+            
+            btw_plot.update({team:(pos,money,bc, money_comm)})
+        
+        
+        ids_names = list(id_leagues.keys())
+        ids = list(id_leagues.values())
+        print("The id _leagues \n:", id_leagues)
+        
+        x_money = []
+        x_pos = []
+        y_bc = []
+        m_comms = []
+        for (pos, money, bc, money_comm) in btw_plot.values():
+            y_bc.append(bc)
+            x_money.append(money)
+            x_pos.append(pos)
+            m_comms.append(money_comm)
+            
+        fig, ax = plt.subplots()
+        
+        # list of length 44, 1-4 representing what community a team is
+        money_groups = ['$ > 1100€', '€ > 600 and € <= 1100','€ < 600 and € >= 300','€ < 300']
+        
+        # Draw a polynomial fit curve based on results
+        popt,_ = curve_fit(self.objective, x_pos, y_bc)
+        a, b, c, d, e, f = popt
+        
+        scatter = plt.scatter(x_pos, y_bc, c = m_comms)
+        
+        x_line = np.arange(min(x_pos), max(x_pos), 1)
+        y_line = self.objective(x_line, a, b, c, d, e, f)
+        
+        plt.plot(x_line, y_line, '--', color='r', alpha=0.5)
+        plt.legend(handles=scatter.legend_elements()[0], labels=money_groups,
+                   loc='upper center', bbox_to_anchor=(0.5, 1.25),
+                   ncol=2, fancybox=True, shadow=True)
+        
+    
+        for i, txt in enumerate(ids):
+            ax.annotate(txt, (x_pos[i], y_bc[i]))
+            
+    
+        plt.xlabel("Average Position", fontsize = 15, c = "black")
+        plt.ylabel("Betwenness Centrality", fontsize = 15, c = "black")     
+        
+        plt.title('Betwenness Centrality - Average Position')
+        plt.savefig("../plots/btw_position_regressionPol5.png", format="PNG")
         plt.show()
+    

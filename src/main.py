@@ -28,7 +28,7 @@ import math
 
 champ_league_winners = ['Olympique Marseille', 'Ajax Amsterdam', 'Juventus FC', 'Manchester United',
                         'FC Porto', 'Liverpool FC', 'FC Barcelona', 'AC Milan', 'Chelsea FC',
-                        'Bayern Munich', 'Real Madrid', 'Borussia Dortmund', 'Inter Milan']
+                        'Bayern Munich', 'Real Madrid', 'Borussia Dortmund', 'Inter Milan', 'Manchester City']
 
 
 europa_league_winners = ['Juventus FC', 'Inter Milan', 'AC Parma', 'Bayern Munich', 'FC Schalke 04',
@@ -123,7 +123,7 @@ def new_execution():
     comm = Community()
     ch_process = ChampionsDataProcess()
     
-    # soccer_dict, teams = util.create_dict(5)
+    soccer_dict, teams = util.create_dict(7)
     
     # Teams -> 314 nodes. 
     #print(sorted(teams))
@@ -156,8 +156,8 @@ def new_execution():
     """
         Obtain how much money Champions League and Europa League winners have spent and received.
     """
-    # spent_ch, received_ch = get_champions_league_spent_received_money(soccer_dict, champ_league_winners)
-    # spent_el, received_el = get_champions_league_spent_received_money(soccer_dict, europa_league_winners)
+    #spent_ch, received_ch = get_champions_league_spent_received_money(soccer_dict, champ_league_winners)
+    #spent_el, received_el = get_champions_league_spent_received_money(soccer_dict, europa_league_winners)
     
     
     """ 
@@ -199,8 +199,8 @@ def new_execution():
         Plot them,
     
     """
-    # pos_com_idx, points_pos_idx = prep.organize_teams(prem_stats)
-    # print("\nThe pos_com_idx: ", pos_com_idx)
+    #pos_com_idx, points_pos_idx = prep.organize_teams(prem_stats)
+    #print("\nThe pos_com_idx: ", pos_com_idx)
     # print("\nThe points_com_idx: ", points_pos_idx)
     
     # # Get ordered communities for both avg_pos, and total points
@@ -219,16 +219,19 @@ def new_execution():
     # spent = util.sub_champions_spent_community(prem_soccer, prem_teams)
     # print(spent)
     # money_comm_idx = prep.get_money_community(spent)
-    # money_comm_idx = deconstruct_com_idx(money_comm_idx)
+    # print(money_comm_idx)
+    #money_comm_idx = deconstruct_com_idx(money_comm_idx)
     # print(money_comm_idx)
     
     """
         Study Betweenness centrality of teams in the given community.
         (There's an option to study both degree and centrality)
     """
-    #btw_centr, graph = sc.community_attributes(prem_stats, prem_ordered, prem_graph)
+    # btw_centr, graph = sc.community_attributes(prem_stats, prem_ordered, prem_graph)
     # btw_centr = prep.sort_dictionary_by_value(btw_centr)
-    # print(btw_centr)
+    #print(btw_centr)
+    
+    #util.plot_betwenness(btw_centr, prem_stats, money_comm_idx, spent)
     
     """ Clustering Coefficient """
     #coeff = prep.get_graph_clustering_ceff(graph)
@@ -271,9 +274,9 @@ def new_execution():
     """
         Normalize omega values for small-world property to see which pair to pair leagues has a better relationship
     """
-    dict_omega, plot_dict, omega_graph = util.normalize_pair_league_omegas()
-    # print(prep.sort_dictionary_by_value(dict_omega))
-    util.plot_omegas(plot_dict)
+    #dict_omega, plot_dict, omega_graph = util.normalize_pair_league_omegas()
+    #print(prep.sort_dictionary_by_value(dict_omega))
+    #util.plot_omegas(plot_dict, dict_omega)
             
     
     
