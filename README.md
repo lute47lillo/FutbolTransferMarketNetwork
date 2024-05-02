@@ -1,7 +1,5 @@
 # FutbolTransferMarketNetwork
-A network study of the futbol transfer market.
-
-The results of this work were accepted and published at the *57th Hawaii International Conference on System Sciences (HICSS'57)*
+A network study of the futbol transfer market. The results of this work were accepted and published at the *57th Hawaii International Conference on System Sciences (HICSS'57)*
 
 The paper can be accessed through my Google Scholar account: [Lute Lillo Portero](https://scholar.google.com/citations?user=jO0CHngAAAAJ&hl=es)
 
